@@ -67,8 +67,8 @@ export default function EscrowSettlementScreen({ onNavigate }) {
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-              <span>Phí dịch vụ đo NIR Spear Probe:</span>
-              <strong style={{ color: '#155724' }}>400.000 đ</strong>
+              <span>Phí dịch vụ thiết bị IoT & kiểm định QR:</span>
+              <strong style={{ color: '#155724' }}>300.000 đ</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

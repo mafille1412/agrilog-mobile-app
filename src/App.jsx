@@ -21,7 +21,7 @@ import BuyerHomeScreen from './components/screens/BuyerHomeScreen';
 import CreateRequestScreen from './components/screens/CreateRequestScreen';
 import MatchingScreen from './components/screens/MatchingScreen';
 import AgentHomeScreen from './components/screens/AgentHomeScreen';
-import NirTestingScreen from './components/screens/NirTestingScreen';
+import IotTestingScreen from './components/screens/IotTestingScreen';
 import BatchQrScreen from './components/screens/BatchQrScreen';
 import LogisticsTrackingScreen from './components/screens/LogisticsTrackingScreen';
 import WeighbridgeScreen from './components/screens/WeighbridgeScreen';
@@ -47,7 +47,7 @@ export default function App() {
     create_request: 'Tạo yêu cầu thu mua',
     matching: 'Khớp lệnh & đại lý đề xuất',
     batch_qr: 'Mã định danh lô hàng & QR',
-    nir_testing: 'Kết quả đo kiểm NIR Spear Probe',
+    nir_testing: 'Kiểm định độ ẩm bằng thiết bị IoT',
     logistics_tracking: 'Tối ưu hóa logistics & Vận chuyển',
     weighbridge: 'Cân điện tử & Nghiệm thu tại nhà máy',
     escrow_settlement: 'Quyết toán Escrow tự động',
@@ -66,7 +66,7 @@ export default function App() {
       case 'create_request': return 'Tạo yêu cầu thu mua';
       case 'matching': return 'Khớp lệnh & đại lý đề xuất';
       case 'batch_qr': return 'Mã định danh lô hàng';
-      case 'nir_testing': return 'Chi tiết kiểm định NIR';
+      case 'nir_testing': return 'Kiểm định thiết bị IoT';
       case 'logistics_tracking': return 'Tối ưu hóa logistics';
       case 'weighbridge': return 'Giao nhận & đối soát';
       case 'escrow_settlement': return 'Quyết toán Escrow';
@@ -91,7 +91,7 @@ export default function App() {
       case 'batch_qr':
         return <BatchQrScreen onNavigate={setCurrentScreen} onOpenPublicPortal={() => setShowPublicPortal(true)} />;
       case 'nir_testing':
-        return <NirTestingScreen onNavigate={setCurrentScreen} />;
+        return <IotTestingScreen onNavigate={setCurrentScreen} />;
       case 'logistics_tracking':
         return <LogisticsTrackingScreen onNavigate={setCurrentScreen} />;
       case 'weighbridge':

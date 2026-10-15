@@ -68,7 +68,7 @@ export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
           </div>
 
           <div style={{ fontSize: '12px', color: '#6B7280' }}>
-            Quét mã để truy xuất nguồn gốc và kiểm định NIR
+            Quét mã để truy xuất nguồn gốc và kiểm định IoT
           </div>
 
           <button 
@@ -138,8 +138,8 @@ export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
               <div style={{ position: 'absolute', left: '-22px', top: '2px', width: '16px', height: '16px', borderRadius: '50%', background: '#155724', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '9px', fontWeight: '800' }}>
                 ✓
               </div>
-              <div style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>Kiểm định chất lượng NIR</div>
-              <div style={{ fontSize: '11px', color: '#6B7280' }}>Độ ẩm 14.2% · Đạt chuẩn xuất khẩu</div>
+              <div style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>Kiểm định độ ẩm bằng thiết bị IoT</div>
+              <div style={{ fontSize: '11px', color: '#6B7280' }}>Độ ẩm 14.2% · Cảm biến IoT AgriLog đạt chuẩn</div>
             </div>
 
             <div style={{ position: 'relative' }}>

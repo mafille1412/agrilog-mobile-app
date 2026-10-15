@@ -3,7 +3,7 @@ import {
   Tractor, 
   Calendar, 
   MapPin, 
-  Microscope, 
+  Cpu, 
   CheckCircle2, 
   Clock, 
   ArrowRight,
@@ -99,7 +99,7 @@ export default function AgentHomeScreen({ onNavigate }) {
             </button>
           ) : (
             <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '10px', borderRadius: '10px', color: '#065F46', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <CheckCircle2 size={16} color="#059669" /> Đã cam kết thành công! Sẵn sàng lấy mẫu NIR.
+              <CheckCircle2 size={16} color="#059669" /> Đã cam kết thành công! Sẵn sàng đo độ ẩm bằng thiết bị IoT.
             </div>
           )}
         </div>
@@ -143,7 +143,7 @@ export default function AgentHomeScreen({ onNavigate }) {
           </button>
         </div>
 
-        {/* NIR Field Testing Trigger */}
+        {/* IoT Moisture Testing Trigger */}
         <div style={{
           background: 'linear-gradient(135deg, #064E3B, #047857)',
           borderRadius: '16px',
@@ -152,11 +152,11 @@ export default function AgentHomeScreen({ onNavigate }) {
           boxShadow: '0 4px 14px rgba(6, 78, 59, 0.25)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <Microscope size={20} color="#34D399" />
-            <h4 style={{ fontSize: '14px', fontWeight: '800' }}>Kiểm định chất lượng quang phổ NIR</h4>
+            <Cpu size={20} color="#34D399" />
+            <h4 style={{ fontSize: '14px', fontWeight: '800' }}>Kiểm định độ ẩm bằng thiết bị IoT</h4>
           </div>
           <p style={{ fontSize: '12px', color: '#D1FAE5', lineHeight: '1.4', marginBottom: '14px' }}>
-            Kỹ thuật viên AgriLog với đầu dò mũi giáo Spear Probe 1.2m đã có mặt tại bãi tập kết để đo 3 điểm và khởi tạo mã Batch ID.
+            Sử dụng thiết bị đo độ ẩm IoT chuyên dụng do AgriLog cung cấp để đo tại bãi tập kết, tự động đồng bộ kết quả và tạo mã QR lô hàng.
           </p>
           <button 
             onClick={() => onNavigate('nir_testing')}
@@ -176,7 +176,7 @@ export default function AgentHomeScreen({ onNavigate }) {
               gap: '6px'
             }}
           >
-            Mở trạm đo kiểm quang phổ NIR <ArrowRight size={16} />
+            Kết nối thiết bị IoT & Đo độ ẩm <ArrowRight size={16} />
           </button>
         </div>
 

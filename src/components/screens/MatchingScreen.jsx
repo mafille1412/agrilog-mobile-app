@@ -59,7 +59,7 @@ export default function MatchingScreen({ onNavigate }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px', marginTop: '6px' }}>
               <span>Cung cấp: <strong>30 tấn</strong></span>
               <span>Độ ẩm TB: <strong style={{ color: '#155724' }}>13.8%</strong></span>
-              <span className="badge-green">NIR Đạt</span>
+              <span className="badge-green">IoT Đạt chuẩn</span>
             </div>
           </div>
 
@@ -82,7 +82,7 @@ export default function MatchingScreen({ onNavigate }) {
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px', marginTop: '6px' }}>
               <span>Cung cấp: <strong>20 tấn</strong></span>
               <span>Độ ẩm TB: <strong style={{ color: '#155724' }}>14.5%</strong></span>
-              <span className="badge-green">NIR Đạt</span>
+              <span className="badge-green">IoT Đạt chuẩn</span>
             </div>
           </div>
 

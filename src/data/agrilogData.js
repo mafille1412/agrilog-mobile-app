@@ -114,7 +114,7 @@ export const COOPERATIVES = [
     moistureAverage: '13.8%',
     distanceToPlant: '14.2 km',
     rating: 4.9,
-    nirCertified: true,
+    iotCertified: true,
     avatar: '🚜'
   },
   {
@@ -128,7 +128,7 @@ export const COOPERATIVES = [
     moistureAverage: '14.5%',
     distanceToPlant: '38.5 km',
     rating: 4.8,
-    nirCertified: true,
+    iotCertified: true,
     avatar: '🌾'
   },
   {
@@ -142,7 +142,7 @@ export const COOPERATIVES = [
     moistureAverage: '14.1%',
     distanceToPlant: '52.0 km',
     rating: 4.7,
-    nirCertified: true,
+    iotCertified: true,
     avatar: '🌱'
   }
 ];
@@ -214,16 +214,18 @@ export const INITIAL_BATCH_DETAILS = {
   harvestLocation: 'Cánh đồng mẫu lớn xã Vọng Thê, Thoại Sơn, An Giang',
   gpsCoords: '10.2294° N, 105.1432° E',
   harvestDate: '2026-10-14 08:30:00',
-  samplingTime: '2026-10-15 09:15:22',
-  inspector: 'Đỗ Thị Thanh Hòa (Chuyên viên Quang phổ AgriLog)',
-  inspectorCert: 'NIR-CERT-2026-VN042',
-  deviceModel: 'AgriLog Spear Probe v2.1 (Sapphire Window - 1.2m)',
+  inspector: 'Đại lý HTX Tân Bình (Sử dụng thiết bị IoT do AgriLog cấp)',
+  deviceSerial: 'AGRILOG-IOT-MOIST-2026-08',
+  deviceModel: 'AgriLog IoT Moisture Sensor Pro (Cảm biến đo độ ẩm chuyên dụng)',
+  connectivity: 'Bluetooth 5.0 BLE & 4G/NB-IoT',
+  batteryLevel: '94%',
+  calibrationStatus: 'Đã hiệu chuẩn (Chuẩn ISO/IEC 17025)',
   
-  // 3-point NIR probe measurements
+  // 3-point IoT moisture probe measurements
   measurements: [
-    { point: 'Điểm 1 (Đáy cuộn rơm - sâu 1.0m)', moisture: 14.6, dryMatter: 85.4, temp: '31.8°C', timeSec: 15 },
-    { point: 'Điểm 2 (Lõi giữa cuộn rơm - sâu 0.6m)', moisture: 14.2, dryMatter: 85.8, temp: '32.4°C', timeSec: 15 },
-    { point: 'Điểm 3 (Lớp mặt ngoài - sâu 0.2m)', moisture: 13.8, dryMatter: 86.2, temp: '33.1°C', timeSec: 15 }
+    { point: 'Mũi đo 1 (Cắm sâu 0.8m - Tâm kiện rơm)', moisture: 14.6, dryMatter: 85.4, temp: '31.8°C', timeSec: 5 },
+    { point: 'Mũi đo 2 (Cắm sâu 0.5m - Thân kiện rơm)', moisture: 14.2, dryMatter: 85.8, temp: '32.1°C', timeSec: 5 },
+    { point: 'Mũi đo 3 (Cắm sâu 0.2m - Lớp vỏ ngoài)', moisture: 13.8, dryMatter: 86.2, temp: '32.6°C', timeSec: 5 }
   ],
   
   // Aggregated results
@@ -235,7 +237,7 @@ export const INITIAL_BATCH_DETAILS = {
   grossCalorificValue: 3650, // kcal/kg
   impurityRate: 1.8, // % (đất cát, tạp chất)
   ambientTempBompensated: true,
-  aiAnomalyCheck: 'ĐẠT CHUẨN (Khớp 99.4% phổ mẫu OM5451)',
+  iotCheck: 'ĐẠT CHUẨN ĐỘ ẨM HỢP ĐỒNG (14.2% ≤ 15.0%)',
   
   // Weights
   weighbridgeGross: 51800, // kg tươi
@@ -278,7 +280,7 @@ export const LOGISTICS_PLAN = {
       id: 2,
       title: 'Điểm lấy hàng 2: Kho bãi Hòn Đất (Cơ sở Út Triệu)',
       time: '09:45',
-      action: 'Bốc ghép thêm 24 tấn rơm cuộn chuẩn NIR',
+      action: 'Bốc ghép thêm 24 tấn rơm cuộn chuẩn IoT',
       status: 'completed'
     },
     {
@@ -292,7 +294,7 @@ export const LOGISTICS_PLAN = {
       id: 4,
       title: 'Cổng tiếp nhận: Nhà máy Điện Sinh khối Erex An Giang',
       time: '12:00',
-      action: 'Hạ bãi, kiểm tra niêm phong QR & giải ngân Escrow',
+      action: 'Hạ bãi, kiểm tra niêm phong QR & đối soát mốc hợp đồng',
       status: 'pending'
     }
   ],
@@ -318,7 +320,7 @@ export const FINANCIAL_METRICS_VSIC = {
   breakEvenYear: 'Năm 2 (2027) với 12,480 lô hàng',
   revenueStreams: [
     { name: '1. Phí hoa hồng sàn B2B', rate: '3% GMV (Bên mua trả)', year: 'Năm 1-5' },
-    { name: '2. Phí dịch vụ đo NIR Spear Probe', rate: '400,000 đ / lô', year: 'Năm 1-5' },
+    { name: '2. Phí dịch vụ thiết bị IoT & kiểm định QR', rate: '300,000 đ / lô', year: 'Năm 1-5' },
     { name: '3. Phí gói SaaS B2B nâng cao', rate: 'Gói Pro cho HTX/Hub lớn', year: 'Từ Năm 3' },
     { name: '4. Phí bản quyền dữ liệu MRV Carbon', rate: '15,000 đ / tấn CO2e xác thực', year: 'Từ Năm 3' },
     { name: '5. Chiết khấu logistics ngược & máy cuộn', rate: 'Phí điều phối mạng lưới', year: 'Từ Năm 2' }

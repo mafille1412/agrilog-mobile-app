@@ -13,7 +13,7 @@ export default function MobileFrame({ children }) {
         {/* Dynamic Island Pill */}
         <div className="notch-pill">
           <div style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#10B981', boxShadow: '0 0 6px #10B981' }} />
-          <span style={{ color: '#A7F3D0', fontSize: '9px', fontWeight: '700' }}>AgriLog NIR</span>
+          <span style={{ color: '#A7F3D0', fontSize: '9px', fontWeight: '700' }}>AgriLog IoT</span>
         </div>
 
         <div className="notch-icons">

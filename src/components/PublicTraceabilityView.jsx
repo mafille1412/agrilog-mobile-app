@@ -107,7 +107,7 @@ export default function PublicTraceabilityView({ onClose }) {
                 Lô hàng đã được kiểm định & xác thực
               </div>
               <div style={{ fontSize: '11px', color: '#047857' }}>
-                Số liệu đo quang phổ cận hồng ngoại (NIR) và định vị GPS tại hiện trường
+                Số liệu đo từ thiết bị IoT đo độ ẩm AgriLog và định vị GPS tại hiện trường
               </div>
             </div>
           </div>
@@ -138,15 +138,15 @@ export default function PublicTraceabilityView({ onClose }) {
             </div>
           </div>
 
-          {/* NIR Quality Specs */}
+          {/* IoT Quality Specs */}
           <div>
             <h4 style={{ fontSize: '13px', fontWeight: '800', color: '#111827', textTransform: 'uppercase', letterSpacing: '0.05em', marginBottom: '10px' }}>
-              Chỉ số kỹ thuật đo bằng quang phổ NIR:
+              Chỉ số kỹ thuật đo bằng thiết bị IoT AgriLog:
             </h4>
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '8px', textAlign: 'center' }}>
               <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '10px 6px', borderRadius: '10px' }}>
-                <span style={{ fontSize: '10px', color: '#047857' }}>Độ ẩm NIR</span>
+                <span style={{ fontSize: '10px', color: '#047857' }}>Độ ẩm đo IoT</span>
                 <div style={{ fontSize: '16px', fontWeight: '800', color: '#064E3B' }}>{b.averageMoisture}%</div>
                 <span style={{ fontSize: '9px', color: '#059669' }}>≤ 15.0% Đạt</span>
               </div>

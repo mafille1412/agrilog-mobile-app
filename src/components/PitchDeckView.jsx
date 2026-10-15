@@ -5,7 +5,7 @@ import {
   TrendingUp, 
   Leaf, 
   ShieldCheck, 
-  Microscope, 
+  Cpu, 
   DollarSign, 
   Users, 
   ExternalLink,
@@ -41,10 +41,10 @@ export default function PitchDeckView({ onSwitchToSimulator }) {
           </div>
 
           <h1 style={{ fontSize: '32px', fontWeight: '800', letterSpacing: '-0.02em', marginBottom: '10px', color: '#F9FAFB' }}>
-            AgriLog – Nền tảng số hóa chuỗi cung ứng phụ phẩm nông nghiệp
+            AgriLog – Sàn B2B kết nối mua bán phụ phẩm nông nghiệp
           </h1>
           <p style={{ fontSize: '15px', color: '#D1FAE5', lineHeight: '1.6', maxWidth: '750px', marginBottom: '20px' }}>
-            Hệ điều hành số & Trọng tài chất lượng B2B trung lập (Asset-light) kết nối doanh nghiệp thu mua với đại lý thu gom, ứng dụng công nghệ quang phổ NIR Spear Probe, AI Logistics đa điểm, truy xuất Batch ID Blockchain và Báo cáo phát thải Carbon MRV.
+            Kết nối doanh nghiệp cần mua phụ phẩm nông nghiệp với mạng lưới đại lý thu gom, trong đó chất lượng từng lô hàng được kiểm định bằng thiết bị IoT và minh bạch hóa bằng mã QR, kèm báo cáo/badge ESG cho doanh nghiệp.
           </p>
 
           <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
@@ -70,11 +70,11 @@ export default function PitchDeckView({ onSwitchToSimulator }) {
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '16px' }}>
             <div style={{ background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', padding: '20px' }}>
               <div style={{ width: '40px', height: '40px', borderRadius: '10px', background: '#DCFCE7', color: '#065F46', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '12px' }}>
-                <Microscope size={22} />
+                <Cpu size={22} />
               </div>
-              <h3 style={{ fontSize: '15px', fontWeight: '800', marginBottom: '6px' }}>NIR Spear Probe 3 điểm</h3>
+              <h3 style={{ fontSize: '15px', fontWeight: '800', marginBottom: '6px' }}>Thiết bị đo độ ẩm IoT</h3>
               <p style={{ fontSize: '12px', color: '#9CA3AF', lineHeight: '1.5' }}>
-                Mũi giáo 1.2m lấy mẫu đại diện sâu (đáy - giữa - mặt trên), nắp sapphire chống bụi và thuật toán bù nhiệt độ môi trường ngoài trời ĐBSCL.
+                Thiết bị IoT chuyên dụng đo độ ẩm tại nguồn do AgriLog cấp cho đại lý, tự động đồng bộ kết quả qua Bluetooth/4G lên hệ thống và chuyển thành mã QR lô hàng.
               </p>
             </div>
 

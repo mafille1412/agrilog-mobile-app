@@ -133,7 +133,7 @@ export default function CreateRequestScreen({ onNavigate }) {
           }}>
             <Info size={16} style={{ flexShrink: 0, marginTop: '2px' }} />
             <span>
-              Hệ thống sẽ tự động ghép nối các đại lý thu gom gần nhất có chất lượng đã được xác minh qua thiết bị NIR Spear Probe.
+              Hệ thống sẽ tự động ghép nối các đại lý thu gom gần nhất, chất lượng từng lô hàng được kiểm định bằng thiết bị IoT và đối soát qua mã QR.
             </span>
           </div>
 

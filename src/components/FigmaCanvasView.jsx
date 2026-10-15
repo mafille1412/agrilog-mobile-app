@@ -23,7 +23,7 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'create_request', title: '7. Tạo yêu cầu thu mua', stage: 'Nhu cầu', tag: 'Create Req' },
     { id: 'matching', title: '8. Ghép nối AI & Lộ trình', stage: 'Logistics', tag: 'AI Match' },
     { id: 'agent_home', title: '9. Cam kết & Máy cuộn', stage: 'Cung ứng', tag: 'Agent Portal' },
-    { id: 'nir_testing', title: '10. Đo quang phổ NIR 3 điểm', stage: 'Kiểm định', tag: 'NIR Probe' },
+    { id: 'nir_testing', title: '10. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
     { id: 'batch_qr', title: '11. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
     { id: 'logistics_tracking', title: '12. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
     { id: 'weighbridge', title: '13. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
@@ -138,7 +138,7 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
                     {scr.id === 'create_request' && 'Đăng nhu cầu thu mua, chọn loại phụ phẩm, khối lượng và tính toán dự toán tự động.'}
                     {scr.id === 'matching' && 'AI kết hợp đa nguồn cung và tối ưu tuyến vận chuyển 1 chuyến ghép.'}
                     {scr.id === 'agent_home' && 'Giao diện đại lý cam kết đơn hàng, đặt lịch máy cuộn rơm tăng tỷ trọng.'}
-                    {scr.id === 'nir_testing' && 'Đầu dò Spear Probe cắm 3 điểm đo độ ẩm, chất khô, nhiệt trị, chống gian lận GPS.'}
+                    {scr.id === 'nir_testing' && 'Thiết bị IoT AgriLog đo độ ẩm tại nguồn, truyền Bluetooth/4G, dữ liệu chỉ thêm không sửa.'}
                     {scr.id === 'batch_qr' && 'Khởi tạo nhãn QR và Batch ID neo dữ liệu lên Hyperledger Fabric + Polygon.'}
                     {scr.id === 'logistics_tracking' && 'Giám sát hành trình xe tải 40ft, cảm biến nhiệt độ & độ ẩm thùng xe.'}
                     {scr.id === 'weighbridge' && 'Phiếu cân điện tử tại cổng nhà máy và áp dụng Thuật toán Định giá Sinh khối khô.'}
