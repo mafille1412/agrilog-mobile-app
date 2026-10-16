@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { ArrowRight, Building2, Tractor, Lock, Phone, UserCheck, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Building2, Tractor, Lock, Phone, UserCheck, ShieldCheck, CreditCard } from 'lucide-react';
 
 export default function WelcomeScreen({ onNavigate, onSelectRole }) {
   const [selectedRole, setSelectedRole] = useState('buyer'); // 'buyer' | 'agent'
   const [identifier, setIdentifier] = useState('0918.456.789');
+  const [cccdNumber, setCccdNumber] = useState('089094001234');
   const [password, setPassword] = useState('••••••••');
 
   const handleRoleToggle = (role) => {
@@ -13,6 +14,7 @@ export default function WelcomeScreen({ onNavigate, onSelectRole }) {
       setIdentifier('0918.456.789');
     } else {
       setIdentifier('0913.789.012');
+      setCccdNumber('089094001234');
     }
   };
 
@@ -135,16 +137,45 @@ export default function WelcomeScreen({ onNavigate, onSelectRole }) {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+        <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '13px' }}>
+          
+          {/* CCCD field when role is Agent */}
+          {selectedRole === 'agent' && (
+            <div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <label className="figma-input-label">Số Căn cước công dân (CCCD / ĐDCN) *</label>
+                <span style={{ fontSize: '10px', color: '#B45309', fontWeight: '700' }}>12 chữ số</span>
+              </div>
+              <div style={{ position: 'relative' }}>
+                <input 
+                  type="text"
+                  maxLength={12}
+                  className="figma-input"
+                  value={cccdNumber}
+                  onChange={(e) => setCccdNumber(e.target.value)}
+                  placeholder="Nhập 12 số CCCD người đại diện HTX"
+                  required
+                  style={{ paddingLeft: '38px', letterSpacing: '0.05em', fontWeight: '600' }}
+                />
+                <CreditCard size={16} color="#B45309" style={{ position: 'absolute', left: '12px', top: '14px' }} />
+              </div>
+              <div style={{ fontSize: '10.5px', color: '#6B7280', marginTop: '3px' }}>
+                Định danh đại diện pháp lý HTX để ký quỹ Escrow bảo chứng
+              </div>
+            </div>
+          )}
+
           <div>
-            <label className="figma-input-label">Số điện thoại hoặc Email</label>
+            <label className="figma-input-label">
+              {selectedRole === 'buyer' ? 'Mã số thuế hoặc Số điện thoại *' : 'Số điện thoại liên hệ *'}
+            </label>
             <div style={{ position: 'relative' }}>
               <input 
                 type="text"
                 className="figma-input"
                 value={identifier}
                 onChange={(e) => setIdentifier(e.target.value)}
-                placeholder="0918.xxx.xxx"
+                placeholder={selectedRole === 'buyer' ? '0918.xxx.xxx hoặc MST' : '0913.xxx.xxx'}
                 required
                 style={{ paddingLeft: '38px' }}
               />
@@ -153,7 +184,7 @@ export default function WelcomeScreen({ onNavigate, onSelectRole }) {
           </div>
 
           <div>
-            <label className="figma-input-label">Mật khẩu</label>
+            <label className="figma-input-label">Mật khẩu *</label>
             <div style={{ position: 'relative' }}>
               <input 
                 type="password"
@@ -181,12 +212,12 @@ export default function WelcomeScreen({ onNavigate, onSelectRole }) {
             type="submit" 
             className="figma-btn-primary" 
             style={{ 
-              marginTop: '6px', 
+              marginTop: '4px', 
               background: selectedRole === 'buyer' ? '#155724' : '#B45309',
               boxShadow: selectedRole === 'buyer' ? '0 4px 12px rgba(21, 87, 36, 0.25)' : '0 4px 12px rgba(180, 83, 9, 0.25)'
             }}
           >
-            Đăng nhập {selectedRole === 'buyer' ? 'Doanh nghiệp' : 'Đại lý'}
+            Đăng nhập {selectedRole === 'buyer' ? 'Doanh nghiệp' : 'Đại lý / HTX'}
           </button>
         </form>
 

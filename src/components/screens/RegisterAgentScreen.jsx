@@ -4,6 +4,7 @@ import { ArrowLeft } from 'lucide-react';
 export default function RegisterAgentScreen({ onNavigate }) {
   const [coopName, setCoopName] = useState('HTX Nông nghiệp Tân Bình');
   const [repName, setRepName] = useState('Nguyễn Văn Được');
+  const [cccd, setCccd] = useState('089094001234');
   const [phone, setPhone] = useState('0913.789.012');
   const [address, setAddress] = useState('Ấp Vọng Thê, Thoại Sơn, An Giang');
   const [capacity, setCapacity] = useState('1200');
@@ -44,7 +45,7 @@ export default function RegisterAgentScreen({ onNavigate }) {
             </div>
 
             <div>
-              <label className="figma-input-label">Tên người đại diện *</label>
+              <label className="figma-input-label">Tên người đại diện pháp lý *</label>
               <input 
                 type="text" 
                 className="figma-input" 
@@ -52,6 +53,23 @@ export default function RegisterAgentScreen({ onNavigate }) {
                 onChange={(e) => setRepName(e.target.value)} 
                 required 
               />
+            </div>
+
+            <div>
+              <label className="figma-input-label">Số Căn cước công dân (CCCD / ĐDCN) *</label>
+              <input 
+                type="text" 
+                maxLength={12}
+                className="figma-input" 
+                value={cccd} 
+                onChange={(e) => setCccd(e.target.value)} 
+                placeholder="Nhập 12 số CCCD người đại diện"
+                required 
+                style={{ letterSpacing: '0.04em', fontWeight: '600' }}
+              />
+              <div style={{ fontSize: '10px', color: '#6B7280', marginTop: '2px' }}>
+                Xác thực định danh chủ nhiệm HTX qua Cơ sở dữ liệu Quốc gia
+              </div>
             </div>
 
             <div>

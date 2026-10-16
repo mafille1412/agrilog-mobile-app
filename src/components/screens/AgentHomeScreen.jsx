@@ -275,11 +275,11 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </button>
           </div>
 
-          {/* Demand Orders List Section (Exact Figma Screen 1) */}
+          {/* Demand Orders List Section */}
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
               <h3 style={{ fontSize: '14px', fontWeight: '800', color: '#111827' }}>
-                Đơn cần ghép
+                Nhu cầu thu mua mở từ Doanh nghiệp
               </h3>
               <span 
                 onClick={() => onNavigate('agent_order_detail')}
@@ -287,6 +287,9 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               >
                 Xem tất cả
               </span>
+            </div>
+            <div style={{ fontSize: '11px', color: '#6B7280', marginBottom: '10px' }}>
+              Chỉ tiêu thu mua do Doanh nghiệp đăng ký. Đại lý nhận đơn & cam kết sản lượng.
             </div>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
@@ -341,14 +344,14 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
                       <div style={{ fontSize: '16px', fontWeight: '800', color: '#111827' }}>
                         {order.needTons}
                       </div>
-                      <div style={{ fontSize: '10px', color: '#6B7280' }}>Cần cấp</div>
+                      <div style={{ fontSize: '10px', color: '#6B7280' }}>Cần thu mua</div>
                     </div>
 
                     <div>
                       <div style={{ fontSize: '16px', fontWeight: '800', color: '#155724' }}>
                         {order.maxMoisture}
                       </div>
-                      <div style={{ fontSize: '10px', color: '#6B7280' }}>Độ ẩm yêu cầu</div>
+                      <div style={{ fontSize: '10px', color: '#6B7280' }}>Độ ẩm tối đa</div>
                     </div>
                   </div>
 
@@ -364,7 +367,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
                   }}>
                     <span>Hạn giao: {order.deadline} · {order.distance}</span>
                     <span style={{ color: '#155724', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '2px' }}>
-                      Xem chi tiết ›
+                      Nhận đơn & Cam kết ›
                     </span>
                   </div>
                 </div>
@@ -372,30 +375,23 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </div>
           </div>
 
-          {/* Big Create Batch CTA Button (Exact Figma Screen 1) */}
-          <div style={{ marginTop: 'auto', paddingTop: '10px', paddingBottom: '4px' }}>
-            <button 
-              onClick={() => onNavigate('agent_create_batch')}
-              style={{
-                width: '100%',
-                background: '#155724',
-                color: '#FFFFFF',
-                border: 'none',
-                borderRadius: '12px',
-                padding: '14px',
-                fontSize: '14px',
-                fontWeight: '800',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px',
-                boxShadow: '0 4px 14px rgba(21, 87, 36, 0.25)'
-              }}
-            >
-              <Plus size={18} strokeWidth={2.5} />
-              Tạo lô hàng mới
-            </button>
+          {/* Demand Fulfillment Info Card (Thay thế nút tạo lô hàng theo yêu cầu) */}
+          <div style={{
+            marginTop: 'auto',
+            padding: '12px 14px',
+            background: '#F0FDF4',
+            border: '1px solid #BBF7D0',
+            borderRadius: '12px',
+            fontSize: '11.5px',
+            color: '#166534',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px'
+          }}>
+            <CheckCircle2 size={22} color="#155724" style={{ flexShrink: 0 }} />
+            <div style={{ lineHeight: '1.45' }}>
+              <strong>Mô hình thu mua theo nhu cầu:</strong> Doanh nghiệp chủ động điều phối xe đến lấy hàng. Đại lý chỉ nhận các đơn thu mua phù hợp và cam kết sản lượng tại bãi tập kết.
+            </div>
           </div>
 
         </div>
@@ -512,14 +508,18 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
               <Truck size={18} color="#155724" />
               <span style={{ fontSize: '13px', fontWeight: '800', color: '#111827' }}>
-                Lịch xe lấy hàng & vận chuyển
+                Đội xe của Doanh nghiệp (hoặc AgriLog) điều phối
               </span>
             </div>
 
             <div style={{ fontSize: '11.5px', color: '#4B5563', lineHeight: '1.5' }}>
+              <div>• Đơn vị điều phối xe: <strong>Doanh nghiệp mua (GreenGrid Energy)</strong></div>
               <div>• Biển số xe: <strong>67C-129.45</strong> (Xe tải 15 tấn)</div>
-              <div>• Dự kiến có mặt tại bãi: <strong>08:30 · 16/10/2026</strong></div>
+              <div>• Dự kiến tới bãi bốc hàng: <strong>08:30 · 16/10/2026</strong></div>
               <div>• Tài xế phụ trách: <strong>Nguyễn Văn Bé (0918.xxx.789)</strong></div>
+              <div style={{ fontSize: '10.5px', color: '#047857', marginTop: '4px' }}>
+                ✓ HTX chỉ cần chuẩn bị hàng tại kho bãi, đối soát cân điện tử & QR khi xe đến.
+              </div>
             </div>
           </div>
 
@@ -733,11 +733,11 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             <ClipboardList size={18} strokeWidth={activeTab === 'orders' ? 2.2 : 1.8} />
           </div>
           <span style={{ fontSize: '10px', color: activeTab === 'orders' ? '#155724' : '#6B7280', fontWeight: activeTab === 'orders' ? '800' : '500' }}>
-            Đơn hàng
+            Đơn đã nhận
           </span>
         </button>
 
-        {/* Tab 3: Phương tiện */}
+        {/* Tab 3: Lịch xe đến (Doanh nghiệp/AgriLog điều phối) */}
         <button
           onClick={() => onNavigate('logistics_tracking')}
           style={{
@@ -754,7 +754,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             <Truck size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
-            Phương tiện
+            Lịch xe đến
           </span>
         </button>
 

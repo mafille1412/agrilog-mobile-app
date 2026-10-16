@@ -22,18 +22,17 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'buyer_home', title: '6. Trang chủ & Bảng giá', stage: 'Nhu cầu', tag: 'Dashboard' },
     { id: 'create_request', title: '7. Tạo yêu cầu thu mua', stage: 'Nhu cầu', tag: 'Create Req' },
     { id: 'matching', title: '8. Ghép nối AI & Lộ trình', stage: 'Logistics', tag: 'AI Match' },
-    { id: 'agent_home', title: '9. Trang chủ Đại lý (Đơn cần ghép)', stage: 'Đại lý', tag: 'Agent Home' },
-    { id: 'agent_create_batch', title: '10. Đại lý - Tạo lô hàng mới', stage: 'Đại lý', tag: 'Create Lot' },
-    { id: 'agent_order_detail', title: '11. Đại lý - Chi tiết đơn & Cam kết', stage: 'Đại lý', tag: 'Commit' },
-    { id: 'agent_commit_success', title: '12. Đại lý - Cam kết đã xác nhận', stage: 'Đại lý', tag: 'Confirmed' },
-    { id: 'agent_completed_order', title: '13. Đại lý - Hoàn tất & Quyết toán', stage: 'Đại lý', tag: 'Settled' },
-    { id: 'nir_testing', title: '14. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
-    { id: 'batch_qr', title: '15. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
-    { id: 'logistics_tracking', title: '16. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
-    { id: 'weighbridge', title: '17. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
-    { id: 'escrow_settlement', title: '18. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
-    { id: 'esg_report', title: '19. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
-    { id: 'account', title: '20. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
+    { id: 'agent_home', title: '9. Trang chủ Đại lý (Nhận đơn mở)', stage: 'Đại lý', tag: 'Agent Home' },
+    { id: 'agent_order_detail', title: '10. Chi tiết đơn & Cam kết đáp ứng', stage: 'Đại lý', tag: 'Commit' },
+    { id: 'agent_commit_success', title: '11. Cam kết đã xác nhận & Lịch xe', stage: 'Đại lý', tag: 'Confirmed' },
+    { id: 'nir_testing', title: '12. Kiểm định độ ẩm thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
+    { id: 'batch_qr', title: '13. Cấp mã Batch ID & Tem QR', stage: 'Truy xuất', tag: 'Batch QR' },
+    { id: 'logistics_tracking', title: '14. Xe Doanh nghiệp / AgriLog đến bãi', stage: 'Vận chuyển', tag: 'Fleet GPS' },
+    { id: 'weighbridge', title: '15. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
+    { id: 'escrow_settlement', title: '16. Quyết toán Escrow tự động', stage: 'Thanh toán', tag: 'Settlement' },
+    { id: 'agent_completed_order', title: '17. Đại lý - Đóng đơn & Đã giải ngân', stage: 'Đại lý', tag: 'Settled' },
+    { id: 'esg_report', title: '18. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
+    { id: 'account', title: '19. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
   ];
 
   return (

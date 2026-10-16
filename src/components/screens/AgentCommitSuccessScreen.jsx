@@ -106,7 +106,7 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
         }}>
           <Truck size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
           <span>
-            Đội xe ghép 1 chuyến đa điểm dự kiến tới lấy hàng vào lúc <strong>08:30 ngày 16/10/2026</strong>. Vui lòng hoàn thành đo kiểm IoT trước giờ bốc hàng.
+            Đội xe do <strong>Doanh nghiệp mua (hoặc AgriLog Logistics)</strong> điều phối dự kiến tới bãi tập kết lấy hàng lúc <strong>08:30 ngày 16/10/2026</strong>. Đại lý vui lòng hoàn thành đo độ ẩm IoT trước giờ xe đến.
           </span>
         </div>
 

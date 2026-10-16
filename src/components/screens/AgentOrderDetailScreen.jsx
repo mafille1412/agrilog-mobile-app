@@ -224,37 +224,23 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             </select>
           </div>
 
-          {/* Logistics / Baler Option (Figma Screen 8) */}
+          {/* Logistics Dispatch Info (Trách nhiệm của Doanh nghiệp / AgriLog) */}
           <div style={{
-            background: '#F9FAFB',
-            border: '1px solid #E5E7EB',
-            borderRadius: '10px',
-            padding: '10px 12px'
+            background: '#F0F9FF',
+            border: '1px solid #BAE6FD',
+            borderRadius: '12px',
+            padding: '12px 14px'
           }}>
-            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
-              <span style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>
-                Yêu cầu điều phối máy cuộn / Xe tải gom
-              </span>
-              <input 
-                type="checkbox"
-                checked={requestBaler}
-                onChange={(e) => setRequestBaler(e.target.checked)}
-                style={{ width: '18px', height: '18px', accentColor: '#155724' }}
-              />
-            </label>
-            {requestBaler && (
-              <div style={{
-                fontSize: '11px',
-                color: '#065F46',
-                background: '#ECFDF5',
-                padding: '8px 10px',
-                borderRadius: '8px',
-                marginTop: '8px',
-                border: '1px solid #A7F3D0'
-              }}>
-                ✓ Hệ thống đã đăng ký điều phối xe tải 15 tấn đến điểm tập kết lúc <strong>08:30 ngày 16/10/2026</strong>.
-              </div>
-            )}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#0369A1', fontWeight: '800', fontSize: '12.5px', marginBottom: '4px' }}>
+              <Truck size={17} />
+              <span>Điều phối vận chuyển (Trách nhiệm của Doanh nghiệp)</span>
+            </div>
+            <div style={{ fontSize: '11px', color: '#334155', lineHeight: '1.45' }}>
+              Doanh nghiệp mua sẽ trực tiếp điều phối đội xe đến bãi tập kết của HTX (hoặc ủy quyền cho nền tảng AgriLog Logistics tối ưu tuyến đường). HTX chỉ cần chuẩn bị sẵn hàng tại bãi đúng lịch hẹn.
+            </div>
+            <div style={{ marginTop: '6px', fontSize: '11px', color: '#0284C7', fontWeight: '700' }}>
+              ⏱ Dự kiến xe tải 15 tấn của Doanh nghiệp tới bãi: <strong>08:30 · 16/10/2026</strong>
+            </div>
           </div>
 
           <div>

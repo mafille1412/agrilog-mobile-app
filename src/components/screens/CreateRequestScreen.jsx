@@ -119,6 +119,66 @@ export default function CreateRequestScreen({ onNavigate }) {
             </div>
           </div>
 
+          {/* Group 3: Logistics Fleet Dispatch by Enterprise */}
+          <div className="figma-card">
+            <h3 style={{ fontSize: '14px', fontWeight: '700', color: '#111827', marginBottom: '10px' }}>
+              Phương án điều phối xe (Trách nhiệm Doanh nghiệp)
+            </h3>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <label style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '8px',
+                padding: '10px',
+                borderRadius: '8px',
+                border: '1px solid #E5E7EB',
+                cursor: 'pointer',
+                background: '#FFFFFF'
+              }}>
+                <input 
+                  type="radio" 
+                  name="logisticsMode" 
+                  defaultChecked 
+                  style={{ accentColor: '#155724', marginTop: '2px' }} 
+                />
+                <div>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>
+                    Doanh nghiệp tự điều phối đội xe
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
+                    Cử xe của nhà máy đến bãi thu gom của HTX theo lịch cam kết
+                  </div>
+                </div>
+              </label>
+
+              <label style={{
+                display: 'flex',
+                alignItems: 'flex-start',
+                gap: '8px',
+                padding: '10px',
+                borderRadius: '8px',
+                border: '1px solid #A7F3D0',
+                cursor: 'pointer',
+                background: '#F0FDF4'
+              }}>
+                <input 
+                  type="radio" 
+                  name="logisticsMode" 
+                  style={{ accentColor: '#155724', marginTop: '2px' }} 
+                />
+                <div>
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#155724' }}>
+                    Nhờ AgriLog hỗ trợ điều phối xe ghép chuyến (Khuyên dùng)
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#4B5563' }}>
+                    Thuật toán AI ghép xe đa điểm giúp tiết kiệm 18.5% chi phí vận chuyển và giảm phát thải CO₂
+                  </div>
+                </div>
+              </label>
+            </div>
+          </div>
+
           {/* Alert Notice Box in Figma */}
           <div style={{
             background: '#EFF6FF',
