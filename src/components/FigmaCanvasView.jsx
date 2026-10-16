@@ -22,14 +22,17 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'buyer_home', title: '6. Trang chủ & Bảng giá', stage: 'Nhu cầu', tag: 'Dashboard' },
     { id: 'create_request', title: '7. Tạo yêu cầu thu mua', stage: 'Nhu cầu', tag: 'Create Req' },
     { id: 'matching', title: '8. Ghép nối AI & Lộ trình', stage: 'Logistics', tag: 'AI Match' },
-    { id: 'agent_home', title: '9. Cam kết & Máy cuộn', stage: 'Cung ứng', tag: 'Agent Portal' },
-    { id: 'nir_testing', title: '10. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
-    { id: 'batch_qr', title: '11. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
-    { id: 'logistics_tracking', title: '12. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
-    { id: 'weighbridge', title: '13. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
-    { id: 'escrow_settlement', title: '14. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
-    { id: 'esg_report', title: '15. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
-    { id: 'account', title: '16. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
+    { id: 'agent_home', title: '9. Trang chủ Đại lý (Đơn cần ghép)', stage: 'Đại lý', tag: 'Agent Home' },
+    { id: 'agent_create_batch', title: '10. Đại lý - Tạo lô hàng mới', stage: 'Đại lý', tag: 'Create Lot' },
+    { id: 'agent_order_detail', title: '11. Đại lý - Chi tiết đơn & Cam kết', stage: 'Đại lý', tag: 'Commit' },
+    { id: 'agent_commit_success', title: '12. Đại lý - Cam kết đã xác nhận', stage: 'Đại lý', tag: 'Confirmed' },
+    { id: 'nir_testing', title: '13. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
+    { id: 'batch_qr', title: '14. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
+    { id: 'logistics_tracking', title: '15. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
+    { id: 'weighbridge', title: '16. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
+    { id: 'escrow_settlement', title: '17. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
+    { id: 'esg_report', title: '18. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
+    { id: 'account', title: '19. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
   ];
 
   return (

@@ -21,6 +21,9 @@ import BuyerHomeScreen from './components/screens/BuyerHomeScreen';
 import CreateRequestScreen from './components/screens/CreateRequestScreen';
 import MatchingScreen from './components/screens/MatchingScreen';
 import AgentHomeScreen from './components/screens/AgentHomeScreen';
+import AgentCreateBatchScreen from './components/screens/AgentCreateBatchScreen';
+import AgentOrderDetailScreen from './components/screens/AgentOrderDetailScreen';
+import AgentCommitSuccessScreen from './components/screens/AgentCommitSuccessScreen';
 import IotTestingScreen from './components/screens/IotTestingScreen';
 import BatchQrScreen from './components/screens/BatchQrScreen';
 import LogisticsTrackingScreen from './components/screens/LogisticsTrackingScreen';
@@ -64,7 +67,10 @@ export default function App() {
     register_buyer: 'Thông tin doanh nghiệp',
     register_agent: 'Đăng ký đơn vị cung ứng',
     verification_pending: 'Xác nhận & Đã nhận hồ sơ',
-    agent_home: 'Giao diện đại lý & Máy cuộn',
+    agent_home: 'Tổng quan Đại lý (Trang chủ)',
+    agent_create_batch: 'Đại lý - Tạo lô hàng mới',
+    agent_order_detail: 'Đại lý - Chi tiết đơn & Cam kết',
+    agent_commit_success: 'Đại lý - Cam kết đã xác nhận',
     account: 'Quản lý tài khoản & Đăng xuất'
   };
 
@@ -84,7 +90,10 @@ export default function App() {
       case 'register_buyer': return 'Thông tin doanh nghiệp';
       case 'register_agent': return 'Đăng ký đơn vị cung ứng';
       case 'verification_pending': return 'Đã nhận hồ sơ';
-      case 'agent_home': return 'Giao diện đại lý';
+      case 'agent_home': return 'Tổng quan đại lý';
+      case 'agent_create_batch': return 'Tạo lô hàng mới';
+      case 'agent_order_detail': return 'Chi tiết đơn hàng';
+      case 'agent_commit_success': return 'Cam kết cung ứng';
       case 'account': return 'Quản lý tài khoản';
       default: return 'AgriLog B2B';
     }
@@ -121,7 +130,13 @@ export default function App() {
       case 'verification_pending':
         return <VerificationPendingScreen onNavigate={setCurrentScreen} currentRole={currentRole} />;
       case 'agent_home':
-        return <AgentHomeScreen onNavigate={setCurrentScreen} />;
+        return <AgentHomeScreen onNavigate={setCurrentScreen} onSelectOrder={setActiveOrder} />;
+      case 'agent_create_batch':
+        return <AgentCreateBatchScreen onNavigate={setCurrentScreen} />;
+      case 'agent_order_detail':
+        return <AgentOrderDetailScreen onNavigate={setCurrentScreen} />;
+      case 'agent_commit_success':
+        return <AgentCommitSuccessScreen onNavigate={setCurrentScreen} />;
       case 'account':
         return <AccountScreen onNavigate={setCurrentScreen} currentRole={currentRole} onLogout={handleLogout} />;
       default:

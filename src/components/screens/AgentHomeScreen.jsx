@@ -1,209 +1,490 @@
 import React, { useState } from 'react';
 import { 
-  Tractor, 
-  Calendar, 
+  Bell, 
+  LayoutGrid, 
+  ClipboardList, 
+  Truck, 
+  User, 
+  Plus, 
+  ArrowRight, 
+  CheckCircle2, 
+  Radio, 
   MapPin, 
   Cpu, 
-  CheckCircle2, 
-  Clock, 
-  ArrowRight,
   Sparkles,
-  AlertCircle,
-  Truck,
-  Plus,
-  User
+  ChevronRight,
+  Filter
 } from 'lucide-react';
 
-export default function AgentHomeScreen({ onNavigate }) {
-  const [committed, setCommitted] = useState(false);
-  const [balerRequested, setBalerRequested] = useState(false);
+export default function AgentHomeScreen({ onNavigate, onSelectOrder }) {
+  const [activeTab, setActiveTab] = useState('home'); // 'home' | 'orders' | 'fleet' | 'account'
+  const [isReady, setIsReady] = useState(true);
+
+  const demandOrders = [
+    {
+      id: 'REQ-1048',
+      byproduct: 'Rơm rạ',
+      badge: 'Phù hợp',
+      enterprise: 'GreenGrid Energy',
+      location: 'KCN Cần Thơ',
+      needTons: '20 t',
+      maxMoisture: '≤ 15%',
+      deadline: '16/10/2026',
+      distance: '14 km',
+      unitPrice: '1.500.000 đ/tấn khô'
+    },
+    {
+      id: 'REQ-1043',
+      byproduct: 'Trấu',
+      badge: 'Phù hợp',
+      enterprise: 'Nhà máy Erex Thoại Sơn',
+      location: 'Thoại Sơn, An Giang',
+      needTons: '30 t',
+      maxMoisture: '≤ 14%',
+      deadline: '18/10/2026',
+      distance: '8 km',
+      unitPrice: '1.200.000 đ/tấn khô'
+    },
+    {
+      id: 'REQ-1039',
+      byproduct: 'Bã mía',
+      badge: 'Mới đăng',
+      enterprise: 'Cơ sở Chế biến Phân bón An Giang',
+      location: 'Châu Thành, An Giang',
+      needTons: '15 t',
+      maxMoisture: '≤ 16%',
+      deadline: '20/10/2026',
+      distance: '22 km',
+      unitPrice: '850.000 đ/tấn khô'
+    }
+  ];
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F8FAF9' }}>
-      {/* Header */}
+      
+      {/* Top Header - Synchronized 100% with BuyerHomeScreen Figma */}
       <div style={{
-        padding: '12px 16px',
-        background: '#B45309',
-        color: 'white',
+        padding: '14px 20px 10px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        borderBottom: '1px solid rgba(255,255,255,0.1)'
+        background: '#FFFFFF',
+        borderBottom: '1px solid #F3F4F6'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{ width: '34px', height: '34px', borderRadius: '10px', background: 'rgba(255,255,255,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Tractor size={20} color="#FFFFFF" />
+        {/* Brand + Logo + Role Badge */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '10px',
+            background: '#1A4329',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#FFFFFF'
+          }}>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 22v-9" />
+              <path d="M12 13a5 5 0 0 0-5-5H4a5 5 0 0 1 5 5v0a5 5 0 0 0 3 0" />
+              <path d="M12 13a5 5 0 0 1 5-5h3a5 5 0 0 0-5 5v0a5 5 0 0 1-3 0" />
+            </svg>
           </div>
-          <div>
-            <div style={{ fontSize: '14px', fontWeight: '800' }}>HTX Nông nghiệp Tân Bình</div>
-            <div style={{ fontSize: '10px', color: '#FEF3C7' }}>Thoại Sơn · An Giang (Đại lý cấp 1)</div>
-          </div>
+
+          <span style={{ fontSize: '19px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
+            AgriLog
+          </span>
+
+          <span style={{
+            background: '#E2EFE7',
+            color: '#1A4329',
+            fontSize: '9.5px',
+            fontWeight: '800',
+            padding: '3px 8px',
+            borderRadius: '20px',
+            letterSpacing: '0.04em'
+          }}>
+            ĐẠI LÝ
+          </span>
         </div>
 
+        {/* Header Right Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.25)', padding: '3px 8px', borderRadius: '12px', fontWeight: '700' }}>
-            Năm 1: Miễn phí
-          </span>
-          <button 
+          {/* Bell notification button */}
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: '1px solid #E5E7EB',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            cursor: 'pointer',
+            background: '#FFFFFF'
+          }}>
+            <Bell size={17} color="#374151" />
+            <span style={{
+              position: 'absolute',
+              top: '7px',
+              right: '7px',
+              width: '6px',
+              height: '6px',
+              background: '#2563EB',
+              borderRadius: '50%'
+            }} />
+          </div>
+
+          {/* Profile Avatar -> Account Screen */}
+          <div 
             onClick={() => onNavigate('account')}
             style={{
-              width: '32px',
-              height: '32px',
+              width: '36px',
+              height: '36px',
               borderRadius: '50%',
-              background: '#FFFFFF',
-              color: '#B45309',
-              border: 'none',
+              background: '#155724',
+              color: '#FFFFFF',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              cursor: 'pointer',
               fontWeight: '800',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+              fontSize: '12px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(21, 87, 36, 0.2)'
             }}
             title="Quản lý tài khoản & Đăng xuất"
           >
-            <User size={16} />
-          </button>
+            TB
+          </div>
         </div>
       </div>
 
-      <div className="phone-screen" style={{ padding: '14px' }}>
+      {/* Screen Body */}
+      <div className="figma-screen-viewport" style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
         
-        {/* Urgent Match Order Card */}
-        <div style={{
-          background: 'white',
-          border: '2px solid #D97706',
-          borderRadius: '16px',
-          padding: '16px',
-          boxShadow: '0 4px 14px rgba(217, 119, 6, 0.15)',
-          marginBottom: '14px'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-            <div>
-              <span style={{ fontSize: '10px', background: '#FEF3C7', color: '#92400E', padding: '2px 8px', borderRadius: '10px', fontWeight: '800' }}>
-                ĐƠN HÀNG GHÉP MỚI
-              </span>
-              <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', marginTop: '4px' }}>
-                Cung ứng 30 tấn Rơm rạ cuộn
-              </h3>
-            </div>
-            <div style={{ fontSize: '13px', fontWeight: '800', color: '#B45309' }}>
-              49.500.000 đ
-            </div>
+        {/* Greeting Section (Exact Figma Screen 1) */}
+        <div>
+          <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', letterSpacing: '-0.01em' }}>
+            Chào buổi sáng, Harjit
+          </h2>
+          <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+            <MapPin size={12} color="#059669" />
+            <span>HTX Tân Bình · Thoại Sơn, An Giang (Đại lý cấp 1)</span>
           </div>
-
-          <div style={{ fontSize: '12px', color: '#4B5563', display: 'flex', flexDirection: 'column', gap: '5px', marginBottom: '12px' }}>
-            <div>🏢 Bên mua: <strong>Nhà máy Điện Sinh Khối Erex An Giang</strong></div>
-            <div>📍 Điểm giao: KCN Bình Hòa, Châu Thành (Cách 14.2 km)</div>
-            <div>💧 Yêu cầu kỹ thuật: Độ ẩm ≤ 15%, tạp chất ≤ 2%</div>
-            <div>⏳ Hạn giao hàng: <strong>18/10/2026</strong> (3 ngày nữa)</div>
-          </div>
-
-          {!committed ? (
-            <button 
-              onClick={() => setCommitted(true)}
-              style={{
-                width: '100%',
-                background: '#D97706',
-                color: 'white',
-                border: 'none',
-                borderRadius: '10px',
-                padding: '12px',
-                fontSize: '13px',
-                fontWeight: '700',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '6px'
-              }}
-            >
-              <CheckCircle2 size={16} /> Xác nhận cam kết cung cấp
-            </button>
-          ) : (
-            <div style={{ background: '#ECFDF5', border: '1px solid #A7F3D0', padding: '10px', borderRadius: '10px', color: '#065F46', fontSize: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <CheckCircle2 size={16} color="#059669" /> Đã cam kết thành công! Sẵn sàng đo độ ẩm bằng thiết bị IoT.
-            </div>
-          )}
         </div>
 
-        {/* Mobile Baler Service (Mạng lưới máy cuộn rơm lưu động) */}
-        <div style={{
-          background: 'white',
-          border: '1px solid #E5E7EB',
-          borderRadius: '14px',
-          padding: '14px',
-          marginBottom: '14px'
-        }}>
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-            <h4 style={{ fontSize: '13px', fontWeight: '800', color: '#111827', display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <Tractor size={16} color="#D97706" /> Mạng lưới máy cuộn lưu động
-            </h4>
-            <span style={{ fontSize: '10px', color: '#059669', background: '#DCFCE7', padding: '2px 6px', borderRadius: '6px', fontWeight: '700' }}>
-              Nén 200 kg/m³
-            </span>
+        {/* Ready to Receive Orders Banner (Dark Green Card in Figma Screen 1) */}
+        <div 
+          onClick={() => setIsReady(!isReady)}
+          style={{
+            background: isReady ? 'linear-gradient(135deg, #155724, #0B3D18)' : '#4B5563',
+            borderRadius: '14px',
+            padding: '14px 16px',
+            color: 'white',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            cursor: 'pointer',
+            boxShadow: '0 4px 14px rgba(21, 87, 36, 0.18)'
+          }}
+        >
+          <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+            <div style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: 'rgba(255, 255, 255, 0.18)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#34D399'
+            }}>
+              <Radio size={18} className={isReady ? 'animate-pulse' : ''} />
+            </div>
+            <div>
+              <div style={{ fontSize: '13.5px', fontWeight: '800' }}>
+                {isReady ? 'Sẵn sàng nhận đơn mới' : 'Đang tạm dừng nhận đơn'}
+              </div>
+              <div style={{ fontSize: '10.5px', color: '#A7F3D0', marginTop: '1px' }}>
+                {isReady ? 'Hệ thống đang ghép đơn trong bán kính 40km' : 'Bấm để kích hoạt lại trạng thái nhận đơn'}
+              </div>
+            </div>
           </div>
 
-          <p style={{ fontSize: '11px', color: '#6B7280', lineHeight: '1.4', marginBottom: '10px' }}>
-            Nén mật độ rơm rạ từ 40 kg/m³ lên 195 kg/m³ ngay tại ruộng Thoại Sơn giúp chở được gấp 5 lần khối lượng trên mỗi chuyến xe.
-          </p>
+          <div style={{
+            background: isReady ? '#34D399' : '#9CA3AF',
+            color: isReady ? '#064E3B' : '#FFFFFF',
+            padding: '4px 10px',
+            borderRadius: '20px',
+            fontSize: '10px',
+            fontWeight: '800'
+          }}>
+            {isReady ? 'BẬT' : 'TẮT'}
+          </div>
+        </div>
 
+        {/* IoT Moisture Device Status Mini-card */}
+        <div style={{
+          background: '#FFFFFF',
+          border: '1px solid #E5E7EB',
+          borderRadius: '12px',
+          padding: '10px 14px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          fontSize: '11.5px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <Cpu size={16} color="#059669" />
+            <span style={{ color: '#374151', fontWeight: '600' }}>
+              Thiết bị đo IoT: <strong style={{ color: '#059669' }}>Đã kết nối BLE (Pin 94%)</strong>
+            </span>
+          </div>
           <button 
-            onClick={() => setBalerRequested(!balerRequested)}
+            onClick={() => onNavigate('nir_testing')}
             style={{
-              width: '100%',
-              background: balerRequested ? '#F3F4F6' : '#FFFBEB',
-              color: balerRequested ? '#374151' : '#92400E',
-              border: '1px solid #FCD34D',
+              background: '#ECFDF5',
+              border: '1px solid #A7F3D0',
+              color: '#065F46',
               borderRadius: '8px',
-              padding: '8px',
-              fontSize: '12px',
+              padding: '4px 8px',
+              fontSize: '10.5px',
               fontWeight: '700',
               cursor: 'pointer'
             }}
           >
-            {balerRequested ? '✓ Đã điều 1 máy cuộn Yanmar YH-850 tới ruộng' : '+ Đặt lịch máy cuộn rơm tự hành'}
+            Đo kiểm IoT →
           </button>
         </div>
 
-        {/* IoT Moisture Testing Trigger */}
-        <div style={{
-          background: 'linear-gradient(135deg, #064E3B, #047857)',
-          borderRadius: '16px',
-          padding: '16px',
-          color: 'white',
-          boxShadow: '0 4px 14px rgba(6, 78, 59, 0.25)'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '8px' }}>
-            <Cpu size={20} color="#34D399" />
-            <h4 style={{ fontSize: '14px', fontWeight: '800' }}>Kiểm định độ ẩm bằng thiết bị IoT</h4>
+        {/* Demand Orders List Section (Exact Figma Screen 1) */}
+        <div>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+            <h3 style={{ fontSize: '14px', fontWeight: '800', color: '#111827' }}>
+              Đơn cần ghép
+            </h3>
+            <span 
+              onClick={() => onNavigate('agent_order_detail')}
+              style={{ fontSize: '12px', color: '#155724', fontWeight: '700', cursor: 'pointer' }}
+            >
+              Xem tất cả
+            </span>
           </div>
-          <p style={{ fontSize: '12px', color: '#D1FAE5', lineHeight: '1.4', marginBottom: '14px' }}>
-            Sử dụng thiết bị đo độ ẩm IoT chuyên dụng do AgriLog cung cấp để đo tại bãi tập kết, tự động đồng bộ kết quả và tạo mã QR lô hàng.
-          </p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            {demandOrders.map((order) => (
+              <div 
+                key={order.id}
+                onClick={() => onNavigate('agent_order_detail')}
+                style={{
+                  background: '#FFFFFF',
+                  border: '1px solid #E5E7EB',
+                  borderRadius: '14px',
+                  padding: '14px 16px',
+                  cursor: 'pointer',
+                  boxShadow: '0 1px 3px rgba(0,0,0,0.03)',
+                  transition: 'transform 0.15s, border-color 0.15s'
+                }}
+              >
+                {/* Order Top: Name + Badge */}
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#111827' }}>
+                    {order.byproduct}
+                  </div>
+                  <span style={{
+                    background: '#ECFDF5',
+                    color: '#047857',
+                    border: '1px solid #A7F3D0',
+                    fontSize: '10px',
+                    fontWeight: '800',
+                    padding: '2px 8px',
+                    borderRadius: '12px'
+                  }}>
+                    {order.badge}
+                  </span>
+                </div>
+
+                {/* Enterprise Name */}
+                <div style={{ fontSize: '11.5px', color: '#6B7280', marginBottom: '10px' }}>
+                  {order.enterprise} · {order.location}
+                </div>
+
+                {/* Two Metric Columns */}
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: '1fr 1fr',
+                  gap: '8px',
+                  background: '#F9FAFB',
+                  borderRadius: '10px',
+                  padding: '8px 12px',
+                  marginBottom: '10px'
+                }}>
+                  <div>
+                    <div style={{ fontSize: '16px', fontWeight: '800', color: '#111827' }}>
+                      {order.needTons}
+                    </div>
+                    <div style={{ fontSize: '10px', color: '#6B7280' }}>Cần cấp</div>
+                  </div>
+
+                  <div>
+                    <div style={{ fontSize: '16px', fontWeight: '800', color: '#155724' }}>
+                      {order.maxMoisture}
+                    </div>
+                    <div style={{ fontSize: '10px', color: '#6B7280' }}>Độ ẩm yêu cầu</div>
+                  </div>
+                </div>
+
+                {/* Footer of Card */}
+                <div style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  fontSize: '11px',
+                  color: '#6B7280',
+                  borderTop: '1px solid #F3F4F6',
+                  paddingTop: '8px'
+                }}>
+                  <span>Hạn giao: {order.deadline} · {order.distance}</span>
+                  <span style={{ color: '#155724', fontWeight: '700', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                    Xem chi tiết ›
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Big Create Batch CTA Button (Exact Figma Screen 1) */}
+        <div style={{ marginTop: 'auto', paddingTop: '10px', paddingBottom: '4px' }}>
           <button 
-            onClick={() => onNavigate('nir_testing')}
+            onClick={() => onNavigate('agent_create_batch')}
             style={{
               width: '100%',
-              background: '#FFFFFF',
-              color: '#064E3B',
+              background: '#155724',
+              color: '#FFFFFF',
               border: 'none',
-              borderRadius: '10px',
-              padding: '12px',
-              fontSize: '13px',
+              borderRadius: '12px',
+              padding: '14px',
+              fontSize: '14px',
               fontWeight: '800',
               cursor: 'pointer',
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '6px'
+              gap: '6px',
+              boxShadow: '0 4px 14px rgba(21, 87, 36, 0.25)'
             }}
           >
-            Kết nối thiết bị IoT & Đo độ ẩm <ArrowRight size={16} />
+            <Plus size={18} strokeWidth={2.5} />
+            Tạo lô hàng mới
           </button>
         </div>
 
       </div>
+
+      {/* Bottom Navigation - 4 Tabs Synchronized Exactly with BuyerHomeScreen Figma */}
+      <div style={{
+        height: '64px',
+        background: '#FFFFFF',
+        borderTop: '1px solid #E5E7EB',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: '0 8px',
+        flexShrink: 0
+      }}>
+        {/* Tab 1: Trang chủ */}
+        <button
+          onClick={() => onNavigate('agent_home')}
+          style={{
+            background: 'none',
+            border: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{
+            background: '#EAF5EC',
+            color: '#155724',
+            padding: '4px 16px',
+            borderRadius: '16px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <LayoutGrid size={18} strokeWidth={2.2} />
+          </div>
+          <span style={{ fontSize: '10px', color: '#155724', fontWeight: '800' }}>
+            Trang chủ
+          </span>
+        </button>
+
+        {/* Tab 2: Đơn hàng */}
+        <button
+          onClick={() => onNavigate('agent_order_detail')}
+          style={{
+            background: 'none',
+            border: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <ClipboardList size={20} color="#6B7280" strokeWidth={1.8} />
+          </div>
+          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
+            Đơn hàng
+          </span>
+        </button>
+
+        {/* Tab 3: Phương tiện */}
+        <button
+          onClick={() => onNavigate('logistics_tracking')}
+          style={{
+            background: 'none',
+            border: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Truck size={20} color="#6B7280" strokeWidth={1.8} />
+          </div>
+          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
+            Phương tiện
+          </span>
+        </button>
+
+        {/* Tab 4: Cá nhân */}
+        <button
+          onClick={() => onNavigate('account')}
+          style={{
+            background: 'none',
+            border: 'none',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            gap: '4px',
+            cursor: 'pointer'
+          }}
+        >
+          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <User size={20} color="#6B7280" strokeWidth={1.8} />
+          </div>
+          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
+            Cá nhân
+          </span>
+        </button>
+      </div>
+
     </div>
   );
 }
