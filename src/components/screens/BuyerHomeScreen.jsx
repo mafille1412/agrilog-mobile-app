@@ -96,29 +96,54 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
           </span>
         </div>
 
-        {/* Bell notification button */}
-        <div style={{
-          width: '38px',
-          height: '38px',
-          borderRadius: '50%',
-          border: '1px solid #E5E7EB',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          position: 'relative',
-          cursor: 'pointer',
-          background: '#FFFFFF'
-        }}>
-          <Bell size={18} color="#374151" />
-          <span style={{
-            position: 'absolute',
-            top: '8px',
-            right: '8px',
-            width: '6px',
-            height: '6px',
-            background: '#2563EB',
-            borderRadius: '50%'
-          }} />
+        {/* Header Right Actions */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          {/* Bell notification button */}
+          <div style={{
+            width: '36px',
+            height: '36px',
+            borderRadius: '50%',
+            border: '1px solid #E5E7EB',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            cursor: 'pointer',
+            background: '#FFFFFF'
+          }}>
+            <Bell size={17} color="#374151" />
+            <span style={{
+              position: 'absolute',
+              top: '7px',
+              right: '7px',
+              width: '6px',
+              height: '6px',
+              background: '#2563EB',
+              borderRadius: '50%'
+            }} />
+          </div>
+
+          {/* Profile Avatar -> Account Screen */}
+          <div 
+            onClick={() => onNavigate('account')}
+            style={{
+              width: '36px',
+              height: '36px',
+              borderRadius: '50%',
+              background: '#1A4329',
+              color: '#FFFFFF',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: '800',
+              fontSize: '12px',
+              cursor: 'pointer',
+              boxShadow: '0 2px 6px rgba(26, 67, 41, 0.2)'
+            }}
+            title="Quản lý tài khoản & Đăng xuất"
+          >
+            GG
+          </div>
         </div>
       </div>
 
@@ -398,7 +423,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
 
         {/* Tab 4: Tài khoản */}
         <button
-          onClick={() => onNavigate('esg_report')}
+          onClick={() => onNavigate('account')}
           style={{
             background: 'none',
             border: 'none',

@@ -28,7 +28,8 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'logistics_tracking', title: '12. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
     { id: 'weighbridge', title: '13. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
     { id: 'escrow_settlement', title: '14. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
-    { id: 'esg_report', title: '15. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' }
+    { id: 'esg_report', title: '15. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
+    { id: 'account', title: '16. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
   ];
 
   return (
@@ -144,6 +145,7 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
                     {scr.id === 'weighbridge' && 'Phiếu cân điện tử tại cổng nhà máy và áp dụng Thuật toán Định giá Sinh khối khô.'}
                     {scr.id === 'escrow_settlement' && 'Tài khoản Escrow giải ngân tự động, thu 3% phí sàn và thanh toán cho đại lý.'}
                     {scr.id === 'esg_report' && 'Xuất báo cáo phát thải CO2e chuẩn IPCC 2006 phục vụ kiểm toán ESG quốc tế.'}
+                    {scr.id === 'account' && 'Xem thông tin doanh nghiệp, đại lý, điểm tín nhiệm, cài đặt và tính năng đăng xuất tài khoản.'}
                   </p>
                 </div>
 

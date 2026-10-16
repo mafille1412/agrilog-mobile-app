@@ -27,17 +27,24 @@ import LogisticsTrackingScreen from './components/screens/LogisticsTrackingScree
 import WeighbridgeScreen from './components/screens/WeighbridgeScreen';
 import EscrowSettlementScreen from './components/screens/EscrowSettlementScreen';
 import EsgReportScreen from './components/screens/EsgReportScreen';
+import AccountScreen from './components/screens/AccountScreen';
 
 import FigmaCanvasView from './components/FigmaCanvasView';
 import PublicTraceabilityView from './components/PublicTraceabilityView';
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState('buyer_home');
+  const [currentScreen, setCurrentScreen] = useState('welcome');
   const [currentRole, setCurrentRole] = useState('buyer');
   const [activeOrder, setActiveOrder] = useState(null);
   const [showCanvasView, setShowCanvasView] = useState(false);
   const [showPublicPortal, setShowPublicPortal] = useState(false);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
+
+  const handleLogout = () => {
+    setCurrentRole('buyer');
+    setActiveOrder(null);
+    setCurrentScreen('welcome');
+  };
 
   // Public Online HTTPS Link (Works anywhere on 4G/5G or different Wi-Fi!)
   const publicOnlineUrl = 'https://c66e9f3884fc7c.lhr.life';
@@ -57,7 +64,8 @@ export default function App() {
     register_buyer: 'Thông tin doanh nghiệp',
     register_agent: 'Đăng ký đơn vị cung ứng',
     verification_pending: 'Xác nhận & Đã nhận hồ sơ',
-    agent_home: 'Giao diện đại lý & Máy cuộn'
+    agent_home: 'Giao diện đại lý & Máy cuộn',
+    account: 'Quản lý tài khoản & Đăng xuất'
   };
 
   const getFrameTitle = () => {
@@ -76,7 +84,9 @@ export default function App() {
       case 'register_buyer': return 'Thông tin doanh nghiệp';
       case 'register_agent': return 'Đăng ký đơn vị cung ứng';
       case 'verification_pending': return 'Đã nhận hồ sơ';
-      default: return 'Tổng quan thu mua';
+      case 'agent_home': return 'Giao diện đại lý';
+      case 'account': return 'Quản lý tài khoản';
+      default: return 'AgriLog B2B';
     }
   };
 
@@ -112,8 +122,10 @@ export default function App() {
         return <VerificationPendingScreen onNavigate={setCurrentScreen} currentRole={currentRole} />;
       case 'agent_home':
         return <AgentHomeScreen onNavigate={setCurrentScreen} />;
+      case 'account':
+        return <AccountScreen onNavigate={setCurrentScreen} currentRole={currentRole} onLogout={handleLogout} />;
       default:
-        return <BuyerHomeScreen onNavigate={setCurrentScreen} onSelectOrder={setActiveOrder} />;
+        return <WelcomeScreen onNavigate={setCurrentScreen} onSelectRole={setCurrentRole} />;
     }
   };
 

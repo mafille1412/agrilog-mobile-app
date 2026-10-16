@@ -10,7 +10,8 @@ import {
   Sparkles,
   AlertCircle,
   Truck,
-  Plus
+  Plus,
+  User
 } from 'lucide-react';
 
 export default function AgentHomeScreen({ onNavigate }) {
@@ -39,9 +40,31 @@ export default function AgentHomeScreen({ onNavigate }) {
           </div>
         </div>
 
-        <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.25)', padding: '3px 8px', borderRadius: '12px', fontWeight: '700' }}>
-          Năm 1: Miễn phí
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+          <span style={{ fontSize: '11px', background: 'rgba(255,255,255,0.25)', padding: '3px 8px', borderRadius: '12px', fontWeight: '700' }}>
+            Năm 1: Miễn phí
+          </span>
+          <button 
+            onClick={() => onNavigate('account')}
+            style={{
+              width: '32px',
+              height: '32px',
+              borderRadius: '50%',
+              background: '#FFFFFF',
+              color: '#B45309',
+              border: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              cursor: 'pointer',
+              fontWeight: '800',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.1)'
+            }}
+            title="Quản lý tài khoản & Đăng xuất"
+          >
+            <User size={16} />
+          </button>
+        </div>
       </div>
 
       <div className="phone-screen" style={{ padding: '14px' }}>
