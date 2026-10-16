@@ -19,15 +19,18 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
   const [deliveryDate, setDeliveryDate] = useState('16/10/2026');
   const [depotLocation, setDepotLocation] = useState('Kho bãi HTX Tân Bình, Thoại Sơn, An Giang');
   const [notes, setNotes] = useState('Rơm cuộn bánh xích Yanmar, nén chặt đạt chuẩn tỷ trọng');
+  const [requestBaler, setRequestBaler] = useState(false);
   const [agreed, setAgreed] = useState(true);
 
   const pricePerTon = 1500000; // 1.500.000 đ / tấn khô
+  const isWeightValid = commitWeight >= 3 && commitWeight <= 70;
   const estimatedRevenue = commitWeight * pricePerTon;
   const depositAmount = estimatedRevenue * 0.3; // 30% cọc
   const remainingAmount = estimatedRevenue - depositAmount;
 
   const handleCommitSubmit = (e) => {
     e.preventDefault();
+    if (!isWeightValid) return;
     onNavigate('agent_commit_success');
   };
 
@@ -48,6 +51,24 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
       {/* Screen Body */}
       <div className="figma-screen-viewport" style={{ padding: '16px' }}>
         
+        {/* Urgent Countdown Alert (Exact Figma Screen 5) */}
+        <div style={{
+          background: '#FFFBEB',
+          border: '1px solid #FDE68A',
+          borderRadius: '10px',
+          padding: '10px 14px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          marginBottom: '12px',
+          fontSize: '12px',
+          color: '#B45309',
+          fontWeight: '700'
+        }}>
+          <span style={{ fontSize: '15px' }}>⏰</span>
+          <span>Đơn hàng sắp hết hạn nhận cam kết — còn 2 giờ</span>
+        </div>
+
         {/* Order Details Card (Exact Figma Screen 3) */}
         <div className="figma-card" style={{ marginBottom: '12px', padding: '14px 16px' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
@@ -117,49 +138,77 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             1.500.000 đ <span style={{ fontSize: '13px', fontWeight: '500', opacity: 0.9 }}>/ tấn khô</span>
           </div>
           <div style={{ fontSize: '10.5px', color: '#D1FAE5', marginTop: '2px' }}>
-            Doanh nghiệp thanh toán trực tiếp theo từng mốc hợp đồng
+            Doanh nghiệp thanh toán trực tiếp qua Escrow theo từng mốc
           </div>
         </div>
 
-        {/* Commitment Form (Exact Figma Screen 4) */}
+        {/* Commitment Form (Exact Figma Screen 4, 6, 7, 8) */}
         <form onSubmit={handleCommitSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           
+          {/* Weight Input with Validation States (Figma Screen 6) */}
           <div>
             <label className="figma-input-label">Khối lượng cam kết cung cấp (tấn) *</label>
             <div style={{ position: 'relative' }}>
               <input 
                 type="number"
-                min="3"
-                max="70"
-                step="1"
+                step="0.5"
                 className="figma-input"
+                style={{
+                  borderColor: isWeightValid ? '#E5E7EB' : '#EF4444',
+                  background: isWeightValid ? '#FFFFFF' : '#FEF2F2'
+                }}
                 value={commitWeight}
                 onChange={(e) => setCommitWeight(Number(e.target.value))}
                 required
               />
               <span style={{ position: 'absolute', right: '12px', top: '13px', fontSize: '13px', color: '#6B7280', fontWeight: '600' }}>
-                tấn
+                tấn khô
               </span>
             </div>
-            <div style={{ fontSize: '10.5px', color: '#6B7280', marginTop: '3px' }}>
-              Quy định sàn: Mỗi đại lý cung cấp tối thiểu 3 tấn
-            </div>
+            
+            {!isWeightValid ? (
+              <div style={{ marginTop: '5px' }}>
+                <div style={{ fontSize: '11px', color: '#DC2626', fontWeight: '700' }}>
+                  ⚠️ Khối lượng cam kết tối thiểu phải từ 3 tấn trở lên
+                </div>
+                <div style={{
+                  background: '#EFF6FF',
+                  border: '1px solid #BFDBFE',
+                  borderRadius: '8px',
+                  padding: '6px 10px',
+                  fontSize: '11px',
+                  color: '#1D4ED8',
+                  marginTop: '5px'
+                }}>
+                  ℹ️ Gom chung với HTX lân cận? Hệ thống sẽ tự động ghép chuyến.
+                </div>
+              </div>
+            ) : (
+              <div style={{ fontSize: '10.5px', color: '#6B7280', marginTop: '3px' }}>
+                Tối thiểu 3 tấn · Tối đa 70 tấn theo chỉ tiêu mở
+              </div>
+            )}
           </div>
 
+          {/* Delivery Date */}
           <div>
-            <label className="figma-input-label">Ngày sẵn sàng giao hàng *</label>
+            <label className="figma-input-label">Ngày dự kiến giao hàng *</label>
             <input 
               type="text"
               className="figma-input"
               value={deliveryDate}
               onChange={(e) => setDeliveryDate(e.target.value)}
-              placeholder="DD/MM/YYYY"
+              placeholder="16/10/2026"
               required
             />
+            <div style={{ fontSize: '10.5px', color: '#6B7280', marginTop: '3px' }}>
+              Trước hoặc đúng hạn giao hàng của doanh nghiệp (16/10/2026)
+            </div>
           </div>
 
+          {/* Depot Location */}
           <div>
-            <label className="figma-input-label">Vị trí kho bãi tập kết hàng *</label>
+            <label className="figma-input-label">Điểm tập kết hàng *</label>
             <select 
               className="figma-input"
               value={depotLocation}
@@ -175,8 +224,41 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             </select>
           </div>
 
+          {/* Logistics / Baler Option (Figma Screen 8) */}
+          <div style={{
+            background: '#F9FAFB',
+            border: '1px solid #E5E7EB',
+            borderRadius: '10px',
+            padding: '10px 12px'
+          }}>
+            <label style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', cursor: 'pointer' }}>
+              <span style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>
+                Yêu cầu điều phối máy cuộn / Xe tải gom
+              </span>
+              <input 
+                type="checkbox"
+                checked={requestBaler}
+                onChange={(e) => setRequestBaler(e.target.checked)}
+                style={{ width: '18px', height: '18px', accentColor: '#155724' }}
+              />
+            </label>
+            {requestBaler && (
+              <div style={{
+                fontSize: '11px',
+                color: '#065F46',
+                background: '#ECFDF5',
+                padding: '8px 10px',
+                borderRadius: '8px',
+                marginTop: '8px',
+                border: '1px solid #A7F3D0'
+              }}>
+                ✓ Hệ thống đã đăng ký điều phối xe tải 15 tấn đến điểm tập kết lúc <strong>08:30 ngày 16/10/2026</strong>.
+              </div>
+            )}
+          </div>
+
           <div>
-            <label className="figma-input-label">Quy cách đóng gói & bảo quản</label>
+            <label className="figma-input-label">Ghi chú thêm về lô hàng (tùy chọn)</label>
             <input 
               type="text"
               className="figma-input"
@@ -185,7 +267,7 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             />
           </div>
 
-          {/* Revenue Calculation Box (Exact Figma Screen 4) */}
+          {/* Revenue Calculation Box (Exact Figma Screen 4 & 5) */}
           <div style={{
             background: '#F0FDF4',
             border: '1px solid #BBF7D0',
@@ -193,16 +275,19 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             padding: '12px 14px',
             fontSize: '11.5px'
           }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-              <span style={{ color: '#166534', fontWeight: '600' }}>Dự toán doanh thu nhận được:</span>
-              <strong style={{ fontSize: '16px', color: '#155724' }}>
-                {estimatedRevenue.toLocaleString('vi-VN')} đ
-              </strong>
+            <div style={{ fontSize: '11px', color: '#166534', fontWeight: '600' }}>
+              Doanh thu ước tính:
+            </div>
+            <div style={{ fontSize: '20px', fontWeight: '800', color: '#155724', margin: '2px 0 4px' }}>
+              {isWeightValid ? estimatedRevenue.toLocaleString('vi-VN') : '---'} đ
             </div>
             
-            <div style={{ fontSize: '10.5px', color: '#4B5563', lineHeight: '1.4', borderTop: '1px solid #DCFCE7', paddingTop: '6px', marginTop: '4px' }}>
-              <div>• Tạm ứng cọc trực tiếp: <strong>{depositAmount.toLocaleString('vi-VN')} đ (30%)</strong></div>
-              <div>• Phần còn lại: <strong>{remainingAmount.toLocaleString('vi-VN')} đ</strong> (thanh toán sau khi cân điện tử và đối soát QR)</div>
+            <div style={{ fontSize: '11px', color: '#4B5563', lineHeight: '1.5', borderTop: '1px solid #DCFCE7', paddingTop: '6px', marginTop: '4px' }}>
+              <div>• Tạm ứng cọc ký quỹ (30%): <strong>{isWeightValid ? depositAmount.toLocaleString('vi-VN') : '---'} đ</strong></div>
+              <div>• Thanh toán còn lại (70%): <strong>{isWeightValid ? remainingAmount.toLocaleString('vi-VN') : '---'} đ</strong></div>
+              <div style={{ fontSize: '10px', color: '#6B7280', marginTop: '3px' }}>
+                * Tiền cọc được khóa vào tài khoản ký quỹ Escrow và giải ngân ngay khi xe lấy hàng xác nhận mã QR.
+              </div>
             </div>
           </div>
 
@@ -216,19 +301,19 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
               style={{ accentColor: '#155724', marginTop: '2px' }} 
             />
             <span>
-              Tôi cam kết phụ phẩm đạt tiêu chuẩn độ ẩm ≤ 15% (kiểm định bằng thiết bị IoT AgriLog) và sẵn sàng giao đúng thời gian cam kết.
+              Tôi cam kết cung ứng đúng khối lượng và phẩm chất (độ ẩm ≤ 15%) theo thỏa thuận. Chấp nhận đối soát tự động qua thiết bị IoT.
             </span>
           </label>
 
-          {/* Submit Button (Figma Screen 4) */}
+          {/* Submit Button (Figma Screen 4 & 5) */}
           <div style={{ marginTop: '6px', paddingBottom: '12px' }}>
             <button 
               type="submit" 
               className="figma-btn-primary"
-              disabled={!agreed}
-              style={{ opacity: agreed ? 1 : 0.6 }}
+              disabled={!agreed || !isWeightValid}
+              style={{ opacity: agreed && isWeightValid ? 1 : 0.5 }}
             >
-              Xác nhận cam kết cung ứng
+              Xác nhận cam kết
             </button>
           </div>
 

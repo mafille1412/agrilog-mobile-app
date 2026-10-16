@@ -26,13 +26,14 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'agent_create_batch', title: '10. Đại lý - Tạo lô hàng mới', stage: 'Đại lý', tag: 'Create Lot' },
     { id: 'agent_order_detail', title: '11. Đại lý - Chi tiết đơn & Cam kết', stage: 'Đại lý', tag: 'Commit' },
     { id: 'agent_commit_success', title: '12. Đại lý - Cam kết đã xác nhận', stage: 'Đại lý', tag: 'Confirmed' },
-    { id: 'nir_testing', title: '13. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
-    { id: 'batch_qr', title: '14. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
-    { id: 'logistics_tracking', title: '15. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
-    { id: 'weighbridge', title: '16. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
-    { id: 'escrow_settlement', title: '17. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
-    { id: 'esg_report', title: '18. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
-    { id: 'account', title: '19. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
+    { id: 'agent_completed_order', title: '13. Đại lý - Hoàn tất & Quyết toán', stage: 'Đại lý', tag: 'Settled' },
+    { id: 'nir_testing', title: '14. Kiểm định thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
+    { id: 'batch_qr', title: '15. Cấp mã Batch ID & QR', stage: 'Truy xuất', tag: 'Batch QR' },
+    { id: 'logistics_tracking', title: '16. Theo dõi xe & IoT', stage: 'Vận chuyển', tag: 'Fleet GPS' },
+    { id: 'weighbridge', title: '17. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
+    { id: 'escrow_settlement', title: '18. Quyết toán Escrow', stage: 'Thanh toán', tag: 'Settlement' },
+    { id: 'esg_report', title: '19. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
+    { id: 'account', title: '20. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
   ];
 
   return (
