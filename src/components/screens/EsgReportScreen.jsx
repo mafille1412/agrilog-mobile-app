@@ -59,7 +59,7 @@ export default function EsgReportScreen({ onNavigate }) {
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px', color: '#4B5563' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <span>Doanh nghiệp:</span>
-              <strong style={{ color: '#111827' }}>Nhà máy Erex An Giang</strong>
+              <strong style={{ color: '#111827' }}>Nhà máy Điện Sinh khối Cần Thơ</strong>
             </div>
 
             <div style={{ display: 'flex', justifyContent: 'space-between' }}>

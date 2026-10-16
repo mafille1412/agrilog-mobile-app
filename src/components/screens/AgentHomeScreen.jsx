@@ -31,8 +31,8 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
       id: 'REQ-1048',
       byproduct: 'Rơm rạ',
       badge: 'Phù hợp',
-      enterprise: 'GreenGrid Energy',
-      location: 'KCN Cần Thơ',
+      enterprise: 'Nhà máy Điện Sinh khối Cần Thơ',
+      location: 'KCN Trà Nóc, Cần Thơ',
       needTons: '20 t',
       maxMoisture: '≤ 15%',
       deadline: '16/10/2026',
@@ -43,7 +43,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
       id: 'REQ-1043',
       byproduct: 'Trấu',
       badge: 'Phù hợp',
-      enterprise: 'Nhà máy Erex Thoại Sơn',
+      enterprise: 'Nhà máy Điện Sinh khối Thoại Sơn',
       location: 'Thoại Sơn, An Giang',
       needTons: '30 t',
       maxMoisture: '≤ 14%',
@@ -55,7 +55,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
       id: 'REQ-1039',
       byproduct: 'Bã mía',
       badge: 'Mới đăng',
-      enterprise: 'Cơ sở Chế biến Phân bón An Giang',
+      enterprise: 'Nhà máy Phân bón Hữu cơ An Giang',
       location: 'Châu Thành, An Giang',
       needTons: '15 t',
       maxMoisture: '≤ 16%',
@@ -174,7 +174,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           {/* Greeting Section */}
           <div>
             <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>
-              Chào buổi sáng, Harjit 👋
+              Chào buổi sáng, anh Được 👋
             </h2>
             <div style={{ fontSize: '12px', color: '#4B5563', marginTop: '3px', display: 'flex', alignItems: 'center', gap: '4px' }}>
               <span>HTX Tân Bình · Thoại Sơn, An Giang</span>
@@ -435,7 +435,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </div>
 
             <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '12px' }}>
-              GreenGrid Energy · Nhà máy Sangrur, KCN Cần Thơ
+              Nhà máy Điện Sinh khối Cần Thơ · KCN Trà Nóc, Cần Thơ
             </div>
 
             <div style={{
@@ -513,7 +513,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </div>
 
             <div style={{ fontSize: '11.5px', color: '#4B5563', lineHeight: '1.5' }}>
-              <div>• Đơn vị điều phối xe: <strong>Doanh nghiệp mua (GreenGrid Energy)</strong></div>
+              <div>• Đơn vị điều phối xe: <strong>Doanh nghiệp mua (Nhà máy Điện Sinh khối Cần Thơ)</strong></div>
               <div>• Biển số xe: <strong>67C-129.45</strong> (Xe tải 15 tấn)</div>
               <div>• Dự kiến tới bãi bốc hàng: <strong>08:30 · 16/10/2026</strong></div>
               <div>• Tài xế phụ trách: <strong>Nguyễn Văn Bé (0918.xxx.789)</strong></div>

@@ -79,7 +79,7 @@ export default function LogisticsTrackingScreen({ onNavigate }) {
             </div>
 
             <div>
-              <div style={{ fontSize: '12px', fontWeight: '700', color: '#155724' }}>Đích: Nhà máy Điện sinh khối Erex</div>
+              <div style={{ fontSize: '12px', fontWeight: '700', color: '#155724' }}>Đích: Nhà máy Điện Sinh khối Cần Thơ</div>
               <div style={{ fontSize: '11px', color: '#6B7280' }}>Dự kiến cập cảng tiếp nhận lúc 12:00</div>
             </div>
           </div>

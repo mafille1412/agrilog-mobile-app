@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
 export default function RegisterBuyerScreen({ onNavigate }) {
-  const [name, setName] = useState('Nhà máy Điện Sinh Khối Erex An Giang');
+  const [name, setName] = useState('Nhà máy Điện Sinh Khối Cần Thơ');
   const [taxCode, setTaxCode] = useState('1602058912');
-  const [address, setAddress] = useState('KCN Bình Hòa, Châu Thành, An Giang');
+  const [address, setAddress] = useState('KCN Trà Nóc, Quận Bình Thủy, TP. Cần Thơ');
   const [repName, setRepName] = useState('Trần Đình Nam');
   const [phone, setPhone] = useState('0918.456.789');
   const [demand, setDemand] = useState('3500');

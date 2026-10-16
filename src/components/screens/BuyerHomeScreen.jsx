@@ -16,7 +16,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
     {
       id: 'REQ-1048',
       name: 'Rơm rạ',
-      factory: 'Nhà máy Sangrur',
+      factory: 'Nhà máy Điện Sinh khối Cần Thơ',
       currentTons: 180,
       totalTons: 250,
       percent: 72,
@@ -27,7 +27,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
     {
       id: 'REQ-1043',
       name: 'Trấu',
-      factory: 'Nhà máy Ludhiana',
+      factory: 'Nhà máy Điện Sinh khối Thoại Sơn',
       currentTons: 90,
       totalTons: 120,
       percent: 75,
@@ -38,12 +38,12 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
     {
       id: 'REQ-1039',
       name: 'Bã mía',
-      factory: 'Nhà máy Meerut',
+      factory: 'Nhà máy Phân bón Hữu cơ An Giang',
       currentTons: 60,
       totalTons: 100,
       percent: 60,
       deadline: '18/10/2026',
-      unit: 't',
+      unit: 'tấn',
       status: 'Tìm nguồn'
     }
   ];
@@ -142,7 +142,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             }}
             title="Quản lý tài khoản & Đăng xuất"
           >
-            GG
+            CT
           </div>
         </div>
       </div>
@@ -156,7 +156,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             Tổng quan thu mua
           </h1>
           <p style={{ fontSize: '13px', color: '#6B7280', marginTop: '2px' }}>
-            GreenGrid Energy · Tháng 10/2026
+            Công ty Năng lượng Sinh khối Cần Thơ · Tháng 10/2026
           </p>
         </div>
 

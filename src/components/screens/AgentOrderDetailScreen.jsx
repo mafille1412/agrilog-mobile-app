@@ -89,7 +89,7 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
           </div>
 
           <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '10px' }}>
-            GreenGrid Energy · Nhà máy Sangrur, KCN Cần Thơ
+            Nhà máy Điện Sinh khối Cần Thơ · KCN Trà Nóc, TP. Cần Thơ
           </div>
 
           <div style={{

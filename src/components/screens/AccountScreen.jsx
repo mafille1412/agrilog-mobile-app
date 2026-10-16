@@ -23,13 +23,13 @@ export default function AccountScreen({ onNavigate, currentRole, onLogout }) {
   const isBuyer = currentRole === 'buyer';
 
   const profile = isBuyer ? {
-    name: 'GreenGrid Energy Joint Stock Co.',
-    subName: 'Nhà máy Điện Sinh Khối Erex An Giang',
+    name: 'Công ty Cổ phần Năng lượng Sinh khối Cần Thơ',
+    subName: 'Nhà máy Điện Sinh khối Cần Thơ',
     roleTag: 'Doanh nghiệp thu mua (Buyer)',
     taxCode: '1602058912',
     phone: '0918.456.789',
-    email: 'procurement@greengrid.vn',
-    address: 'KCN Bình Hòa, Huyện Châu Thành, An Giang',
+    email: 'procurement@nangluongcantho.vn',
+    address: 'KCN Trà Nóc, Quận Bình Thủy, TP. Cần Thơ',
     rating: '98.5/100',
     tier: 'Hạng Kim Cương',
     totalPurchased: '1.240 tấn',

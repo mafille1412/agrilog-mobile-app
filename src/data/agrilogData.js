@@ -62,11 +62,11 @@ export const BYPRODUCTS = [
 
 export const ENTERPRISES = [
   {
-    id: 'ent_erex',
-    name: 'Nhà máy Điện Sinh Khối Erex An Giang',
-    code: 'EREX-AG',
+    id: 'ent_cantho',
+    name: 'Nhà máy Điện Sinh Khối Cần Thơ',
+    code: 'SK-CT',
     industry: 'Năng lượng sinh khối (Biomass Power)',
-    location: 'KCN Bình Hòa, Châu Thành, An Giang',
+    location: 'KCN Trà Nóc, Quận Bình Thủy, TP. Cần Thơ',
     contactPerson: 'Kỹ sư trưởng Trần Đình Nam',
     phone: '0918.456.789',
     monthlyDemand: '3,500 tấn sinh khối khô/tháng',
@@ -150,13 +150,13 @@ export const COOPERATIVES = [
 export const MOCK_ORDERS = [
   {
     id: 'ORD-2026-0089',
-    enterpriseId: 'ent_erex',
-    enterpriseName: 'Nhà máy Điện Sinh Khối Erex An Giang',
+    enterpriseId: 'ent_cantho',
+    enterpriseName: 'Nhà máy Điện Sinh Khối Cần Thơ',
     byproduct: 'Rơm rạ cuộn',
     byproductId: 'straw',
     volume: 50, // tấn
     maxMoisture: 15, // %
-    destination: 'Nhà máy Erex Thoại Sơn, An Giang',
+    destination: 'Nhà máy Điện Sinh khối Cần Thơ, KCN Trà Nóc',
     deliveryDate: '2026-10-18',
     targetPrice: 1650000,
     status: 'in_inspection', // created -> matched -> committed -> in_inspection -> batch_issued -> in_transit -> delivered -> settled
@@ -292,7 +292,7 @@ export const LOGISTICS_PLAN = {
     },
     {
       id: 4,
-      title: 'Cổng tiếp nhận: Nhà máy Điện Sinh khối Erex An Giang',
+      title: 'Cổng tiếp nhận: Nhà máy Điện Sinh khối Cần Thơ',
       time: '12:00',
       action: 'Hạ bãi, kiểm tra niêm phong QR & đối soát mốc hợp đồng',
       status: 'pending'

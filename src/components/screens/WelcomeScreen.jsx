@@ -270,7 +270,7 @@ export default function WelcomeScreen({ onNavigate, onSelectRole }) {
             >
               <Building2 size={16} style={{ margin: '0 auto 4px' }} />
               <div style={{ fontSize: '11.5px', fontWeight: '800' }}>Doanh nghiệp</div>
-              <div style={{ fontSize: '9.5px', color: '#047857' }}>Erex / GreenGrid</div>
+              <div style={{ fontSize: '9.5px', color: '#047857' }}>Điện Sinh Khối Cần Thơ</div>
             </button>
 
             <button

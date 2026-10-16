@@ -69,7 +69,7 @@ export default function AgentCompletedOrderScreen({ onNavigate }) {
             Đơn hàng đã đóng
           </h2>
           <p style={{ fontSize: '13px', color: '#6B7280', maxWidth: '300px', margin: '0 auto', lineHeight: '1.4' }}>
-            Lô hàng đã được nghiệm thu và đối soát tự động thành công tại nhà máy GreenGrid Energy, KCN Cần Thơ.
+            Lô hàng đã được nghiệm thu và đối soát tự động thành công tại Nhà máy Điện Sinh khối Cần Thơ, KCN Trà Nóc.
           </p>
         </div>
 

@@ -94,7 +94,7 @@ export default function MatchingScreen({ onNavigate }) {
             <Truck size={16} /> Lộ trình ghép xe 1 chuyến
           </div>
           <p style={{ fontSize: '12px', color: '#15803D', lineHeight: '1.4' }}>
-            Ghé HTX Tân Bình (30 tấn) → Ghép Cơ sở Út Triệu (20 tấn) → Giao Nhà máy Erex. Tiết kiệm <strong>18.5% chi phí cước xe</strong>.
+            Ghé HTX Tân Bình (30 tấn) → Ghép Cơ sở Út Triệu (20 tấn) → Giao Nhà máy Điện Sinh khối Cần Thơ. Tiết kiệm <strong>18.5% chi phí cước xe</strong>.
           </p>
         </div>
 
