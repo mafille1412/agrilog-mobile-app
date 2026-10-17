@@ -24,6 +24,7 @@ import AgentHomeScreen from './components/screens/AgentHomeScreen';
 import AgentCreateBatchScreen from './components/screens/AgentCreateBatchScreen';
 import AgentOrderDetailScreen from './components/screens/AgentOrderDetailScreen';
 import AgentCommitSuccessScreen from './components/screens/AgentCommitSuccessScreen';
+import AgentBatchesScreen from './components/screens/AgentBatchesScreen';
 import AgentCompletedOrderScreen from './components/screens/AgentCompletedOrderScreen';
 import IotTestingScreen from './components/screens/IotTestingScreen';
 import BatchQrScreen from './components/screens/BatchQrScreen';
@@ -71,6 +72,7 @@ export default function App() {
     agent_home: 'Tổng quan Đại lý (Trang chủ)',
     agent_order_detail: 'Đại lý - Chi tiết đơn & Cam kết',
     agent_commit_success: 'Đại lý - Cam kết đã xác nhận',
+    agent_batches: 'Đại lý - Quản lý & Kiểm định lô hàng',
     agent_completed_order: 'Đại lý - Đơn hàng hoàn tất & Quyết toán',
     account: 'Quản lý tài khoản & Đăng xuất'
   };
@@ -94,6 +96,7 @@ export default function App() {
       case 'agent_home': return 'Tổng quan đại lý';
       case 'agent_order_detail': return 'Chi tiết đơn hàng';
       case 'agent_commit_success': return 'Cam kết cung ứng';
+      case 'agent_batches': return 'Kiểm định & Lô hàng';
       case 'agent_completed_order': return 'Đơn hàng hoàn tất';
       case 'account': return 'Quản lý tài khoản';
       default: return 'AgriLog B2B';
@@ -138,6 +141,8 @@ export default function App() {
         return <AgentOrderDetailScreen onNavigate={setCurrentScreen} />;
       case 'agent_commit_success':
         return <AgentCommitSuccessScreen onNavigate={setCurrentScreen} />;
+      case 'agent_batches':
+        return <AgentBatchesScreen onNavigate={setCurrentScreen} />;
       case 'agent_completed_order':
         return <AgentCompletedOrderScreen onNavigate={setCurrentScreen} />;
       case 'account':

@@ -523,10 +523,130 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </div>
           </div>
 
+          {/* Batches Inspection Overview Section */}
+          <div className="figma-card" style={{ padding: '14px 16px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+              <div>
+                <div style={{ fontSize: '13px', fontWeight: '800', color: '#111827' }}>
+                  Trạng thái kiểm định các lô hàng
+                </div>
+                <div style={{ fontSize: '10.5px', color: '#6B7280' }}>
+                  2/3 lô đã kiểm định IoT đạt chuẩn (12.0 / 20.0 tấn)
+                </div>
+              </div>
+              <button
+                onClick={() => onNavigate('agent_batches')}
+                style={{
+                  background: '#ECFDF5',
+                  border: '1px solid #A7F3D0',
+                  color: '#065F46',
+                  borderRadius: '8px',
+                  padding: '4px 8px',
+                  fontSize: '11px',
+                  fontWeight: '700',
+                  cursor: 'pointer'
+                }}
+              >
+                Chi tiết lô ›
+              </button>
+            </div>
+
+            {/* Quick mini-list of 3 batches */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              {/* Batch 1 */}
+              <div style={{
+                background: '#F9FAFB',
+                border: '1px solid #E5E7EB',
+                borderRadius: '8px',
+                padding: '8px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '11.5px'
+              }}>
+                <div>
+                  <div style={{ fontWeight: '700', color: '#111827' }}>LH-REQ-1048-01 · 6.0 tấn</div>
+                  <div style={{ fontSize: '10px', color: '#047857' }}>Độ ẩm IoT: 13.8% (≤ 15%) · Đạt chuẩn</div>
+                </div>
+                <span style={{
+                  background: '#ECFDF5',
+                  color: '#047857',
+                  border: '1px solid #A7F3D0',
+                  fontSize: '9.5px',
+                  fontWeight: '800',
+                  padding: '2px 6px',
+                  borderRadius: '10px'
+                }}>
+                  ĐÃ KIỂM ĐỊNH
+                </span>
+              </div>
+
+              {/* Batch 2 */}
+              <div style={{
+                background: '#F9FAFB',
+                border: '1px solid #E5E7EB',
+                borderRadius: '8px',
+                padding: '8px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '11.5px'
+              }}>
+                <div>
+                  <div style={{ fontWeight: '700', color: '#111827' }}>LH-REQ-1048-02 · 6.0 tấn</div>
+                  <div style={{ fontSize: '10px', color: '#047857' }}>Độ ẩm IoT: 14.2% (≤ 15%) · Đạt chuẩn</div>
+                </div>
+                <span style={{
+                  background: '#ECFDF5',
+                  color: '#047857',
+                  border: '1px solid #A7F3D0',
+                  fontSize: '9.5px',
+                  fontWeight: '800',
+                  padding: '2px 6px',
+                  borderRadius: '10px'
+                }}>
+                  ĐÃ KIỂM ĐỊNH
+                </span>
+              </div>
+
+              {/* Batch 3 */}
+              <div style={{
+                background: '#FFFDF5',
+                border: '1px dashed #FDE68A',
+                borderRadius: '8px',
+                padding: '8px 10px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                fontSize: '11.5px'
+              }}>
+                <div>
+                  <div style={{ fontWeight: '700', color: '#B45309' }}>LH-REQ-1048-03 · 8.0 tấn</div>
+                  <div style={{ fontSize: '10px', color: '#78350F' }}>Chưa đo độ ẩm · Cần đo trước khi bốc xe</div>
+                </div>
+                <button
+                  onClick={() => onNavigate('nir_testing')}
+                  style={{
+                    background: '#F59E0B',
+                    color: '#FFFFFF',
+                    border: 'none',
+                    fontSize: '10px',
+                    fontWeight: '800',
+                    padding: '4px 8px',
+                    borderRadius: '8px',
+                    cursor: 'pointer'
+                  }}
+                >
+                  Đo IoT ngay
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Action Buttons (Figma Screen 10) */}
           <div style={{ display: 'flex', gap: '10px' }}>
             <button
-              onClick={() => onNavigate('nir_testing')}
+              onClick={() => onNavigate('agent_batches')}
               style={{
                 flex: 1,
                 background: '#FFFFFF',
@@ -544,7 +664,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               }}
             >
               <Cpu size={16} />
-              Đo độ ẩm IoT
+              Quản lý kiểm định lô hàng
             </button>
 
             <button

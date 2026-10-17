@@ -17,7 +17,7 @@ export default function IotTestingScreen({ onNavigate }) {
       
       {/* Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('agent_home')}>
+        <button className="figma-header-btn" onClick={() => onNavigate('agent_batches')}>
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
@@ -246,9 +246,24 @@ export default function IotTestingScreen({ onNavigate }) {
         </div>
 
         {/* CTA Button */}
-        <div style={{ marginTop: 'auto', paddingTop: '10px' }}>
-          <button onClick={() => onNavigate('batch_qr')} className="figma-btn-primary">
-            Đồng bộ dữ liệu IoT & Tạo mã QR lô hàng
+        <div style={{ marginTop: 'auto', paddingTop: '10px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+          <button onClick={() => onNavigate('agent_batches')} className="figma-btn-primary">
+            Lưu kết quả kiểm định & Xem các lô hàng
+          </button>
+          <button 
+            onClick={() => onNavigate('batch_qr')}
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid #155724',
+              color: '#155724',
+              borderRadius: '12px',
+              padding: '12px',
+              fontSize: '12.5px',
+              fontWeight: '700',
+              cursor: 'pointer'
+            }}
+          >
+            Tạo & Xem tem QR định danh lô hàng ›
           </button>
         </div>
 

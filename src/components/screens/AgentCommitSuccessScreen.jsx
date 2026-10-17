@@ -113,12 +113,33 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
         {/* Action Buttons */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
           <button 
-            onClick={() => onNavigate('nir_testing')}
+            onClick={() => onNavigate('agent_batches')}
             className="figma-btn-primary"
             style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
           >
-            <Cpu size={18} />
-            Đo độ ẩm IoT & Tạo mã QR lô hàng
+            <ClipboardList size={18} />
+            Xem các lô hàng & Trạng thái kiểm định IoT →
+          </button>
+
+          <button 
+            onClick={() => onNavigate('nir_testing')}
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid #155724',
+              color: '#155724',
+              borderRadius: '12px',
+              padding: '12px',
+              fontSize: '13px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px'
+            }}
+          >
+            <Cpu size={16} />
+            Đo độ ẩm IoT ngay cho Lô 3 (8 tấn)
           </button>
 
           <button 
@@ -139,7 +160,7 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
             }}
           >
             <Truck size={16} />
-            Xem lộ trình xe ghép đa điểm
+            Theo dõi xe tải Doanh nghiệp điều phối
           </button>
 
           <button 

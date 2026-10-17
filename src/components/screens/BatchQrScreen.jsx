@@ -7,7 +7,7 @@ export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('matching')}>
+        <button className="figma-header-btn" onClick={() => onNavigate('agent_batches')}>
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
@@ -161,12 +161,28 @@ export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
         </div>
 
         {/* Bottom CTA */}
-        <div style={{ marginTop: 'auto', paddingTop: '6px' }}>
+        <div style={{ marginTop: 'auto', paddingTop: '6px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
           <button 
             onClick={() => onNavigate('logistics_tracking')}
             className="figma-btn-primary"
           >
-            Theo dõi vận chuyển
+            Theo dõi điều phối vận chuyển
+          </button>
+
+          <button 
+            onClick={() => onNavigate('agent_batches')}
+            style={{
+              background: '#FFFFFF',
+              border: '1px solid #155724',
+              color: '#155724',
+              borderRadius: '12px',
+              padding: '11px',
+              fontSize: '12.5px',
+              fontWeight: '700',
+              cursor: 'pointer'
+            }}
+          >
+            Quay về danh sách kiểm định lô hàng
           </button>
         </div>
 
