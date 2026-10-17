@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { 
-  ArrowLeft, 
-  CheckCircle2, 
-  Award, 
-  FileText, 
-  Download, 
-  Building2, 
-  ShieldCheck, 
-  Check, 
+import {
+  ArrowLeft,
+  CheckCircle2,
+  Award,
+  FileText,
+  Download,
+  Building2,
+  ShieldCheck,
+  Check,
   FolderArchive,
   ExternalLink,
   X
@@ -23,7 +23,7 @@ export default function EscrowSettlementScreen({ onNavigate }) {
   React.useEffect(() => {
     try {
       confetti({ particleCount: 50, spread: 60, origin: { y: 0.7 } });
-    } catch (e) {}
+    } catch (e) { }
   }, []);
 
   const handleSaveArchive = () => {
@@ -33,7 +33,7 @@ export default function EscrowSettlementScreen({ onNavigate }) {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F5F6F8' }}>
-      
+
       {/* Figma Header */}
       <div className="figma-screen-header">
         <button className="figma-header-btn" onClick={() => onNavigate('weighbridge')}>
@@ -47,7 +47,7 @@ export default function EscrowSettlementScreen({ onNavigate }) {
 
       {/* Screen Body */}
       <div className="figma-screen-viewport" style={{ padding: '16px' }}>
-        
+
         {/* Enterprise Responsibility Notice */}
         <div style={{
           background: '#EFF6FF',
@@ -152,16 +152,16 @@ export default function EscrowSettlementScreen({ onNavigate }) {
             {archiveSaved ? (
               <>
                 <CheckCircle2 size={18} color="#059669" />
-                ✓ Đã lưu trữ chứng từ đối soát vào hệ thống
+                Đã lưu trữ chứng từ đối soát vào hệ thống
               </>
             ) : (
               <>
                 <FileText size={18} color="#155724" />
-                📄 Lưu trữ chứng từ đối soát (Hóa đơn & Biên bản)
+                Lưu trữ chứng từ đối soát (Hóa đơn & Biên bản)
               </>
             )}
           </button>
-          
+
           <div style={{ textAlign: 'center', marginTop: '4px', fontSize: '10.5px', color: '#6B7280' }}>
             Tự động đồng bộ biên bản trạm cân, kết quả IoT, e-Invoice & ủy nhiệm chi
           </div>

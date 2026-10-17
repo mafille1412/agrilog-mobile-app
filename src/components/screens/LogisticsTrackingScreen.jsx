@@ -52,7 +52,7 @@ export default function LogisticsTrackingScreen({ onNavigate }) {
         }}>
           <Building2 size={18} style={{ flexShrink: 0, marginTop: '2px' }} />
           <div>
-            <strong>Trách nhiệm điều phối:</strong> Việc điều phối xe thuộc về <strong>Doanh nghiệp mua</strong>. Doanh nghiệp có thể tự điều phối xe riêng hoặc nhờ AgriLog hỗ trợ ghép chuyến.
+            <strong>Trách nhiệm điều phối:</strong> Việc điều phối xe thuộc về <strong>Doanh nghiệp mua</strong>. Doanh nghiệp có thể tự điều phối xe riêng hoặc nhờ AgriLog hỗ trợ liên kết với các đội xe đối tác (AgriLog không trực tiếp điều xe mà đóng vai trò nền tảng kết nối).
           </div>
         </div>
 
@@ -98,7 +98,7 @@ export default function LogisticsTrackingScreen({ onNavigate }) {
               }}
             >
               <div style={{ fontSize: '16px', marginBottom: '2px' }}>🌱</div>
-              Lựa chọn 2:<br /><strong>AgriLog hỗ trợ ghép xe</strong>
+              Lựa chọn 2:<br /><strong>Liên kết đội xe qua AgriLog</strong>
             </button>
           </div>
         </div>
@@ -197,10 +197,10 @@ export default function LogisticsTrackingScreen({ onNavigate }) {
             }}>
               <div style={{ fontSize: '12.5px', fontWeight: '800', marginBottom: '3px', display: 'flex', alignItems: 'center', gap: '6px' }}>
                 <Sparkles size={16} />
-                AgriLog Logistics hỗ trợ ghép chuyến đa điểm
+                AgriLog hỗ trợ liên kết các đội xe đối tác
               </div>
               <div style={{ fontSize: '11px', lineHeight: '1.4' }}>
-                Thuật toán AgriLog tự động ghép nối xe tải 50 tấn gom chung 2 HTX lân cận, giúp doanh nghiệp tiết kiệm 18.5% cước phí và giảm 64.8 kg CO₂.
+                AgriLog đóng vai trò nền tảng liên kết, kết nối với mạng lưới các đội xe vận tải sinh khối chuyên dụng để tối ưu lộ trình ghép chuyến đa điểm, giúp doanh nghiệp tiết kiệm 18.5% cước phí và giảm 64.8 kg CO₂.
               </div>
             </div>
 
