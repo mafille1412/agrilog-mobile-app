@@ -51,7 +51,7 @@ export default function App() {
   };
 
   // Public Online HTTPS Link (Works anywhere on 4G/5G or different Wi-Fi!)
-  const publicOnlineUrl = 'https://e757de978d71eb.lhr.life';
+  const publicOnlineUrl = 'https://49c35efb83fad7.lhr.life';
 
   const screenNames = {
     buyer_home: 'Tổng quan thu mua (Trang chủ)',
