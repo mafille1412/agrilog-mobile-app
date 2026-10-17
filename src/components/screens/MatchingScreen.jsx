@@ -10,7 +10,7 @@ import {
   Info
 } from 'lucide-react';
 
-export default function MatchingScreen({ onNavigate }) {
+export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
   const [selected, setSelected] = useState([1, 2]);
   // 2 Lựa chọn điều phối xe cho Doanh nghiệp:
   // 'self': Doanh nghiệp tự điều phối đội xe

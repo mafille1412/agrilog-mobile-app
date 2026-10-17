@@ -55,15 +55,23 @@ export default function App() {
   };
 
   const handleBack = (fallbackScreen) => {
-    if (screenHistory.length > 0) {
-      const prev = screenHistory[screenHistory.length - 1];
-      setScreenHistory(old => old.slice(0, -1));
-      setCurrentScreen(prev);
-    } else if (fallbackScreen) {
-      setCurrentScreen(fallbackScreen);
-    } else {
-      setCurrentScreen(currentRole === 'agent' ? 'agent_home' : 'buyer_home');
-    }
+    setScreenHistory(oldHistory => {
+      const history = [...oldHistory];
+      while (history.length > 0 && history[history.length - 1] === currentScreen) {
+        history.pop();
+      }
+      if (history.length > 0) {
+        const prev = history.pop();
+        setCurrentScreen(prev);
+        return history;
+      }
+      if (fallbackScreen) {
+        setCurrentScreen(fallbackScreen);
+      } else {
+        setCurrentScreen(currentRole === 'agent' ? 'agent_home' : 'buyer_home');
+      }
+      return [];
+    });
   };
 
   const handleLogout = () => {

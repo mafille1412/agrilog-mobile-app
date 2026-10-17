@@ -17,7 +17,7 @@ import {
   FileCheck 
 } from 'lucide-react';
 
-export default function AccountScreen({ onNavigate, currentRole, onLogout }) {
+export default function AccountScreen({ onNavigate, onBack, currentRole, onLogout }) {
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
 
   const isBuyer = currentRole === 'buyer';
