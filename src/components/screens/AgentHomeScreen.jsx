@@ -828,9 +828,9 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           </span>
         </button>
 
-        {/* Tab 2: Đơn hàng */}
+        {/* Tab 2: Đơn hàng (Xem các lô hàng & Trạng thái kiểm định) */}
         <button
-          onClick={() => setActiveTab('orders')}
+          onClick={() => onNavigate('agent_batches')}
           style={{
             background: 'none',
             border: 'none',
@@ -853,11 +853,11 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             <ClipboardList size={18} strokeWidth={activeTab === 'orders' ? 2.2 : 1.8} />
           </div>
           <span style={{ fontSize: '10px', color: activeTab === 'orders' ? '#155724' : '#6B7280', fontWeight: activeTab === 'orders' ? '800' : '500' }}>
-            Đơn đã nhận
+            Đơn hàng
           </span>
         </button>
 
-        {/* Tab 3: Lịch xe đến (Doanh nghiệp/AgriLog điều phối) */}
+        {/* Tab 3: Phương tiện */}
         <button
           onClick={() => onNavigate('logistics_tracking')}
           style={{
@@ -874,7 +874,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             <Truck size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
-            Lịch xe đến
+            Phương tiện
           </span>
         </button>
 

@@ -473,7 +473,7 @@ export default function AgentBatchesScreen({ onNavigate }) {
           <div style={{ background: '#EAF5EC', color: '#155724', padding: '4px 16px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ClipboardList size={18} strokeWidth={2.2} />
           </div>
-          <span style={{ fontSize: '10px', color: '#155724', fontWeight: '800' }}>Lô hàng</span>
+          <span style={{ fontSize: '10px', color: '#155724', fontWeight: '800' }}>Đơn hàng</span>
         </button>
 
         <button onClick={() => onNavigate('logistics_tracking')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>

@@ -110,57 +110,14 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
           </span>
         </div>
 
-        {/* Action Buttons */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {/* Action Buttons - Clean & Exactly matching Figma Screen 9 */}
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginTop: '6px' }}>
           <button 
             onClick={() => onNavigate('agent_batches')}
             className="figma-btn-primary"
-            style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+            style={{ width: '100%', padding: '14px', fontSize: '14px', fontWeight: '800' }}
           >
-            <ClipboardList size={18} />
-            Xem các lô hàng & Trạng thái kiểm định IoT →
-          </button>
-
-          <button 
-            onClick={() => onNavigate('nir_testing')}
-            style={{
-              background: '#FFFFFF',
-              border: '1px solid #155724',
-              color: '#155724',
-              borderRadius: '12px',
-              padding: '12px',
-              fontSize: '13px',
-              fontWeight: '700',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px'
-            }}
-          >
-            <Cpu size={16} />
-            Đo độ ẩm IoT ngay cho Lô 3 (8 tấn)
-          </button>
-
-          <button 
-            onClick={() => onNavigate('logistics_tracking')}
-            style={{
-              background: '#FFFFFF',
-              border: '1px solid #E5E7EB',
-              color: '#374151',
-              borderRadius: '12px',
-              padding: '12px',
-              fontSize: '13px',
-              fontWeight: '700',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '6px'
-            }}
-          >
-            <Truck size={16} />
-            Theo dõi xe tải Doanh nghiệp điều phối
+            Xem đơn hàng
           </button>
 
           <button 
@@ -175,7 +132,7 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
               marginTop: '4px'
             }}
           >
-            Quay về trang chủ Đại lý
+            Quay về trang chủ
           </button>
         </div>
 
@@ -199,7 +156,7 @@ export default function AgentCommitSuccessScreen({ onNavigate }) {
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>Trang chủ</span>
         </button>
 
-        <button onClick={() => onNavigate('agent_order_detail')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+        <button onClick={() => onNavigate('agent_batches')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
           <div style={{ background: '#EAF5EC', color: '#155724', padding: '4px 16px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ClipboardList size={18} strokeWidth={2.2} />
           </div>
