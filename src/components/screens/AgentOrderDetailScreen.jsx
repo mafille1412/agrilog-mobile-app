@@ -224,7 +224,7 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
             </select>
           </div>
 
-          {/* Logistics Dispatch Info (Trách nhiệm của Doanh nghiệp / AgriLog) */}
+          {/* Logistics Dispatch Info (Trách nhiệm của Doanh nghiệp / 2 Lựa chọn) */}
           <div style={{
             background: '#F0F9FF',
             border: '1px solid #BAE6FD',
@@ -233,10 +233,17 @@ export default function AgentOrderDetailScreen({ onNavigate }) {
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: '#0369A1', fontWeight: '800', fontSize: '12.5px', marginBottom: '4px' }}>
               <Truck size={17} />
-              <span>Điều phối vận chuyển (Trách nhiệm của Doanh nghiệp)</span>
+              <span>Điều phối vận chuyển (Thuộc trách nhiệm Doanh nghiệp)</span>
             </div>
             <div style={{ fontSize: '11px', color: '#334155', lineHeight: '1.45' }}>
-              Doanh nghiệp mua sẽ trực tiếp điều phối đội xe đến bãi tập kết của HTX (hoặc ủy quyền cho nền tảng AgriLog Logistics tối ưu tuyến đường). HTX chỉ cần chuẩn bị sẵn hàng tại bãi đúng lịch hẹn.
+              Việc điều phối xe hoàn toàn thuộc về Doanh nghiệp mua với <strong>2 lựa chọn</strong>:
+              <div style={{ marginTop: '4px', paddingLeft: '4px' }}>
+                • <strong>Lựa chọn 1:</strong> Doanh nghiệp tự điều phối đội xe riêng đến lấy hàng tại bãi.<br />
+                • <strong>Lựa chọn 2:</strong> Nhờ sự hỗ trợ từ AgriLog Logistics để tối ưu hóa ghép chuyến đa điểm.
+              </div>
+              <div style={{ marginTop: '4px', color: '#0369A1' }}>
+                HTX chỉ cần chuẩn bị sẵn rơm tại kho bãi và đối soát mã QR IoT khi xe tới.
+              </div>
             </div>
             <div style={{ marginTop: '6px', fontSize: '11px', color: '#0284C7', fontWeight: '700' }}>
               ⏱ Dự kiến xe tải 15 tấn của Doanh nghiệp tới bãi: <strong>08:30 · 16/10/2026</strong>
