@@ -10,13 +10,21 @@ import {
   Phone 
 } from 'lucide-react';
 
-export default function LogisticsTrackingScreen({ onNavigate }) {
+export default function LogisticsTrackingScreen({ onNavigate, onBack, currentRole }) {
+  const handleBack = () => {
+    if (onBack) {
+      onBack(currentRole === 'agent' ? 'agent_home' : 'matching');
+    } else {
+      onNavigate(currentRole === 'agent' ? 'agent_home' : 'matching');
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F5F6F8' }}>
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('batch_qr')}>
+        <button className="figma-header-btn" onClick={handleBack}>
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

@@ -39,15 +39,37 @@ import PublicTraceabilityView from './components/PublicTraceabilityView';
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState('welcome');
+  const [screenHistory, setScreenHistory] = useState([]);
   const [currentRole, setCurrentRole] = useState('buyer');
   const [activeOrder, setActiveOrder] = useState(null);
   const [showCanvasView, setShowCanvasView] = useState(false);
   const [showPublicPortal, setShowPublicPortal] = useState(false);
   const [showPhoneModal, setShowPhoneModal] = useState(false);
 
+  const handleNavigate = (nextScreen, replace = false) => {
+    if (nextScreen === currentScreen) return;
+    if (!replace) {
+      setScreenHistory(prev => [...prev, currentScreen]);
+    }
+    setCurrentScreen(nextScreen);
+  };
+
+  const handleBack = (fallbackScreen) => {
+    if (screenHistory.length > 0) {
+      const prev = screenHistory[screenHistory.length - 1];
+      setScreenHistory(old => old.slice(0, -1));
+      setCurrentScreen(prev);
+    } else if (fallbackScreen) {
+      setCurrentScreen(fallbackScreen);
+    } else {
+      setCurrentScreen(currentRole === 'agent' ? 'agent_home' : 'buyer_home');
+    }
+  };
+
   const handleLogout = () => {
     setCurrentRole('buyer');
     setActiveOrder(null);
+    setScreenHistory([]);
     setCurrentScreen('welcome');
   };
 
@@ -106,49 +128,49 @@ export default function App() {
   const renderActiveScreen = () => {
     switch (currentScreen) {
       case 'buyer_home':
-        return <BuyerHomeScreen onNavigate={setCurrentScreen} onSelectOrder={setActiveOrder} />;
+        return <BuyerHomeScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onSelectOrder={setActiveOrder} />;
       case 'create_request':
-        return <CreateRequestScreen onNavigate={setCurrentScreen} onOrderCreated={setActiveOrder} />;
+        return <CreateRequestScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onOrderCreated={setActiveOrder} />;
       case 'matching':
-        return <MatchingScreen onNavigate={setCurrentScreen} />;
+        return <MatchingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'batch_qr':
-        return <BatchQrScreen onNavigate={setCurrentScreen} onOpenPublicPortal={() => setShowPublicPortal(true)} />;
+        return <BatchQrScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onOpenPublicPortal={() => setShowPublicPortal(true)} />;
       case 'nir_testing':
-        return <IotTestingScreen onNavigate={setCurrentScreen} />;
+        return <IotTestingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'logistics_tracking':
-        return <LogisticsTrackingScreen onNavigate={setCurrentScreen} />;
+        return <LogisticsTrackingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'weighbridge':
-        return <WeighbridgeScreen onNavigate={setCurrentScreen} />;
+        return <WeighbridgeScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'escrow_settlement':
-        return <EscrowSettlementScreen onNavigate={setCurrentScreen} />;
+        return <EscrowSettlementScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'esg_report':
-        return <EsgReportScreen onNavigate={setCurrentScreen} />;
+        return <EsgReportScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'welcome':
-        return <WelcomeScreen onNavigate={setCurrentScreen} onSelectRole={setCurrentRole} />;
+        return <WelcomeScreen onNavigate={handleNavigate} onBack={handleBack} onSelectRole={setCurrentRole} />;
       case 'role_select':
-        return <RoleSelectScreen onNavigate={setCurrentScreen} onSelectRole={setCurrentRole} />;
+        return <RoleSelectScreen onNavigate={handleNavigate} onBack={handleBack} onSelectRole={setCurrentRole} />;
       case 'register_buyer':
-        return <RegisterBuyerScreen onNavigate={setCurrentScreen} />;
+        return <RegisterBuyerScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'register_agent':
-        return <RegisterAgentScreen onNavigate={setCurrentScreen} />;
+        return <RegisterAgentScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'verification_pending':
-        return <VerificationPendingScreen onNavigate={setCurrentScreen} currentRole={currentRole} />;
+        return <VerificationPendingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'agent_home':
-        return <AgentHomeScreen onNavigate={setCurrentScreen} onSelectOrder={setActiveOrder} />;
+        return <AgentHomeScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onSelectOrder={setActiveOrder} />;
       case 'agent_create_batch':
-        return <AgentCreateBatchScreen onNavigate={setCurrentScreen} />;
+        return <AgentCreateBatchScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'agent_order_detail':
-        return <AgentOrderDetailScreen onNavigate={setCurrentScreen} />;
+        return <AgentOrderDetailScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'agent_commit_success':
-        return <AgentCommitSuccessScreen onNavigate={setCurrentScreen} />;
+        return <AgentCommitSuccessScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'agent_batches':
-        return <AgentBatchesScreen onNavigate={setCurrentScreen} />;
+        return <AgentBatchesScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'agent_completed_order':
-        return <AgentCompletedOrderScreen onNavigate={setCurrentScreen} />;
+        return <AgentCompletedOrderScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'account':
-        return <AccountScreen onNavigate={setCurrentScreen} currentRole={currentRole} onLogout={handleLogout} />;
+        return <AccountScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onLogout={handleLogout} />;
       default:
-        return <WelcomeScreen onNavigate={setCurrentScreen} onSelectRole={setCurrentRole} />;
+        return <WelcomeScreen onNavigate={handleNavigate} onBack={handleBack} onSelectRole={setCurrentRole} />;
     }
   };
 

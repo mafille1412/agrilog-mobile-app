@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
-export default function RegisterBuyerScreen({ onNavigate }) {
+export default function RegisterBuyerScreen({ onNavigate, onBack }) {
   const [name, setName] = useState('Nhà máy Điện Sinh Khối Cần Thơ');
   const [taxCode, setTaxCode] = useState('1602058912');
   const [address, setAddress] = useState('KCN Trà Nóc, Quận Bình Thủy, TP. Cần Thơ');
@@ -19,7 +19,10 @@ export default function RegisterBuyerScreen({ onNavigate }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('role_select')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('role_select') : onNavigate('role_select')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

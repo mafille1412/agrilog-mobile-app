@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
 
-export default function RegisterAgentScreen({ onNavigate }) {
+export default function RegisterAgentScreen({ onNavigate, onBack }) {
   const [coopName, setCoopName] = useState('HTX Nông nghiệp Tân Bình');
   const [repName, setRepName] = useState('Nguyễn Văn Được');
   const [cccd, setCccd] = useState('089094001234');
@@ -19,7 +19,10 @@ export default function RegisterAgentScreen({ onNavigate }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('role_select')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('role_select') : onNavigate('role_select')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

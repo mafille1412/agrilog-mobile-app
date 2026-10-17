@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { ArrowLeft, CheckCircle2, ShieldCheck, MapPin, Cpu, Wifi, Battery, RefreshCw, Radio, Check } from 'lucide-react';
 import { INITIAL_BATCH_DETAILS } from '../../data/agrilogData';
 
-export default function IotTestingScreen({ onNavigate }) {
+export default function NirTestingScreen({ onNavigate, onBack }) {
   const [isScanning, setIsScanning] = useState(false);
   const [activePoint, setActivePoint] = useState(null);
 
@@ -18,7 +18,10 @@ export default function IotTestingScreen({ onNavigate }) {
       
       {/* Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('agent_home')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('agent_batches') : onNavigate('agent_batches')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

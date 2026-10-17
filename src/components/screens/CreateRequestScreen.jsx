@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Info } from 'lucide-react';
 
-export default function CreateRequestScreen({ onNavigate }) {
+export default function CreateRequestScreen({ onNavigate, onBack }) {
   const [biomassType, setBiomassType] = useState('straw');
   const [quantity, setQuantity] = useState('50');
   const [moisture, setMoisture] = useState('15');
@@ -18,7 +18,10 @@ export default function CreateRequestScreen({ onNavigate }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('buyer_home')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('buyer_home') : onNavigate('buyer_home')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

@@ -17,7 +17,7 @@ import {
   Sparkles
 } from 'lucide-react';
 
-export default function AgentBatchesScreen({ onNavigate }) {
+export default function AgentBatchesScreen({ onNavigate, onBack }) {
   const [filterStatus, setFilterStatus] = useState('all'); // 'all' | 'tested' | 'pending'
 
   const batches = [
@@ -89,7 +89,10 @@ export default function AgentBatchesScreen({ onNavigate }) {
       
       {/* Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('agent_home')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('agent_home') : onNavigate('agent_home')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
@@ -473,14 +476,14 @@ export default function AgentBatchesScreen({ onNavigate }) {
           <div style={{ background: '#EAF5EC', color: '#155724', padding: '4px 16px', borderRadius: '16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <ClipboardList size={18} strokeWidth={2.2} />
           </div>
-          <span style={{ fontSize: '10px', color: '#155724', fontWeight: '800' }}>Đơn hàng</span>
+          <span style={{ fontSize: '10px', color: '#155724', fontWeight: '800' }}>Lô hàng</span>
         </button>
 
-        <button onClick={() => onNavigate('logistics_tracking')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
+        <button onClick={() => onNavigate('agent_completed_order')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>
           <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Truck size={20} color="#6B7280" strokeWidth={1.8} />
+            <CheckCircle2 size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
-          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>Phương tiện</span>
+          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>Đã giao</span>
         </button>
 
         <button onClick={() => onNavigate('account')} style={{ background: 'none', border: 'none', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px', cursor: 'pointer' }}>

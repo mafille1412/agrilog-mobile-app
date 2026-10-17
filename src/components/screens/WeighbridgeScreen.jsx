@@ -10,7 +10,7 @@ import {
   Building2
 } from 'lucide-react';
 
-export default function WeighbridgeScreen({ onNavigate }) {
+export default function WeighbridgeScreen({ onNavigate, onBack }) {
   const [rating, setRating] = useState(5);
   const [feedback, setFeedback] = useState('Rơm cuộn nén chặt, khô đều đạt độ ẩm 14.2%, tài xế quét mã QR IoT tại bãi nhanh chóng.');
   const [criteria, setCriteria] = useState({
@@ -30,7 +30,10 @@ export default function WeighbridgeScreen({ onNavigate }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('logistics_tracking')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('logistics_tracking') : onNavigate('logistics_tracking')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

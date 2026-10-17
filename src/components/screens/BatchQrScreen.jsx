@@ -1,13 +1,21 @@
 import React from 'react';
 import { ArrowLeft, CheckCircle2, Circle, Truck, ExternalLink } from 'lucide-react';
 
-export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
+export default function BatchQrScreen({ onNavigate, onBack, currentRole, onOpenPublicPortal }) {
+  const handleBack = () => {
+    if (onBack) {
+      onBack(currentRole === 'agent' ? 'agent_batches' : 'logistics_tracking');
+    } else {
+      onNavigate(currentRole === 'agent' ? 'agent_batches' : 'logistics_tracking');
+    }
+  };
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F5F6F8' }}>
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('agent_batches')}>
+        <button className="figma-header-btn" onClick={handleBack}>
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
@@ -162,28 +170,21 @@ export default function BatchQrScreen({ onNavigate, onOpenPublicPortal }) {
 
         {/* Bottom CTA */}
         <div style={{ marginTop: 'auto', paddingTop: '6px', display: 'flex', flexDirection: 'column', gap: '8px' }}>
-          <button 
-            onClick={() => onNavigate('logistics_tracking')}
-            className="figma-btn-primary"
-          >
-            Theo dõi điều phối vận chuyển
-          </button>
-
-          <button 
-            onClick={() => onNavigate('agent_batches')}
-            style={{
-              background: '#FFFFFF',
-              border: '1px solid #155724',
-              color: '#155724',
-              borderRadius: '12px',
-              padding: '11px',
-              fontSize: '12.5px',
-              fontWeight: '700',
-              cursor: 'pointer'
-            }}
-          >
-            Quay về danh sách kiểm định lô hàng
-          </button>
+          {currentRole === 'agent' ? (
+            <button 
+              onClick={() => onNavigate('agent_batches')}
+              className="figma-btn-primary"
+            >
+              Quay về danh sách kiểm định lô hàng
+            </button>
+          ) : (
+            <button 
+              onClick={() => onNavigate('logistics_tracking')}
+              className="figma-btn-primary"
+            >
+              Quay lại lộ trình vận chuyển →
+            </button>
+          )}
         </div>
 
       </div>

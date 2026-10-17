@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
-export default function EscrowSettlementScreen({ onNavigate }) {
+export default function EscrowSettlementScreen({ onNavigate, onBack }) {
   // Giải ngân là quyền và trách nhiệm của Doanh nghiệp
   const [isDisbursed, setIsDisbursed] = useState(true);
   const [showArchiveModal, setShowArchiveModal] = useState(false);
@@ -36,7 +36,10 @@ export default function EscrowSettlementScreen({ onNavigate }) {
 
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('weighbridge')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('weighbridge') : onNavigate('weighbridge')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ArrowLeft, Building2, Tractor, CheckCircle2 } from 'lucide-react';
 
-export default function RoleSelectScreen({ onNavigate, onSelectRole }) {
+export default function RoleSelectScreen({ onNavigate, onBack, onSelectRole }) {
   const [selectedRole, setSelectedRole] = useState('buyer'); // 'buyer' | 'agent'
 
   const handleContinue = () => {
@@ -18,7 +18,10 @@ export default function RoleSelectScreen({ onNavigate, onSelectRole }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('welcome')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('welcome') : onNavigate('welcome')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

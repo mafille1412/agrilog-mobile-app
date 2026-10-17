@@ -66,7 +66,7 @@ export default function AccountScreen({ onNavigate, currentRole, onLogout }) {
       <div className="figma-screen-header">
         <button 
           className="figma-header-btn" 
-          onClick={() => onNavigate(isBuyer ? 'buyer_home' : 'agent_home')}
+          onClick={() => onBack ? onBack(isBuyer ? 'buyer_home' : 'agent_home') : onNavigate(isBuyer ? 'buyer_home' : 'agent_home')}
         >
           <ArrowLeft size={20} />
         </button>

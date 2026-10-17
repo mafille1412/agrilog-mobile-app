@@ -828,7 +828,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           </span>
         </button>
 
-        {/* Tab 2: Đơn hàng (Xem các lô hàng & Trạng thái kiểm định) */}
+        {/* Tab 2: Lô hàng */}
         <button
           onClick={() => onNavigate('agent_batches')}
           style={{
@@ -841,25 +841,17 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             cursor: 'pointer'
           }}
         >
-          <div style={{
-            background: activeTab === 'orders' ? '#EAF5EC' : 'transparent',
-            color: activeTab === 'orders' ? '#155724' : '#6B7280',
-            padding: '4px 16px',
-            borderRadius: '16px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center'
-          }}>
-            <ClipboardList size={18} strokeWidth={activeTab === 'orders' ? 2.2 : 1.8} />
+          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <ClipboardList size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
-          <span style={{ fontSize: '10px', color: activeTab === 'orders' ? '#155724' : '#6B7280', fontWeight: activeTab === 'orders' ? '800' : '500' }}>
-            Đơn hàng
+          <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
+            Lô hàng
           </span>
         </button>
 
-        {/* Tab 3: Phương tiện */}
+        {/* Tab 3: Đã giao */}
         <button
-          onClick={() => onNavigate('logistics_tracking')}
+          onClick={() => onNavigate('agent_completed_order')}
           style={{
             background: 'none',
             border: 'none',
@@ -871,10 +863,10 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           }}
         >
           <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Truck size={20} color="#6B7280" strokeWidth={1.8} />
+            <CheckCircle2 size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
-            Phương tiện
+            Đã giao
           </span>
         </button>
 

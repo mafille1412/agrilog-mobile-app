@@ -1,13 +1,16 @@
 import React from 'react';
 import { ArrowLeft, Award, Download, Home } from 'lucide-react';
 
-export default function EsgReportScreen({ onNavigate }) {
+export default function EsgReportScreen({ onNavigate, onBack }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F5F6F8' }}>
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('escrow_settlement')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('escrow_settlement') : onNavigate('escrow_settlement')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">

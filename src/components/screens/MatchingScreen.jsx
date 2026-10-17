@@ -22,7 +22,10 @@ export default function MatchingScreen({ onNavigate }) {
       
       {/* Figma Header */}
       <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={() => onNavigate('create_request')}>
+        <button 
+          className="figma-header-btn" 
+          onClick={() => onBack ? onBack('create_request') : onNavigate('create_request')}
+        >
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
@@ -227,10 +230,10 @@ export default function MatchingScreen({ onNavigate }) {
         {/* CTA Button */}
         <div style={{ marginTop: 'auto', paddingTop: '6px' }}>
           <button 
-            onClick={() => onNavigate('batch_qr')}
+            onClick={() => onNavigate('logistics_tracking')}
             className="figma-btn-primary"
           >
-            Xác nhận khớp lệnh & Phương án xe
+            Xác nhận & Theo dõi điều phối xe →
           </button>
         </div>
 
