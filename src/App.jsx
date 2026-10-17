@@ -69,7 +69,6 @@ export default function App() {
     register_agent: 'Đăng ký đơn vị cung ứng',
     verification_pending: 'Xác nhận & Đã nhận hồ sơ',
     agent_home: 'Tổng quan Đại lý (Trang chủ)',
-    agent_create_batch: 'Đại lý - Tạo lô hàng mới',
     agent_order_detail: 'Đại lý - Chi tiết đơn & Cam kết',
     agent_commit_success: 'Đại lý - Cam kết đã xác nhận',
     agent_completed_order: 'Đại lý - Đơn hàng hoàn tất & Quyết toán',
@@ -93,7 +92,6 @@ export default function App() {
       case 'register_agent': return 'Đăng ký đơn vị cung ứng';
       case 'verification_pending': return 'Đã nhận hồ sơ';
       case 'agent_home': return 'Tổng quan đại lý';
-      case 'agent_create_batch': return 'Tạo lô hàng mới';
       case 'agent_order_detail': return 'Chi tiết đơn hàng';
       case 'agent_commit_success': return 'Cam kết cung ứng';
       case 'agent_completed_order': return 'Đơn hàng hoàn tất';

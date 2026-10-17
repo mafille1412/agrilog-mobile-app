@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { 
-  Bell, 
-  LayoutGrid, 
-  ClipboardList, 
-  Truck, 
-  User, 
-  Plus, 
-  ArrowRight, 
-  CheckCircle2, 
-  Radio, 
-  MapPin, 
-  Cpu, 
+import {
+  Bell,
+  LayoutGrid,
+  ClipboardList,
+  Truck,
+  User,
+  Plus,
+  ArrowRight,
+  CheckCircle2,
+  Radio,
+  MapPin,
+  Cpu,
   Sparkles,
   ChevronRight,
   Filter,
@@ -67,7 +67,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F8FAF9' }}>
-      
+
       {/* Top Header - Synchronized 100% with Figma Prototype */}
       <div style={{
         padding: '14px 20px 10px',
@@ -115,7 +115,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
 
         {/* Right Actions: Notification bell + User Avatar */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <button 
+          <button
             style={{
               position: 'relative',
               background: '#F9FAFB',
@@ -144,7 +144,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           </button>
 
           {/* User Avatar linking to Account / Logout */}
-          <div 
+          <div
             onClick={() => onNavigate('account')}
             style={{
               width: '36px',
@@ -170,7 +170,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
       {/* VIEW 1: HOME TAB (Figma Screen 1) */}
       {activeTab === 'home' && (
         <div className="figma-screen-viewport" style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          
+
           {/* Greeting Section */}
           <div>
             <h2 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>
@@ -192,7 +192,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
           </div>
 
           {/* Status Card (Figma Screen 1: Sẵn sàng nhận đơn mới) */}
-          <div 
+          <div
             onClick={() => setIsReady(!isReady)}
             style={{
               background: 'linear-gradient(135deg, #155724, #0B3D18)',
@@ -258,7 +258,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
                 Thiết bị đo IoT: <strong style={{ color: '#059669' }}>Đã kết nối BLE (Pin 94%)</strong>
               </span>
             </div>
-            <button 
+            <button
               onClick={() => onNavigate('nir_testing')}
               style={{
                 background: '#ECFDF5',
@@ -281,7 +281,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               <h3 style={{ fontSize: '14px', fontWeight: '800', color: '#111827' }}>
                 Nhu cầu thu mua mở từ Doanh nghiệp
               </h3>
-              <span 
+              <span
                 onClick={() => onNavigate('agent_order_detail')}
                 style={{ fontSize: '12px', color: '#155724', fontWeight: '700', cursor: 'pointer' }}
               >
@@ -294,7 +294,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {demandOrders.map((order) => (
-                <div 
+                <div
                   key={order.id}
                   onClick={() => onNavigate('agent_order_detail')}
                   style={{
@@ -400,7 +400,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
       {/* VIEW 2: ORDERS TAB (Figma Screen 10 - Quản lý đơn hàng & Đơn đã cam kết) */}
       {activeTab === 'orders' && (
         <div className="figma-screen-viewport" style={{ padding: '16px 20px', display: 'flex', flexDirection: 'column', gap: '14px' }}>
-          
+
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
             <div>
               <h2 style={{ fontSize: '17px', fontWeight: '800', color: '#111827', margin: 0 }}>
@@ -525,7 +525,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
 
           {/* Action Buttons (Figma Screen 10) */}
           <div style={{ display: 'flex', gap: '10px' }}>
-            <button 
+            <button
               onClick={() => onNavigate('nir_testing')}
               style={{
                 flex: 1,
@@ -547,7 +547,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               Đo độ ẩm IoT
             </button>
 
-            <button 
+            <button
               onClick={() => setCancelModal(true)}
               style={{
                 background: '#FEF2F2',
@@ -566,7 +566,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
 
           {/* Big CTA Create QR Code (Figma Screen 10) */}
           <div style={{ marginTop: 'auto', paddingTop: '6px' }}>
-            <button 
+            <button
               onClick={() => onNavigate('batch_qr')}
               style={{
                 width: '100%',
@@ -590,7 +590,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
             </button>
 
             <div style={{ textAlign: 'center', marginTop: '10px' }}>
-              <span 
+              <span
                 onClick={() => onNavigate('agent_completed_order')}
                 style={{ fontSize: '11.5px', color: '#155724', fontWeight: '700', textDecoration: 'underline', cursor: 'pointer' }}
               >
@@ -629,7 +629,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               Hủy cam kết khi đội xe đã điều phối có thể ảnh hưởng đến điểm uy tín của HTX trên hệ thống AgriLog.
             </p>
             <div style={{ display: 'flex', gap: '8px' }}>
-              <button 
+              <button
                 onClick={() => setCancelModal(false)}
                 style={{
                   flex: 1,
@@ -644,7 +644,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
               >
                 Đóng
               </button>
-              <button 
+              <button
                 onClick={() => {
                   setCancelModal(false);
                   setActiveTab('home');
