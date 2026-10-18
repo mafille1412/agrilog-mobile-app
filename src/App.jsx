@@ -92,7 +92,7 @@ export default function App() {
     buyer_home: 'Tổng quan thu mua (Trang chủ)',
     buyer_requests: 'Yêu cầu thu mua (Danh sách & Lọc)',
     create_request: 'Tạo yêu cầu thu mua',
-    matching: 'Khớp lệnh & đại lý đề xuất',
+    matching: 'Xác nhận yêu cầu & phương án xe',
     buyer_orders: 'Đơn hàng thu mua (Danh sách & Lọc)',
     buyer_order_detail: 'Chi tiết đơn hàng (4 Tab: Tổng quan/Lô hàng/Vận chuyển/Thanh toán)',
     batch_qr: 'Mã định danh lô hàng & QR',
@@ -120,7 +120,7 @@ export default function App() {
       case 'buyer_home': return 'Tổng quan thu mua';
       case 'buyer_requests': return 'Danh sách yêu cầu';
       case 'create_request': return 'Tạo yêu cầu thu mua';
-      case 'matching': return 'Khớp lệnh & đại lý đề xuất';
+      case 'matching': return 'Xác nhận yêu cầu thu mua';
       case 'buyer_orders': return 'Danh sách đơn hàng';
       case 'buyer_order_detail': return 'Chi tiết đơn hàng';
       case 'batch_qr': return 'Mã định danh lô hàng';

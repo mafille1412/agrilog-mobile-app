@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, 
-  CheckCircle2, 
   MapPin, 
   Truck, 
   Building2, 
-  Link2, 
   Sparkles,
-  Info
+  Info,
+  Clock,
+  Layers
 } from 'lucide-react';
 
 export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
-  const [selected, setSelected] = useState([1, 2]);
   // 2 Lựa chọn điều phối xe cho Doanh nghiệp:
   // 'self': Doanh nghiệp tự điều phối đội xe
   // 'agrilog_connect': Nhờ AgriLog hỗ trợ liên kết với các đội xe đối tác (AgriLog không trực tiếp điều xe)
@@ -20,7 +19,7 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F5F6F8' }}>
       
-      {/* Figma Header */}
+      {/* Header */}
       <div className="figma-screen-header">
         <button 
           className="figma-header-btn" 
@@ -29,7 +28,7 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
           <ArrowLeft size={20} />
         </button>
         <div className="figma-header-title">
-          Khớp lệnh & đại lý đề xuất
+          Xác nhận yêu cầu thu mua
         </div>
         <div style={{ width: '36px' }} />
       </div>
@@ -37,71 +36,77 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
       {/* Screen Body */}
       <div className="figma-screen-viewport" style={{ padding: '16px' }}>
         
-        {/* Green Top Banner in Figma */}
-        <div style={{
-          background: '#155724',
-          color: 'white',
-          borderRadius: '12px',
-          padding: '14px 16px',
-          marginBottom: '14px'
-        }}>
-          <div style={{ fontSize: '14px', fontWeight: '800', marginBottom: '4px' }}>
-            Đã tìm thấy 2 đại lý phù hợp nhất
-          </div>
-          <div style={{ fontSize: '12px', color: '#D1FAE5' }}>
-            Tổng sản lượng: 50 tấn · Đảm bảo giao đúng tiến độ
-          </div>
-        </div>
-
-        {/* List of Matched Dealers in Figma */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', marginBottom: '14px' }}>
-          
-          {/* Dealer 1 */}
-          <div className="figma-card" style={{ border: '2px solid #155724' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-              <div>
-                <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#111827', margin: 0 }}>
-                  HTX Nông nghiệp Tân Bình
-                </h4>
-                <div style={{ fontSize: '11px', color: '#6B7280', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <MapPin size={12} color="#155724" /> Thoại Sơn, An Giang · Cách 14.2 km
-                </div>
-              </div>
-              <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: '#155724', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <CheckCircle2 size={14} />
-              </div>
+        {/* Thông tin tóm tắt yêu cầu vừa tạo (không hiển thị đại lý vì mới tạo đơn) */}
+        <div className="figma-card" style={{ marginBottom: '14px', padding: '16px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
+            <div>
+              <span style={{ fontSize: '11.5px', color: '#6B7280', fontWeight: '700', letterSpacing: '0.02em' }}>
+                MÃ ĐƠN: #REQ-1048
+              </span>
+              <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: '2px 0 0' }}>
+                Rơm rạ cuộn
+              </h3>
             </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px', marginTop: '6px' }}>
-              <span>Cung cấp: <strong>30 tấn</strong></span>
-              <span>Độ ẩm TB: <strong style={{ color: '#155724' }}>13.8%</strong></span>
-              <span className="badge-green">IoT Đạt chuẩn</span>
-            </div>
+            <span style={{
+              background: '#EFF6FF',
+              color: '#2563EB',
+              fontSize: '11px',
+              fontWeight: '700',
+              padding: '4px 10px',
+              borderRadius: '12px'
+            }}>
+              Đang mở nhận đơn
+            </span>
           </div>
 
-          {/* Dealer 2 */}
-          <div className="figma-card" style={{ border: '2px solid #155724' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '6px' }}>
-              <div>
-                <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#111827', margin: 0 }}>
-                  Cơ sở Thu gom Út Triệu
-                </h4>
-                <div style={{ fontSize: '11px', color: '#6B7280', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                  <MapPin size={12} color="#155724" /> Hòn Đất, Kiên Giang · Cách 38.5 km
-                </div>
-              </div>
-              <div style={{ width: '20px', height: '20px', borderRadius: '50%', background: '#155724', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <CheckCircle2 size={14} />
+          <div style={{ 
+            display: 'grid', 
+            gridTemplateColumns: '1fr 1fr', 
+            gap: '10px', 
+            margin: '12px 0', 
+            padding: '12px', 
+            background: '#F9FAFB', 
+            borderRadius: '10px',
+            border: '1px solid #F3F4F6'
+          }}>
+            <div>
+              <div style={{ fontSize: '11px', color: '#6B7280' }}>Khối lượng cần thu:</div>
+              <div style={{ fontSize: '16px', fontWeight: '800', color: '#1A4329', marginTop: '2px' }}>
+                50 tấn khô
               </div>
             </div>
-
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', borderTop: '1px solid #F3F4F6', paddingTop: '8px', marginTop: '6px' }}>
-              <span>Cung cấp: <strong>20 tấn</strong></span>
-              <span>Độ ẩm TB: <strong style={{ color: '#155724' }}>14.5%</strong></span>
-              <span className="badge-green">IoT Đạt chuẩn</span>
+            <div>
+              <div style={{ fontSize: '11px', color: '#6B7280' }}>Tiêu chuẩn độ ẩm:</div>
+              <div style={{ fontSize: '13px', fontWeight: '700', color: '#111827', marginTop: '4px' }}>
+                ≤ 15.0%
+              </div>
+            </div>
+            <div style={{ gridColumn: 'span 2', borderTop: '1px solid #E5E7EB', paddingTop: '8px', marginTop: '2px' }}>
+              <div style={{ fontSize: '11px', color: '#6B7280' }}>Điểm nhận hàng:</div>
+              <div style={{ fontSize: '12.5px', fontWeight: '600', color: '#1F2937', marginTop: '2px' }}>
+                Nhà máy Đồng Tháp · KCN Bình Hòa, An Giang
+              </div>
             </div>
           </div>
 
+          {/* Trạng thái phát thông báo bình thường */}
+          <div style={{
+            fontSize: '11.5px',
+            color: '#155724',
+            background: '#F0FDF4',
+            border: '1px solid #BBF7D0',
+            padding: '9px 12px',
+            borderRadius: '8px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            lineHeight: '1.4'
+          }}>
+            <Clock size={16} color="#155724" style={{ flexShrink: 0 }} />
+            <span>
+              Yêu cầu sẽ được công khai trên hệ thống sàn AgriLog để các Đại lý & HTX trong khu vực nhận đơn và cam kết số lượng.
+            </span>
+          </div>
         </div>
 
         {/* Transportation & Fleet Dispatch Section (Doanh nghiệp lựa chọn) */}
@@ -147,12 +152,12 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
                   Doanh nghiệp tự điều phối đội xe
                 </div>
                 <div style={{ fontSize: '10.5px', color: '#6B7280', marginTop: '2px', lineHeight: '1.4' }}>
-                  Nhà máy tự cử đội xe nội bộ đến 2 điểm thu gom lấy hàng. Đại lý sẽ đối soát mã QR IoT khi xe của doanh nghiệp tới bãi.
+                  Nhà máy tự cử đội xe nội bộ đến điểm thu gom lấy hàng sau khi đại lý xác nhận cam kết sản lượng.
                 </div>
               </div>
             </div>
 
-            {/* Option 2: Nhờ AgriLog hỗ trợ liên kết các đội xe đối tác */}
+            {/* Option 2: Nhờ AgriLog hỗ trợ liên kết với các đội xe đối tác */}
             <div 
               onClick={() => setTransportMode('agrilog_connect')}
               style={{
@@ -204,7 +209,7 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
             }}>
               <Building2 size={16} color="#4B5563" style={{ flexShrink: 0 }} />
               <span>
-                Doanh nghiệp chủ động kế hoạch xe tải, xuất phát từ nhà máy đến kho HTX Tân Bình và cơ sở Út Triệu.
+                Doanh nghiệp chủ động kế hoạch xe tải, xuất phát từ nhà máy đến các điểm thu gom khi có đại lý cam kết.
               </span>
             </div>
           ) : (
@@ -217,10 +222,10 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
               color: '#15803D'
             }}>
               <div style={{ fontWeight: '700', marginBottom: '2px', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                <Sparkles size={14} /> Lộ trình ghép xe 1 chuyến qua mạng lưới liên kết:
+                <Sparkles size={14} /> Hỗ trợ ghép xe qua mạng lưới đối tác liên kết:
               </div>
               <div style={{ lineHeight: '1.4' }}>
-                Đội xe đối tác liên kết sẽ ghé HTX Tân Bình (30t) → Ghép Cơ sở Út Triệu (20t) → Giao Nhà máy. Tiết kiệm <strong>18.5% chi phí cước xe</strong>.
+                Hệ thống sẽ kết nối với đội xe tải chuyên dụng gần nhất để ghép chuyến thu gom khi đại lý nhận đơn, giúp tối ưu cước phí và giảm phát thải CO₂.
               </div>
             </div>
           )}
@@ -233,7 +238,7 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
             onClick={() => onNavigate('buyer_order_detail')}
             className="figma-btn-primary"
           >
-            Xác nhận & Vào chi tiết đơn hàng →
+            Xác nhận đăng yêu cầu & Vào chi tiết →
           </button>
         </div>
 

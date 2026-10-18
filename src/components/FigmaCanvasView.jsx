@@ -24,7 +24,7 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
     { id: 'buyer_home', title: '6. Doanh nghiệp - Tổng quan & Bảng giá', stage: 'Doanh nghiệp', tag: 'Dashboard' },
     { id: 'buyer_requests', title: '7. Doanh nghiệp - Quản lý Yêu cầu', stage: 'Doanh nghiệp', tag: 'Requests' },
     { id: 'create_request', title: '8. Doanh nghiệp - Tạo yêu cầu thu mua', stage: 'Doanh nghiệp', tag: 'Create Req' },
-    { id: 'matching', title: '9. Doanh nghiệp - Khớp lệnh AI & Xe', stage: 'Doanh nghiệp', tag: 'AI Match' },
+    { id: 'matching', title: '9. Doanh nghiệp - Xác nhận yêu cầu & Xe', stage: 'Doanh nghiệp', tag: 'Confirm' },
     { id: 'buyer_orders', title: '10. Doanh nghiệp - Quản lý Đơn hàng', stage: 'Doanh nghiệp', tag: 'Orders' },
     { id: 'buyer_order_detail', title: '11. Chi tiết đơn (4 Tab hợp nhất)', stage: 'Doanh nghiệp', tag: 'Order Hub' },
     { id: 'batch_qr', title: '12. Mã định danh lô hàng & Tem QR', stage: 'Truy xuất', tag: 'Batch QR' },
