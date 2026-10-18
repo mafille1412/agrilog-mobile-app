@@ -7,6 +7,7 @@ import {
   Bell, 
   LayoutGrid, 
   ClipboardList, 
+  Package,
   Truck, 
   User 
 } from 'lucide-react';
@@ -244,7 +245,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
               key={order.id}
               onClick={() => {
                 if (onSelectOrder) onSelectOrder(order);
-                onNavigate('matching');
+                onNavigate('buyer_order_detail');
               }}
               style={{
                 background: '#FFFFFF',
@@ -381,7 +382,7 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
 
         {/* Tab 2: Yêu cầu */}
         <button
-          onClick={() => onNavigate('create_request')}
+          onClick={() => onNavigate('buyer_requests')}
           style={{
             background: 'none',
             border: 'none',
@@ -400,9 +401,9 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
           </span>
         </button>
 
-        {/* Tab 3: Vận chuyển */}
+        {/* Tab 3: Đơn hàng */}
         <button
-          onClick={() => onNavigate('logistics_tracking')}
+          onClick={() => onNavigate('buyer_orders')}
           style={{
             background: 'none',
             border: 'none',
@@ -414,10 +415,10 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
           }}
         >
           <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Truck size={20} color="#6B7280" strokeWidth={1.8} />
+            <Package size={20} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
-            Vận chuyển
+            Đơn hàng
           </span>
         </button>
 

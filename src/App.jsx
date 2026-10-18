@@ -18,8 +18,12 @@ import RegisterBuyerScreen from './components/screens/RegisterBuyerScreen';
 import RegisterAgentScreen from './components/screens/RegisterAgentScreen';
 import VerificationPendingScreen from './components/screens/VerificationPendingScreen';
 import BuyerHomeScreen from './components/screens/BuyerHomeScreen';
+import BuyerRequestsScreen from './components/screens/BuyerRequestsScreen';
 import CreateRequestScreen from './components/screens/CreateRequestScreen';
 import MatchingScreen from './components/screens/MatchingScreen';
+import BuyerOrdersScreen from './components/screens/BuyerOrdersScreen';
+import BuyerOrderDetailScreen from './components/screens/BuyerOrderDetailScreen';
+import QrScannerScreen from './components/screens/QrScannerScreen';
 import AgentHomeScreen from './components/screens/AgentHomeScreen';
 import AgentCreateBatchScreen from './components/screens/AgentCreateBatchScreen';
 import AgentOrderDetailScreen from './components/screens/AgentOrderDetailScreen';
@@ -86,9 +90,13 @@ export default function App() {
 
   const screenNames = {
     buyer_home: 'Tổng quan thu mua (Trang chủ)',
+    buyer_requests: 'Yêu cầu thu mua (Danh sách & Lọc)',
     create_request: 'Tạo yêu cầu thu mua',
     matching: 'Khớp lệnh & đại lý đề xuất',
+    buyer_orders: 'Đơn hàng thu mua (Danh sách & Lọc)',
+    buyer_order_detail: 'Chi tiết đơn hàng (4 Tab: Tổng quan/Lô hàng/Vận chuyển/Thanh toán)',
     batch_qr: 'Mã định danh lô hàng & QR',
+    qr_scanner: 'Quét mã QR IoT bằng Camera',
     nir_testing: 'Kiểm định độ ẩm bằng thiết bị IoT',
     logistics_tracking: 'Tối ưu hóa logistics & Vận chuyển',
     weighbridge: 'Cân điện tử & Nghiệm thu tại nhà máy',
@@ -110,9 +118,13 @@ export default function App() {
   const getFrameTitle = () => {
     switch (currentScreen) {
       case 'buyer_home': return 'Tổng quan thu mua';
+      case 'buyer_requests': return 'Danh sách yêu cầu';
       case 'create_request': return 'Tạo yêu cầu thu mua';
       case 'matching': return 'Khớp lệnh & đại lý đề xuất';
+      case 'buyer_orders': return 'Danh sách đơn hàng';
+      case 'buyer_order_detail': return 'Chi tiết đơn hàng';
       case 'batch_qr': return 'Mã định danh lô hàng';
+      case 'qr_scanner': return 'Quét mã QR IoT';
       case 'nir_testing': return 'Kiểm định thiết bị IoT';
       case 'logistics_tracking': return 'Tối ưu hóa logistics';
       case 'weighbridge': return 'Giao nhận & đối soát';
@@ -137,12 +149,20 @@ export default function App() {
     switch (currentScreen) {
       case 'buyer_home':
         return <BuyerHomeScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onSelectOrder={setActiveOrder} />;
+      case 'buyer_requests':
+        return <BuyerRequestsScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'create_request':
         return <CreateRequestScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onOrderCreated={setActiveOrder} />;
       case 'matching':
         return <MatchingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
+      case 'buyer_orders':
+        return <BuyerOrdersScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onSelectOrder={setActiveOrder} />;
+      case 'buyer_order_detail':
+        return <BuyerOrderDetailScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} activeOrder={activeOrder} />;
       case 'batch_qr':
         return <BatchQrScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} onOpenPublicPortal={() => setShowPublicPortal(true)} />;
+      case 'qr_scanner':
+        return <QrScannerScreen onNavigate={handleNavigate} onBack={handleBack} />;
       case 'nir_testing':
         return <IotTestingScreen onNavigate={handleNavigate} onBack={handleBack} currentRole={currentRole} />;
       case 'logistics_tracking':

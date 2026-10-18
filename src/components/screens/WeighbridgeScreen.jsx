@@ -32,7 +32,7 @@ export default function WeighbridgeScreen({ onNavigate, onBack }) {
       <div className="figma-screen-header">
         <button 
           className="figma-header-btn" 
-          onClick={() => onBack ? onBack('logistics_tracking') : onNavigate('logistics_tracking')}
+          onClick={() => onBack ? onBack('buyer_order_detail') : onNavigate('buyer_order_detail')}
         >
           <ArrowLeft size={20} />
         </button>

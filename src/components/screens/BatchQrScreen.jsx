@@ -4,9 +4,9 @@ import { ArrowLeft, CheckCircle2, Circle, Truck, ExternalLink } from 'lucide-rea
 export default function BatchQrScreen({ onNavigate, onBack, currentRole, onOpenPublicPortal }) {
   const handleBack = () => {
     if (onBack) {
-      onBack(currentRole === 'agent' ? 'agent_batches' : 'logistics_tracking');
+      onBack(currentRole === 'agent' ? 'agent_batches' : 'buyer_order_detail');
     } else {
-      onNavigate(currentRole === 'agent' ? 'agent_batches' : 'logistics_tracking');
+      onNavigate(currentRole === 'agent' ? 'agent_batches' : 'buyer_order_detail');
     }
   };
 
@@ -179,10 +179,10 @@ export default function BatchQrScreen({ onNavigate, onBack, currentRole, onOpenP
             </button>
           ) : (
             <button 
-              onClick={() => onNavigate('logistics_tracking')}
+              onClick={() => onNavigate('buyer_order_detail')}
               className="figma-btn-primary"
             >
-              Quay lại lộ trình vận chuyển →
+              Quay lại chi tiết đơn hàng →
             </button>
           )}
         </div>

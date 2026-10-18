@@ -230,10 +230,10 @@ export default function MatchingScreen({ onNavigate, onBack, currentRole }) {
         {/* CTA Button */}
         <div style={{ marginTop: 'auto', paddingTop: '6px' }}>
           <button 
-            onClick={() => onNavigate('logistics_tracking')}
+            onClick={() => onNavigate('buyer_order_detail')}
             className="figma-btn-primary"
           >
-            Xác nhận & Theo dõi điều phối xe →
+            Xác nhận & Vào chi tiết đơn hàng →
           </button>
         </div>
 

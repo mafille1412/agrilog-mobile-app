@@ -14,25 +14,32 @@ export default function FigmaCanvasView({ onSelectScreen, currentScreen }) {
   const [zoom, setZoom] = useState(1);
 
   const screens = [
-    { id: 'welcome', title: '1. Chào mừng & Chọn vai trò', stage: 'Onboarding', tag: 'Welcome' },
+    { id: 'welcome', title: '1. Chào mừng & Đăng nhập (CCCD)', stage: 'Onboarding', tag: 'Welcome' },
     { id: 'role_select', title: '2. Phân loại đối tượng', stage: 'Onboarding', tag: 'Role' },
     { id: 'register_buyer', title: '3. Đăng ký Doanh nghiệp', stage: 'Onboarding', tag: 'Buyer' },
     { id: 'register_agent', title: '4. Đăng ký Đại lý/HTX', stage: 'Onboarding', tag: 'Agent' },
     { id: 'verification_pending', title: '5. Xác nhận & Sandbox', stage: 'Onboarding', tag: 'Verify' },
-    { id: 'buyer_home', title: '6. Trang chủ & Bảng giá', stage: 'Nhu cầu', tag: 'Dashboard' },
-    { id: 'create_request', title: '7. Tạo yêu cầu thu mua', stage: 'Nhu cầu', tag: 'Create Req' },
-    { id: 'matching', title: '8. Ghép nối AI & Lộ trình', stage: 'Logistics', tag: 'AI Match' },
-    { id: 'agent_home', title: '9. Trang chủ Đại lý (Nhận đơn mở)', stage: 'Đại lý', tag: 'Agent Home' },
-    { id: 'agent_order_detail', title: '10. Chi tiết đơn & Cam kết đáp ứng', stage: 'Đại lý', tag: 'Commit' },
-    { id: 'agent_commit_success', title: '11. Cam kết đã xác nhận & Lịch xe', stage: 'Đại lý', tag: 'Confirmed' },
-    { id: 'nir_testing', title: '12. Kiểm định độ ẩm thiết bị IoT', stage: 'Kiểm định', tag: 'IoT Sensor' },
-    { id: 'batch_qr', title: '13. Cấp mã Batch ID & Tem QR', stage: 'Truy xuất', tag: 'Batch QR' },
-    { id: 'logistics_tracking', title: '14. Xe Doanh nghiệp / AgriLog đến bãi', stage: 'Vận chuyển', tag: 'Fleet GPS' },
-    { id: 'weighbridge', title: '15. Cân điện tử & Định giá khô', stage: 'Nghiệm thu', tag: 'Weighbridge' },
-    { id: 'escrow_settlement', title: '16. Quyết toán Escrow tự động', stage: 'Thanh toán', tag: 'Settlement' },
-    { id: 'agent_completed_order', title: '17. Đại lý - Đóng đơn & Đã giải ngân', stage: 'Đại lý', tag: 'Settled' },
-    { id: 'esg_report', title: '18. Báo cáo MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
-    { id: 'account', title: '19. Quản lý tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
+    
+    // Enterprise / Buyer Flow
+    { id: 'buyer_home', title: '6. Doanh nghiệp - Tổng quan & Bảng giá', stage: 'Doanh nghiệp', tag: 'Dashboard' },
+    { id: 'buyer_requests', title: '7. Doanh nghiệp - Quản lý Yêu cầu', stage: 'Doanh nghiệp', tag: 'Requests' },
+    { id: 'create_request', title: '8. Doanh nghiệp - Tạo yêu cầu thu mua', stage: 'Doanh nghiệp', tag: 'Create Req' },
+    { id: 'matching', title: '9. Doanh nghiệp - Khớp lệnh AI & Xe', stage: 'Doanh nghiệp', tag: 'AI Match' },
+    { id: 'buyer_orders', title: '10. Doanh nghiệp - Quản lý Đơn hàng', stage: 'Doanh nghiệp', tag: 'Orders' },
+    { id: 'buyer_order_detail', title: '11. Chi tiết đơn (4 Tab hợp nhất)', stage: 'Doanh nghiệp', tag: 'Order Hub' },
+    { id: 'batch_qr', title: '12. Mã định danh lô hàng & Tem QR', stage: 'Truy xuất', tag: 'Batch QR' },
+    { id: 'qr_scanner', title: '13. Quét mã QR IoT (Camera Scanner)', stage: 'IoT & QR', tag: 'Scanner' },
+    { id: 'weighbridge', title: '14. Cân điện tử & Đánh giá Đại lý', stage: 'Nghiệm thu', tag: 'Weighbridge' },
+    { id: 'escrow_settlement', title: '15. Giải ngân Escrow & Lưu chứng từ', stage: 'Thanh toán', tag: 'Escrow' },
+    { id: 'esg_report', title: '16. Chứng nhận MRV Carbon & ESG', stage: 'Báo cáo', tag: 'ESG Report' },
+
+    // Agent Flow
+    { id: 'agent_home', title: '17. Đại lý - Danh sách đơn mở', stage: 'Đại lý', tag: 'Agent Home' },
+    { id: 'agent_order_detail', title: '18. Đại lý - Nhận đơn & Cam kết', stage: 'Đại lý', tag: 'Commit' },
+    { id: 'agent_commit_success', title: '19. Đại lý - Cam kết đã xác nhận', stage: 'Đại lý', tag: 'Confirmed' },
+    { id: 'agent_batches', title: '20. Đại lý - Quản lý & Kiểm định lô', stage: 'Đại lý', tag: 'Batches' },
+    { id: 'agent_completed_order', title: '21. Đại lý - Giao hàng thành công', stage: 'Đại lý', tag: 'Delivered' },
+    { id: 'account', title: '22. Hồ sơ tài khoản & Đăng xuất', stage: 'Tài khoản', tag: 'Account' }
   ];
 
   return (
