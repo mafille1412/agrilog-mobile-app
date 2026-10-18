@@ -37,7 +37,7 @@ export default function BuyerOrdersScreen({ onNavigate, onSelectOrder }) {
     },
     {
       id: 'REQ-1043',
-      name: 'Trấu nghiền',
+      name: 'Bã mía ép khô',
       factory: 'Nhà máy Điện Sinh khối Thoại Sơn',
       totalTons: '30.0 tấn',
       unitPrice: '1.200.000 đ/tấn',

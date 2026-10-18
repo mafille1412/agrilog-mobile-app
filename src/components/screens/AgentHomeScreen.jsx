@@ -41,7 +41,7 @@ export default function AgentHomeScreen({ onNavigate, onSelectOrder, initialTab 
     },
     {
       id: 'REQ-1043',
-      byproduct: 'Trấu',
+      byproduct: 'Bã mía',
       badge: 'Phù hợp',
       enterprise: 'Nhà máy Điện Sinh khối Thoại Sơn',
       location: 'Thoại Sơn, An Giang',

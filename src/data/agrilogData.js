@@ -17,20 +17,6 @@ export const BYPRODUCTS = [
     activeSeason: 'Đông Xuân (Thu hoạch rộ)'
   },
   {
-    id: 'husk',
-    name: 'Trấu xay nguyên vỏ',
-    nameEn: 'Rice Husk',
-    icon: '🌱',
-    density: '120 kg/m³',
-    rawDensity: '120 kg/m³',
-    targetMoisture: 12,
-    unit: 'tấn',
-    basePrice: 1150000,
-    co2Factor: 0.105,
-    applications: ['Viên nén đốt lò hơi', 'Tro trấu silica', 'Vật liệu cách nhiệt'],
-    activeSeason: 'Quanh năm theo vụ lúa'
-  },
-  {
     id: 'bagasse',
     name: 'Bã mía ép khô',
     nameEn: 'Sugarcane Bagasse',
@@ -41,22 +27,8 @@ export const BYPRODUCTS = [
     unit: 'tấn',
     basePrice: 750000,
     co2Factor: 0.098,
-    applications: ['Đồng phát điện bã mía', 'Bao bì phân hủy sinh học'],
+    applications: ['Đồng phát điện bã mía', 'Bao bì phân hủy sinh học', 'Nhiên liệu sinh khối'],
     activeSeason: 'Vụ ép mía (Tháng 11 - Tháng 4)'
-  },
-  {
-    id: 'corncob',
-    name: 'Lõi ngô sấy',
-    nameEn: 'Corn Cobs',
-    icon: '🌽',
-    density: '240 kg/m³',
-    rawDensity: '180 kg/m³',
-    targetMoisture: 14,
-    unit: 'tấn',
-    basePrice: 1400000,
-    co2Factor: 0.112,
-    applications: ['Cồn sinh học Furfural', 'Nhiên liệu rắn lò sấy'],
-    activeSeason: 'Vụ Hè Thu'
   }
 ];
 
@@ -95,7 +67,7 @@ export const ENTERPRISES = [
     location: 'KCN Sa Đéc, Đồng Tháp',
     contactPerson: 'Bà Lê Mai Phương',
     phone: '0982.776.543',
-    monthlyDemand: '1,500 tấn trấu & rơm/tháng',
+    monthlyDemand: '1,500 tấn bã mía & rơm/tháng',
     rating: 4.8,
     verified: true,
     esgGoal: 'Thay thế 30% phân hóa học bằng phân hữu cơ tuần hoàn'
@@ -188,19 +160,19 @@ export const MOCK_ORDERS = [
     id: 'ORD-2026-0087',
     enterpriseId: 'ent_mekong_bio',
     enterpriseName: 'Mekong Organic Sa Đéc',
-    byproduct: 'Trấu xay nguyên vỏ',
-    byproductId: 'husk',
+    byproduct: 'Bã mía ép khô',
+    byproductId: 'bagasse',
     volume: 80,
-    maxMoisture: 13,
+    maxMoisture: 18,
     destination: 'KCN Sa Đéc, Đồng Tháp',
     deliveryDate: '2026-10-15',
-    targetPrice: 1180000,
+    targetPrice: 750000,
     status: 'settled',
     matchedCoop: 'HTX Nông nghiệp Sen Hồng',
     coopId: 'coop_senhong',
-    batchId: 'AGL-2026-DT0908-HK01',
+    batchId: 'AGL-2026-DT0908-BG01',
     progress: 100,
-    estimatedTotal: 94400000
+    estimatedTotal: 60000000
   }
 ];
 

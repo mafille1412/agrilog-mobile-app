@@ -35,7 +35,7 @@ export default function BuyerRequestsScreen({ onNavigate, onSelectOrder }) {
     },
     {
       id: 'REQ-1043',
-      name: 'Trấu nghiền',
+      name: 'Bã mía ép khô',
       factory: 'Nhà máy Điện Sinh khối Thoại Sơn',
       currentTons: 90,
       totalTons: 120,

@@ -129,7 +129,7 @@ export default function RoleSelectScreen({ onNavigate, onBack, onSelectRole }) {
                   )}
                 </div>
                 <p style={{ fontSize: '12px', color: '#4B5563', lineHeight: '1.4', marginTop: '4px' }}>
-                  Dành cho thương lái, đại lý thu gom, hợp tác xã tại địa phương cung ứng rơm rạ, trấu, bã mía.
+                  Dành cho thương lái, đại lý thu gom, hợp tác xã tại địa phương cung ứng rơm rạ và bã mía.
                 </p>
               </div>
             </div>

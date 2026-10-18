@@ -49,9 +49,7 @@ export default function CreateRequestScreen({ onNavigate, onBack }) {
                   onChange={(e) => setBiomassType(e.target.value)}
                 >
                   <option value="straw">Rơm rạ cuộn</option>
-                  <option value="husk">Trấu xay nguyên vỏ</option>
                   <option value="bagasse">Bã mía sấy khô</option>
-                  <option value="corncob">Lõi ngô sấy</option>
                 </select>
               </div>
 
