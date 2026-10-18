@@ -3,93 +3,55 @@ import {
   Scale, 
   Leaf, 
   Plus, 
+  Scan, 
   ArrowRight, 
   Bell, 
   LayoutGrid, 
   ClipboardList, 
-  Package,
-  Truck, 
+  Package, 
   User 
 } from 'lucide-react';
 
 export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
-  const orders = [
-    {
-      id: 'REQ-1048',
-      name: 'Rơm rạ',
-      factory: 'Nhà máy Điện Sinh khối Cần Thơ',
-      currentTons: 180,
-      totalTons: 250,
-      percent: 72,
-      deadline: '14/10/2026',
-      unit: 'tấn',
-      status: 'Tìm nguồn'
-    },
-    {
-      id: 'REQ-1043',
-      name: 'Trấu',
-      factory: 'Nhà máy Điện Sinh khối Thoại Sơn',
-      currentTons: 90,
-      totalTons: 120,
-      percent: 75,
-      deadline: '16/10/2026',
-      unit: 'tấn',
-      status: 'Tìm nguồn'
-    },
-    {
-      id: 'REQ-1039',
-      name: 'Bã mía',
-      factory: 'Nhà máy Phân bón Hữu cơ An Giang',
-      currentTons: 60,
-      totalTons: 100,
-      percent: 60,
-      deadline: '18/10/2026',
-      unit: 'tấn',
-      status: 'Tìm nguồn'
-    }
-  ];
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F8FAF9' }}>
       
-      {/* Top Header matching Figma exactly */}
+      {/* Top Header */}
       <div style={{
-        padding: '14px 20px 10px',
+        padding: '12px 20px 8px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        background: '#FFFFFF'
+        background: '#FFFFFF',
+        borderBottom: '1px solid #F3F4F6'
       }}>
-        {/* Logo + Brand + Badge */}
+        {/* Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Logo icon: rounded square with sprout */}
           <div style={{
-            width: '36px',
-            height: '36px',
-            borderRadius: '10px',
+            width: '34px',
+            height: '34px',
+            borderRadius: '9px',
             background: '#1A4329',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
             color: '#FFFFFF'
           }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 22v-9" />
               <path d="M12 13a5 5 0 0 0-5-5H4a5 5 0 0 1 5 5v0a5 5 0 0 0 3 0" />
               <path d="M12 13a5 5 0 0 1 5-5h3a5 5 0 0 0-5 5v0a5 5 0 0 1-3 0" />
             </svg>
           </div>
-
-          <span style={{ fontSize: '19px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
+          <span style={{ fontSize: '18px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
             AgriLog
           </span>
-
           <span style={{
             background: '#E2EFE7',
             color: '#1A4329',
             fontSize: '9.5px',
             fontWeight: '800',
-            padding: '3px 8px',
+            padding: '2.5px 7px',
             borderRadius: '20px',
             letterSpacing: '0.04em'
           }}>
@@ -99,10 +61,9 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
 
         {/* Header Right Actions */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          {/* Bell notification button */}
           <div style={{
-            width: '36px',
-            height: '36px',
+            width: '34px',
+            height: '34px',
             borderRadius: '50%',
             border: '1px solid #E5E7EB',
             display: 'flex',
@@ -112,11 +73,11 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             cursor: 'pointer',
             background: '#FFFFFF'
           }}>
-            <Bell size={17} color="#374151" />
+            <Bell size={16} color="#374151" />
             <span style={{
               position: 'absolute',
-              top: '7px',
-              right: '7px',
+              top: '6px',
+              right: '6px',
               width: '6px',
               height: '6px',
               background: '#2563EB',
@@ -124,12 +85,11 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             }} />
           </div>
 
-          {/* Profile Avatar -> Account Screen */}
           <div 
             onClick={() => onNavigate('account')}
             style={{
-              width: '36px',
-              height: '36px',
+              width: '34px',
+              height: '34px',
               borderRadius: '50%',
               background: '#1A4329',
               color: '#FFFFFF',
@@ -137,218 +97,390 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
               alignItems: 'center',
               justifyContent: 'center',
               fontWeight: '800',
-              fontSize: '12px',
+              fontSize: '11px',
               cursor: 'pointer',
-              boxShadow: '0 2px 6px rgba(26, 67, 41, 0.2)'
+              boxShadow: '0 2px 5px rgba(26, 67, 41, 0.2)'
             }}
             title="Quản lý tài khoản & Đăng xuất"
           >
-            CT
+            GE
           </div>
         </div>
       </div>
 
       {/* Scrollable Screen Content */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '14px 20px 20px' }}>
+      <div style={{ flex: 1, overflowY: 'auto', padding: '16px 18px 24px' }}>
         
-        {/* Title Section */}
-        <div style={{ marginBottom: '16px' }}>
-          <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
+        {/* Title Section matching user image */}
+        <div style={{ marginBottom: '14px' }}>
+          <h1 style={{ fontSize: '24px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em', margin: 0 }}>
             Tổng quan thu mua
           </h1>
-          <p style={{ fontSize: '13px', color: '#6B7280', marginTop: '2px' }}>
-            Công ty Năng lượng Sinh khối Cần Thơ · Tháng 10/2026
+          <p style={{ fontSize: '13px', color: '#6B7280', marginTop: '3px', marginBottom: 0 }}>
+            GreenGrid Energy · Tháng 10/2026
           </p>
         </div>
 
-        {/* Dual KPI Cards */}
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '22px' }}>
+        {/* Dual Stat Cards matching user image */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '12px' }}>
           
-          {/* Left KPI: Tổng lượng đã mua */}
+          {/* Card 1: Tổng lượng đã mua */}
           <div style={{
-            background: '#E9F5ED',
+            background: '#EFF8F2',
             borderRadius: '16px',
             padding: '14px 14px 12px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            minHeight: '120px'
+            border: '1px solid #E1EFE6'
           }}>
             <div>
               <div style={{ color: '#1A4329', marginBottom: '8px' }}>
                 <Scale size={20} strokeWidth={2.2} />
               </div>
-              <div style={{ fontSize: '11.5px', color: '#111827', fontWeight: '700' }}>
+              <div style={{ fontSize: '12px', color: '#374151', fontWeight: '600' }}>
                 Tổng lượng đã mua
               </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '4px' }}>
-                <span style={{ fontSize: '24px', fontWeight: '800', color: '#111827' }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '2px' }}>
+                <span style={{ fontSize: '26px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
                   1.240
                 </span>
-                <span style={{ fontSize: '13px', color: '#4B5563', fontWeight: '600' }}>
-                  tấn
+                <span style={{ fontSize: '12.5px', color: '#6B7280', fontWeight: '500' }}>
+                  tấn khô
                 </span>
               </div>
             </div>
-            <div style={{ fontSize: '10.5px', color: '#15803D', fontWeight: '600', marginTop: '6px' }}>
+            <div style={{ fontSize: '11px', color: '#15803D', fontWeight: '600', marginTop: '6px' }}>
               +18% so với tháng trước
             </div>
           </div>
 
-          {/* Right KPI: CO2 giảm thải */}
+          {/* Card 2: CO2 giảm thải */}
           <div style={{
-            background: '#EDF4FF',
+            background: '#F0F6FF',
             borderRadius: '16px',
             padding: '14px 14px 12px',
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'space-between',
-            minHeight: '120px'
+            border: '1px solid #DFECFE'
           }}>
             <div>
               <div style={{ color: '#2563EB', marginBottom: '8px' }}>
                 <Leaf size={20} strokeWidth={2.2} />
               </div>
-              <div style={{ fontSize: '11.5px', color: '#111827', fontWeight: '700' }}>
+              <div style={{ fontSize: '12px', color: '#374151', fontWeight: '600' }}>
                 CO₂ giảm thải
               </div>
-              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '4px' }}>
-                <span style={{ fontSize: '24px', fontWeight: '800', color: '#111827' }}>
-                  1.860
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: '4px', marginTop: '2px' }}>
+                <span style={{ fontSize: '26px', fontWeight: '800', color: '#111827', letterSpacing: '-0.02em' }}>
+                  148
                 </span>
-                <span style={{ fontSize: '13px', color: '#4B5563', fontWeight: '600' }}>
+                <span style={{ fontSize: '12.5px', color: '#6B7280', fontWeight: '500' }}>
                   tấn
                 </span>
               </div>
             </div>
-            <div style={{ fontSize: '10.5px', color: '#2563EB', fontWeight: '600', marginTop: '6px' }}>
-              CO₂e giảm thải ước tính
+            <div style={{ fontSize: '11px', color: '#2563EB', fontWeight: '600', marginTop: '6px' }}>
+              CO₂e ước tính
             </div>
           </div>
 
         </div>
 
-        {/* Section Heading: Yêu cầu đang mở */}
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-          <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#111827' }}>
-            Yêu cầu đang mở
-          </h2>
-          <span style={{ fontSize: '12px', color: '#2563EB', fontWeight: '600', cursor: 'pointer' }}>
-            Xem tất cả (3)
-          </span>
+        {/* Dual Action Buttons: + Tạo yêu cầu & Quét QR */}
+        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
+          
+          <button
+            onClick={() => onNavigate('create_request')}
+            style={{
+              height: '46px',
+              background: '#1A4329',
+              color: '#FFFFFF',
+              borderRadius: '12px',
+              border: 'none',
+              fontSize: '14px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '6px',
+              boxShadow: '0 3px 8px rgba(26, 67, 41, 0.2)',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <Plus size={18} strokeWidth={2.5} /> Tạo yêu cầu
+          </button>
+
+          <button
+            onClick={() => onNavigate('qr_scanner')}
+            style={{
+              height: '46px',
+              background: '#FFFFFF',
+              color: '#111827',
+              borderRadius: '12px',
+              border: '1.5px solid #E5E7EB',
+              fontSize: '14px',
+              fontWeight: '700',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: '7px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <Scan size={18} strokeWidth={2.2} /> Quét QR
+          </button>
+
         </div>
 
-        {/* Order Cards List */}
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-          {orders.map((order) => (
-            <div
-              key={order.id}
-              onClick={() => {
-                if (onSelectOrder) onSelectOrder(order);
-                onNavigate('buyer_order_detail');
-              }}
+        {/* Section 1: Yêu cầu đang mở */}
+        <div style={{ marginBottom: '18px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#111827', margin: 0 }}>
+              Yêu cầu đang mở
+            </h2>
+            <button
+              onClick={() => onNavigate('buyer_requests')}
               style={{
-                background: '#FFFFFF',
-                borderRadius: '16px',
-                border: '1px solid #E5E7EB',
-                padding: '16px',
-                boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+                background: 'none',
+                border: 'none',
+                fontSize: '12.5px',
+                fontWeight: '700',
+                color: '#111827',
                 cursor: 'pointer',
-                transition: 'all 0.15s ease'
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2px',
+                padding: 0
               }}
             >
-              {/* Header row: Name + Badge */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
-                <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#111827' }}>
-                  {order.name}
-                </h3>
-                <span style={{
-                  background: '#EBF3FE',
-                  color: '#2563EB',
-                  fontSize: '11px',
-                  fontWeight: '700',
-                  padding: '3px 10px',
-                  borderRadius: '12px'
-                }}>
-                  {order.status}
-                </span>
-              </div>
+              Xem tất cả →
+            </button>
+          </div>
 
-              {/* Subtitle */}
-              <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '12px' }}>
-                {order.id} · {order.factory}
-              </div>
-
-              {/* Progress label & percent */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', marginBottom: '6px' }}>
-                <span style={{ fontWeight: '700', color: '#111827' }}>
-                  Đã có {order.currentTons} / {order.totalTons} {order.unit}
-                </span>
-                <span style={{ fontWeight: '700', color: '#15803D' }}>
-                  {order.percent}%
-                </span>
-              </div>
-
-              {/* Progress Bar */}
-              <div style={{
-                height: '7px',
-                background: '#E5E7EB',
-                borderRadius: '4px',
-                overflow: 'hidden',
-                marginBottom: '12px'
+          {/* Request Card: Rơm rạ */}
+          <div
+            onClick={() => onNavigate('buyer_order_detail')}
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1px solid #E5E7EB',
+              padding: '16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            {/* Header: Name + Badge */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '4px' }}>
+              <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#111827', margin: 0 }}>
+                Rơm rạ
+              </h3>
+              <span style={{
+                background: '#EFF6FF',
+                color: '#2563EB',
+                fontSize: '11px',
+                fontWeight: '700',
+                padding: '3px 10px',
+                borderRadius: '12px'
               }}>
-                <div style={{
-                  width: `${order.percent}%`,
-                  height: '100%',
-                  background: '#1A4329',
-                  borderRadius: '4px'
-                }} />
-              </div>
-
-              {/* Footer: Deadline + Arrow */}
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', color: '#6B7280' }}>
-                <span>Giao trước {order.deadline}</span>
-                <ArrowRight size={15} color="#9CA3AF" />
-              </div>
+                Đang tìm nguồn
+              </span>
             </div>
-          ))}
+
+            {/* Subtitle */}
+            <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '12px' }}>
+              REQ-1048 · Nhà máy Đồng Tháp
+            </div>
+
+            {/* Progress label & percent */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', marginBottom: '6px' }}>
+              <span style={{ fontWeight: '700', color: '#111827' }}>
+                Đã cam kết 180 / 250 tấn khô
+              </span>
+              <span style={{ fontWeight: '700', color: '#111827' }}>
+                72%
+              </span>
+            </div>
+
+            {/* Progress Bar */}
+            <div style={{
+              height: '6px',
+              background: '#E5E7EB',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              marginBottom: '12px'
+            }}>
+              <div style={{
+                width: '72%',
+                height: '100%',
+                background: '#1A4329',
+                borderRadius: '4px'
+              }} />
+            </div>
+
+            {/* Footer: Deadline + Chi tiết */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12px', color: '#6B7280' }}>
+              <span>Hạn giao 25/10/2026</span>
+              <span style={{ fontWeight: '700', color: '#111827', display: 'flex', alignItems: 'center', gap: '2px' }}>
+                Chi tiết →
+              </span>
+            </div>
+          </div>
         </div>
 
-        {/* CTA Button: + Tạo yêu cầu thu mua */}
-        <button
-          onClick={() => onNavigate('create_request')}
-          style={{
-            width: '100%',
-            height: '50px',
-            background: '#1A4329',
-            color: '#FFFFFF',
-            borderRadius: '12px',
-            border: 'none',
-            fontSize: '15px',
-            fontWeight: '700',
-            cursor: 'pointer',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '8px',
-            boxShadow: '0 4px 12px rgba(26, 67, 41, 0.25)',
-            marginBottom: '10px'
-          }}
-        >
-          <Plus size={18} strokeWidth={2.5} /> Tạo yêu cầu thu mua
-        </button>
+        {/* Section 2: Đơn hàng đang giao */}
+        <div style={{ marginBottom: '18px' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+            <h2 style={{ fontSize: '16px', fontWeight: '800', color: '#111827', margin: 0 }}>
+              Đơn hàng đang giao
+            </h2>
+            <button
+              onClick={() => onNavigate('buyer_orders')}
+              style={{
+                background: 'none',
+                border: 'none',
+                fontSize: '12.5px',
+                fontWeight: '700',
+                color: '#111827',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2px',
+                padding: 0
+              }}
+            >
+              Xem tất cả →
+            </button>
+          </div>
+
+          {/* Delivery Order Card: COM-0001 HTX Tân Bình */}
+          <div
+            onClick={() => onNavigate('buyer_order_detail')}
+            style={{
+              background: '#FFFFFF',
+              borderRadius: '16px',
+              border: '1px solid #E5E7EB',
+              padding: '16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            {/* Header: COM-0001 + Badge */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+              <span style={{ fontSize: '16px', fontWeight: '800', color: '#111827' }}>
+                COM-0001
+              </span>
+              <span style={{
+                background: '#EFF6FF',
+                color: '#2563EB',
+                fontSize: '11px',
+                fontWeight: '700',
+                padding: '3px 10px',
+                borderRadius: '12px'
+              }}>
+                Đang thực hiện
+              </span>
+            </div>
+
+            {/* Cooperative Name */}
+            <h3 style={{ fontSize: '16px', fontWeight: '800', color: '#111827', margin: '2px 0 3px' }}>
+              HTX Tân Bình
+            </h3>
+
+            {/* Commitment quantity */}
+            <div style={{ fontSize: '13px', fontWeight: '700', color: '#1A4329', marginBottom: '4px' }}>
+              Cam kết 20 tấn khô
+            </div>
+
+            {/* Sub details */}
+            <div style={{ fontSize: '12px', color: '#6B7280', marginBottom: '12px' }}>
+              REQ-1048 · Rơm rạ · Nhà máy Đồng Tháp
+            </div>
+
+            {/* Progress label & percent */}
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', marginBottom: '6px' }}>
+              <span style={{ fontWeight: '700', color: '#111827' }}>
+                Đã xuất 17,6 / 20 tấn khô
+              </span>
+              <span style={{ fontWeight: '700', color: '#111827' }}>
+                88%
+              </span>
+            </div>
+
+            {/* Progress Bar */}
+            <div style={{
+              height: '6px',
+              background: '#E5E7EB',
+              borderRadius: '4px',
+              overflow: 'hidden',
+              marginBottom: '8px'
+            }}>
+              <div style={{
+                width: '88%',
+                height: '100%',
+                background: '#1A4329',
+                borderRadius: '4px'
+              }} />
+            </div>
+
+            {/* Delivery Note */}
+            <div style={{ fontSize: '11.5px', color: '#6B7280', marginBottom: '10px' }}>
+              Đang vận chuyển · Chưa xác nhận nhận hàng
+            </div>
+
+            {/* Expected arrival */}
+            <div style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              fontSize: '12px',
+              marginBottom: '10px',
+              paddingBottom: '10px',
+              borderBottom: '1px solid #F3F4F6'
+            }}>
+              <span style={{ color: '#6B7280' }}>Dự kiến đến</span>
+              <span style={{ fontWeight: '700', color: '#111827' }}>24/10/2026 · 14:30</span>
+            </div>
+
+            {/* Action CTA */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '3px', fontSize: '13px', fontWeight: '700', color: '#1A4329' }}>
+              Xem đơn hàng →
+            </div>
+          </div>
+        </div>
+
+        {/* Section 3: ĐIỂM NHẬN HIỆN TẠI */}
+        <div style={{
+          background: '#F9FAFB',
+          border: '1px solid #E5E7EB',
+          borderRadius: '14px',
+          padding: '12px 16px'
+        }}>
+          <div style={{ fontSize: '10.5px', fontWeight: '800', color: '#6B7280', letterSpacing: '0.04em', textTransform: 'uppercase' }}>
+            ĐIỂM NHẬN HIỆN TẠI
+          </div>
+          <div style={{ fontSize: '15px', fontWeight: '800', color: '#1A4329', marginTop: '3px' }}>
+            Nhà máy Đồng Tháp
+          </div>
+        </div>
 
       </div>
 
-      {/* Bottom Navigation Bar matching Figma exactly */}
+      {/* Bottom Navigation Bar */}
       <div style={{
-        height: '62px',
+        height: '60px',
         background: '#FFFFFF',
         borderTop: '1px solid #E5E7EB',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        padding: '0 10px 4px',
+        padding: '0 10px 2px',
         flexShrink: 0
       }}>
         {/* Tab 1: Trang chủ (Active) */}
@@ -360,14 +492,14 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
           <div style={{
             background: '#E2EFE7',
             color: '#1A4329',
-            padding: '4px 16px',
+            padding: '3px 16px',
             borderRadius: '16px',
             display: 'flex',
             alignItems: 'center',
@@ -389,12 +521,12 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <ClipboardList size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <ClipboardList size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
             Yêu cầu
@@ -410,12 +542,12 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <Package size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Package size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
             Đơn hàng
@@ -431,12 +563,12 @@ export default function BuyerHomeScreen({ onNavigate, onSelectOrder }) {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <User size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <User size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
             Tài khoản
