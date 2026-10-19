@@ -266,7 +266,7 @@ export default function IotTestingScreen({ onNavigate, onBack }) {
               cursor: 'pointer'
             }}
           >
-            Tạo & Xem tem QR định danh lô hàng ›
+            Tạo & Xem QR lô hàng ›
           </button>
         </div>
 

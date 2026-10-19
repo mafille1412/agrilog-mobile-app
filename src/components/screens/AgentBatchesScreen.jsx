@@ -384,7 +384,7 @@ export default function AgentBatchesScreen({ onNavigate, onBack }) {
                       }}
                     >
                       <QrCode size={15} />
-                      Xem tem QR & Chứng nhận
+                      Xem QR lô hàng
                     </button>
 
                     <button

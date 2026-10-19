@@ -442,7 +442,7 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
                   gap: '6px'
                 }}
               >
-                <QrCode size={15} /> Xem tem QR & Chứng nhận số
+                <QrCode size={15} /> Xem QR lô hàng
               </button>
             </div>
 

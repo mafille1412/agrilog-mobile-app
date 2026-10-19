@@ -550,7 +550,7 @@ export default function QrScannerScreen({ onNavigate, onBack }) {
                   gap: '6px'
                 }}
               >
-                <QrCode size={14} /> Xem tem QR
+                <QrCode size={14} /> Xem QR lô hàng
               </button>
             </div>
 
