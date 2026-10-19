@@ -1,30 +1,25 @@
 import React, { useState } from 'react';
 import { 
   ArrowLeft, 
+  MoreHorizontal,
+  Lock, 
+  Info, 
+  Scan, 
+  CheckCircle2, 
   Truck, 
   MapPin, 
-  CheckCircle2, 
-  Navigation, 
-  Sparkles, 
-  Clock, 
-  Phone,
-  QrCode,
-  ShieldCheck,
-  Building2,
-  FileText,
-  DollarSign,
-  ChevronRight,
-  ExternalLink,
-  Camera,
-  LayoutGrid,
-  ClipboardList,
-  PackageCheck,
+  ShieldCheck, 
+  QrCode, 
+  Camera, 
+  LayoutGrid, 
+  ClipboardList, 
+  Package, 
   User,
-  ScanLine
+  ArrowRight
 } from 'lucide-react';
 
-export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = 'REQ-1048' }) {
-  // 4 Segmented Sub-tabs as designed in Figma Row 2:
+export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = 'COM-0001' }) {
+  // 4 Segmented Sub-tabs:
   // 'overview' | 'batches' | 'logistics' | 'payment'
   const [activeTab, setActiveTab] = useState('overview');
 
@@ -39,215 +34,340 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
   return (
     <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: '#F8FAF9' }}>
       
-      {/* Header */}
-      <div className="figma-screen-header">
-        <button className="figma-header-btn" onClick={handleBack}>
-          <ArrowLeft size={20} />
-        </button>
-        <div style={{ textAlign: 'center' }}>
-          <div className="figma-header-title">
-            Chi tiết đơn hàng
-          </div>
-          <div style={{ fontSize: '11px', color: '#6B7280', fontWeight: '500' }}>
-            #{orderId} · Rơm rạ cuộn (50 tấn)
-          </div>
-        </div>
-        <div style={{ width: '36px' }} />
-      </div>
-
-      {/* 4 Segmented Sub-tabs Navigation Bar */}
+      {/* Top Header */}
       <div style={{
-        background: '#FFFFFF',
-        borderBottom: '1px solid #E5E7EB',
+        padding: '12px 16px',
         display: 'flex',
-        padding: '6px 12px 0',
-        gap: '4px'
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        background: '#FFFFFF',
+        borderBottom: '1px solid #F3F4F6'
       }}>
-        {[
-          { id: 'overview', label: 'Tổng quan' },
-          { id: 'batches', label: 'Lô hàng (2)' },
-          { id: 'logistics', label: 'Vận chuyển' },
-          { id: 'payment', label: 'Thanh toán' }
-        ].map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              flex: 1,
-              background: 'none',
-              border: 'none',
-              borderBottom: activeTab === tab.id ? '2.5px solid #1A4329' : '2.5px solid transparent',
-              padding: '10px 4px',
-              fontSize: '12px',
-              fontWeight: activeTab === tab.id ? '800' : '600',
-              color: activeTab === tab.id ? '#1A4329' : '#6B7280',
-              cursor: 'pointer',
-              transition: 'all 0.15s ease'
-            }}
-          >
-            {tab.label}
-          </button>
-        ))}
+        <button 
+          onClick={handleBack}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: '6px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#111827'
+          }}
+        >
+          <ArrowLeft size={22} />
+        </button>
+
+        <h1 style={{ fontSize: '17px', fontWeight: '800', color: '#111827', margin: 0 }}>
+          Chi tiết đơn hàng
+        </h1>
+
+        <button 
+          onClick={() => alert('Tuỳ chọn đơn hàng COM-0001')}
+          style={{
+            background: 'none',
+            border: 'none',
+            padding: '6px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#4B5563'
+          }}
+        >
+          <MoreHorizontal size={22} />
+        </button>
       </div>
 
-      {/* Screen Body */}
-      <div style={{ flex: 1, overflowY: 'auto', padding: '16px' }}>
+      {/* Scrollable Container */}
+      <div style={{ flex: 1, overflowY: 'auto', padding: '14px 16px 20px' }}>
+        
+        {/* Breadcrumb Context */}
+        <div style={{ fontSize: '11.5px', color: '#6B7280', marginBottom: '6px', display: 'flex', alignItems: 'center', gap: '4px' }}>
+          <span 
+            onClick={() => onNavigate('buyer_requests')}
+            style={{ color: '#15803D', fontWeight: '700', cursor: 'pointer' }}
+          >
+            Yêu cầu REQ-1048
+          </span>
+          <span>›</span>
+          <span>Đơn hàng</span>
+        </div>
+
+        {/* Order ID & Status Header */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '3px' }}>
+          <h2 style={{ fontSize: '24px', fontWeight: '800', color: '#111827', margin: 0, letterSpacing: '-0.02em' }}>
+            COM-0001
+          </h2>
+          <span style={{
+            background: '#EFF6FF',
+            color: '#2563EB',
+            fontSize: '11px',
+            fontWeight: '700',
+            padding: '3px 10px',
+            borderRadius: '12px'
+          }}>
+            Đang thực hiện
+          </span>
+        </div>
+
+        {/* Subtitle */}
+        <div style={{ fontSize: '13px', color: '#4B5563', marginBottom: '14px' }}>
+          HTX Tân Bình · Cam kết 20 tấn khô
+        </div>
+
+        {/* 4 Segmented Sub-tabs Pill Container */}
+        <div style={{
+          background: '#ECEEF0',
+          borderRadius: '10px',
+          padding: '3px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(4, 1fr)',
+          gap: '2px',
+          marginBottom: '16px'
+        }}>
+          {[
+            { id: 'overview', label: 'Tổng quan' },
+            { id: 'batches', label: 'Lô hàng' },
+            { id: 'logistics', label: 'Vận chuyển' },
+            { id: 'payment', label: 'Thanh toán' }
+          ].map(tab => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                style={{
+                  background: isActive ? '#FFFFFF' : 'transparent',
+                  color: isActive ? '#1A4329' : '#6B7280',
+                  fontWeight: isActive ? '800' : '500',
+                  border: 'none',
+                  borderRadius: '8px',
+                  padding: '7px 4px',
+                  fontSize: '12px',
+                  cursor: 'pointer',
+                  textAlign: 'center',
+                  boxShadow: isActive ? '0 1px 3px rgba(0,0,0,0.06)' : 'none',
+                  transition: 'all 0.15s ease'
+                }}
+              >
+                {tab.label}
+              </button>
+            );
+          })}
+        </div>
 
         {/* ======================================================== */}
-        {/* SUB-TAB 1: TỔNG QUAN (Figma Row 2 Screen 1) */}
+        {/* SUB-TAB 1: TỔNG QUAN (Exact Match to Figma Image) */}
         {/* ======================================================== */}
         {activeTab === 'overview' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             
-            {/* Status Banner */}
+            {/* Card 1: Thông tin đơn hàng */}
             <div style={{
-              background: '#F0F9FF',
-              border: '1px solid #BAE6FD',
-              borderRadius: '12px',
-              padding: '12px 14px',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'space-between'
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+              <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', margin: '0 0 12px' }}>
+                Thông tin đơn hàng
+              </h3>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '9px', fontSize: '12.5px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Nhà cung cấp</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>HTX Tân Bình</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Nguyên liệu</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>Rơm rạ</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Đã cam kết</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>20 tấn khô</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Giới hạn độ ẩm</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>≤ 15%</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                  <span style={{ color: '#6B7280' }}>Yêu cầu gốc</span>
+                  <span 
+                    onClick={() => onNavigate('buyer_requests')}
+                    style={{ fontWeight: '800', color: '#15803D', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '2px' }}
+                  >
+                    REQ-1048 →
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Tiến độ giao hàng */}
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
+              <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', margin: '0 0 10px' }}>
+                Tiến độ giao hàng
+              </h3>
+
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '12.5px', marginBottom: '6px' }}>
+                <span style={{ fontWeight: '700', color: '#111827' }}>
+                  Đã xuất 17,6 / 20 tấn khô
+                </span>
+                <span style={{ fontWeight: '800', color: '#15803D' }}>
+                  88%
+                </span>
+              </div>
+
+              {/* Progress Bar */}
+              <div style={{
+                height: '6px',
+                background: '#E5E7EB',
+                borderRadius: '4px',
+                overflow: 'hidden',
+                marginBottom: '8px'
+              }}>
                 <div style={{
-                  width: '36px',
-                  height: '36px',
-                  borderRadius: '50%',
-                  background: '#0284C7',
-                  color: 'white',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}>
-                  <Truck size={20} />
-                </div>
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '800', color: '#0369A1' }}>
-                    Xe đang vận chuyển trên tuyến
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#0284C7' }}>
-                    Dự kiến cập cảng nhà máy lúc 12:00
-                  </div>
-                </div>
-              </div>
-              <span className="badge-green">Đúng tiến độ</span>
-            </div>
-
-            {/* Order Specification Summary Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
-                <span style={{ fontSize: '15px', fontWeight: '800', color: '#111827' }}>
-                  Thông tin đơn thu mua
-                </span>
-                <span style={{ fontSize: '12px', color: '#15803D', fontWeight: '700' }}>
-                  1.500.000 đ/tấn
-                </span>
+                  width: '88%',
+                  height: '100%',
+                  background: '#1A4329',
+                  borderRadius: '4px'
+                }} />
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', background: '#F9FAFB', borderRadius: '10px', padding: '10px 12px', marginBottom: '10px' }}>
-                <div>
-                  <div style={{ fontSize: '10.5px', color: '#6B7280' }}>Khối lượng</div>
-                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#111827' }}>50.0 tấn</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '10.5px', color: '#6B7280' }}>Độ ẩm mục tiêu</div>
-                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#15803D' }}>≤ 15.0%</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '10.5px', color: '#6B7280' }}>Tổng giá trị</div>
-                  <div style={{ fontSize: '15px', fontWeight: '800', color: '#1A4329' }}>75.000.000 đ</div>
-                </div>
-                <div>
-                  <div style={{ fontSize: '10.5px', color: '#6B7280' }}>Hạn nhận hàng</div>
-                  <div style={{ fontSize: '14px', fontWeight: '700', color: '#111827' }}>16/10/2026</div>
-                </div>
+              <div style={{ fontSize: '11.5px', color: '#6B7280', marginBottom: '12px' }}>
+                88% cam kết đang trên đường đến nhà máy
               </div>
 
-              <div style={{ fontSize: '11.5px', color: '#4B5563', lineHeight: '1.5' }}>
-                <div>• Nhà máy nhận: <strong>Nhà máy Điện Sinh khối Cần Thơ</strong></div>
-                <div>• Địa điểm: <strong>KCN Trà Nóc, Q. Bình Thủy, TP. Cần Thơ</strong></div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12.5px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Đã nhận</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>0 tấn khô</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Chưa xuất</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>2,4 tấn khô</span>
+                </div>
               </div>
             </div>
 
-            {/* Escrow Guarantee Notice */}
+            {/* Card 3: Thông tin giao nhận */}
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
+              <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', margin: '0 0 12px' }}>
+                Thông tin giao nhận
+              </h3>
+
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '9px', fontSize: '12.5px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Điểm nhận</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>Nhà máy Đồng Tháp</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Dự kiến đến</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>24/10/2026 · 14:30</span>
+                </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Hạn giao</span>
+                  <span style={{ fontWeight: '700', color: '#111827' }}>25/10/2026</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 4: Giá cố định do AgriLog công bố */}
             <div style={{
               background: '#F0FDF4',
-              border: '1px solid #BBF7D0',
-              borderRadius: '12px',
-              padding: '12px 14px'
+              borderRadius: '14px',
+              border: '1px solid #DCFCE7',
+              padding: '14px 16px'
             }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '6px' }}>
-                <ShieldCheck size={18} color="#155724" />
-                <span style={{ fontSize: '13px', fontWeight: '800', color: '#155724' }}>
-                  Bảo chứng tài chính Escrow
-                </span>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '12px', fontWeight: '600', color: '#166534' }}>
+                <Lock size={14} />
+                <span>Giá cố định do AgriLog công bố</span>
               </div>
-              <div style={{ fontSize: '11.5px', color: '#166534', lineHeight: '1.4' }}>
-                Tiền cọc <strong>30% (22.500.000 đ)</strong> đã được phong tỏa trong tài khoản Escrow. 70% còn lại (52.500.000 đ) sẽ được tự động giải ngân sau khi nghiệm thu trạm cân điện tử đạt chuẩn.
+              <div style={{ fontSize: '22px', fontWeight: '800', color: '#111827', margin: '4px 0 2px' }}>
+                1.200.000 đ/tấn khô
               </div>
-            </div>
-
-            {/* Matched Suppliers Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
-              <div style={{ fontSize: '13px', fontWeight: '800', color: '#111827', marginBottom: '10px' }}>
-                Đơn vị cung ứng đã ghép lệnh (2 đại lý)
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {/* Dealer 1 */}
-                <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '10px', padding: '10px 12px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ fontSize: '13px', color: '#111827' }}>HTX Nông nghiệp Tân Bình</strong>
-                    <span className="badge-green">30 tấn · 13.8% ẩm</span>
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#6B7280', marginTop: '2px' }}>
-                    Thoại Sơn, An Giang · Đã kiểm định IoT & in tem QR
-                  </div>
-                </div>
-
-                {/* Dealer 2 */}
-                <div style={{ background: '#F9FAFB', border: '1px solid #E5E7EB', borderRadius: '10px', padding: '10px 12px' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                    <strong style={{ fontSize: '13px', color: '#111827' }}>Cơ sở Thu gom Út Triệu</strong>
-                    <span className="badge-green">20 tấn · 14.5% ẩm</span>
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#6B7280', marginTop: '2px' }}>
-                    Hòn Đất, Kiên Giang · Đã kiểm định IoT & in tem QR
-                  </div>
-                </div>
+              <div style={{ fontSize: '11.5px', color: '#6B7280' }}>
+                Chỉ xem · Không thể chỉnh sửa giá
               </div>
             </div>
 
-            {/* CTA: Next Step */}
+            {/* Notification Banner */}
+            <div style={{
+              background: '#EFF6FF',
+              borderRadius: '12px',
+              border: '1px solid #BFDBFE',
+              padding: '12px 14px',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '10px'
+            }}>
+              <Info size={17} color="#2563EB" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <span style={{ fontSize: '12px', color: '#1D4ED8', lineHeight: '1.4' }}>
+                Lô AGR-261010-008 đang giao. Chỉ cập nhật khối lượng đã giao sau khi nhà máy xác nhận nhận hàng.
+              </span>
+            </div>
+
+            {/* CTA: Quét QR nhận hàng */}
             <button
               onClick={() => onNavigate('weighbridge')}
-              className="figma-btn-primary"
-              style={{ marginTop: '4px' }}
+              style={{
+                width: '100%',
+                height: '48px',
+                background: '#1A4329',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                fontSize: '14.5px',
+                fontWeight: '700',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 12px rgba(26, 67, 41, 0.25)',
+                transition: 'all 0.15s ease'
+              }}
             >
-              Đến trạm cân & Nghiệm thu giao hàng →
+              <Scan size={18} strokeWidth={2.2} /> Quét QR nhận hàng
             </button>
+
+            {/* Subtext below button */}
+            <div style={{ fontSize: '11px', color: '#6B7280', textAlign: 'center', marginTop: '-4px' }}>
+              Lô hàng, vận chuyển và thanh toán thuộc COM-0001.
+            </div>
 
           </div>
         )}
 
         {/* ======================================================== */}
-        {/* SUB-TAB 2: LÔ HÀNG (Figma Row 2 Screen 2) */}
+        {/* SUB-TAB 2: LÔ HÀNG (Lô AGR-261010-008) */}
         {/* ======================================================== */}
         {activeTab === 'batches' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
               <div>
                 <h3 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', margin: 0 }}>
-                  Danh sách lô hàng kiểm định
+                  Lô hàng thuộc COM-0001
                 </h3>
                 <div style={{ fontSize: '11.5px', color: '#6B7280', marginTop: '2px' }}>
-                  2/2 lô hàng đã kiểm định cảm biến IoT đạt chuẩn
+                  Đã kiểm định IoT & dán tem QR tại bãi thu gom
                 </div>
               </div>
 
-              {/* QR Scanner Camera Quick Action Button */}
               <button
                 onClick={() => onNavigate('qr_scanner')}
                 style={{
@@ -264,18 +384,24 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
                   cursor: 'pointer'
                 }}
               >
-                <ScanLine size={15} /> Quét camera
+                <Scan size={14} /> Quét camera
               </button>
             </div>
 
-            {/* Batch 1 Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
+            {/* Batch AGR-261010-008 Card */}
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
                 <div>
                   <span style={{ fontSize: '14px', fontWeight: '800', color: '#111827' }}>
-                    Lô 1: AGL-2026-KG0912
+                    Lô: AGR-261010-008
                   </span>
-                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
+                  <div style={{ fontSize: '11px', color: '#6B7280', marginTop: '2px' }}>
                     HTX Nông nghiệp Tân Bình · Thoại Sơn, An Giang
                   </div>
                 </div>
@@ -292,70 +418,40 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
                 marginBottom: '10px',
                 fontSize: '11.5px'
               }}>
-                <div>Khối lượng: <strong>30.0 tấn</strong></div>
+                <div>Đã xuất: <strong>17.6 tấn</strong></div>
                 <div>Độ ẩm IoT: <strong style={{ color: '#15803D' }}>13.8%</strong> (≤ 15%)</div>
                 <div>Quy cách: <strong>Rơm cuộn nén</strong></div>
                 <div>Thiết bị: <strong>AgriLog Sensor Pro</strong></div>
               </div>
 
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button
-                  onClick={() => onNavigate('batch_qr')}
-                  className="figma-btn-primary"
-                  style={{ flex: 1, padding: '10px', fontSize: '12px' }}
-                >
-                  <QrCode size={15} /> Xem mã QR & Chứng nhận
-                </button>
-              </div>
+              <button
+                onClick={() => onNavigate('batch_qr')}
+                style={{
+                  width: '100%',
+                  padding: '10px',
+                  background: '#F0FDF4',
+                  color: '#15803D',
+                  border: '1px solid #BBF7D0',
+                  borderRadius: '10px',
+                  fontSize: '12px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
+              >
+                <QrCode size={15} /> Xem tem QR & Chứng nhận số
+              </button>
             </div>
 
-            {/* Batch 2 Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <div>
-                  <span style={{ fontSize: '14px', fontWeight: '800', color: '#111827' }}>
-                    Lô 2: AGL-2026-KG0913
-                  </span>
-                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
-                    Cơ sở Thu gom Út Triệu · Hòn Đất, Kiên Giang
-                  </div>
-                </div>
-                <span className="badge-green">IoT Đạt chuẩn</span>
-              </div>
-
-              <div style={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr',
-                gap: '8px',
-                background: '#F9FAFB',
-                borderRadius: '10px',
-                padding: '10px 12px',
-                marginBottom: '10px',
-                fontSize: '11.5px'
-              }}>
-                <div>Khối lượng: <strong>20.0 tấn</strong></div>
-                <div>Độ ẩm IoT: <strong style={{ color: '#15803D' }}>14.5%</strong> (≤ 15%)</div>
-                <div>Quy cách: <strong>Rơm cuộn nén</strong></div>
-                <div>Thiết bị: <strong>AgriLog Sensor Pro</strong></div>
-              </div>
-
-              <div style={{ display: 'flex', gap: '8px' }}>
-                <button
-                  onClick={() => onNavigate('batch_qr')}
-                  className="figma-btn-primary"
-                  style={{ flex: 1, padding: '10px', fontSize: '12px' }}
-                >
-                  <QrCode size={15} /> Xem mã QR & Chứng nhận
-                </button>
-              </div>
-            </div>
-
-            {/* Scan Prompt Card */}
+            {/* Quick scan box */}
             <div 
               onClick={() => onNavigate('qr_scanner')}
               style={{
                 background: '#F0FDF4',
-                border: '1px dashed #16A34A',
+                border: '1.5px dashed #16A34A',
                 borderRadius: '12px',
                 padding: '14px',
                 textAlign: 'center',
@@ -367,36 +463,26 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
                 Quét mã QR tem nhãn trên kiện hàng
               </div>
               <div style={{ fontSize: '11px', color: '#4B5563', marginTop: '2px' }}>
-                Mở camera quét nhanh tem IoT dán trên từng kiện rơm khi xe đến bãi
+                Dùng camera quét nhanh tem IoT dán trên từng kiện rơm khi xe đến cổng nhà máy
               </div>
             </div>
-
           </div>
         )}
 
         {/* ======================================================== */}
-        {/* SUB-TAB 3: VẬN CHUYỂN (Figma Row 2 Screen 3) */}
+        {/* SUB-TAB 3: VẬN CHUYỂN */}
         {/* ======================================================== */}
         {activeTab === 'logistics' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             
-            {/* Green Highlight Box in Figma */}
-            <div style={{
-              background: '#EAF5EC',
-              border: '1px solid #C3E6CB',
-              borderRadius: '12px',
-              padding: '12px 14px'
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#155724', fontWeight: '800', fontSize: '13px', marginBottom: '4px' }}>
-                <Sparkles size={16} /> Tiết kiệm 18.5% chi phí vận chuyển
-              </div>
-              <div style={{ fontSize: '11.5px', color: '#276738', lineHeight: '1.4' }}>
-                Thuật toán ghép chuyến đa điểm giúp giảm 38% số chuyến xe chạy rỗng và cắt giảm 64.8 kg khí CO₂.
-              </div>
-            </div>
-
             {/* Fleet Info Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
                 <h4 style={{ fontSize: '15px', fontWeight: '800', color: '#111827', margin: 0 }}>
                   Xe tải 68C-148.92
@@ -404,75 +490,44 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
                 <span className="badge-blue">Đang vận chuyển</span>
               </div>
 
-              <div style={{ fontSize: '12px', color: '#4B5563', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div style={{ fontSize: '12px', color: '#4B5563', display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <div>Tài xế: <strong>Lê Văn Hoàng</strong> (0918.776.321)</div>
-                <div>Loại xe: <strong>Đầu kéo rơ-moóc thùng cao 40ft (chở rơm cuộn)</strong></div>
-                <div>Tải trọng thực: <strong>50 tấn / 50 tấn</strong> (Đã ghép 2 bãi gom)</div>
+                <div>Loại xe: <strong>Xe tải thùng chuyên dụng rơm rạ cuộn</strong></div>
+                <div>Khối lượng trên xe: <strong>17.6 tấn rơm rạ</strong></div>
+                <div>Điểm xuất phát: <strong>Kho HTX Tân Bình, Thoại Sơn, An Giang</strong></div>
+                <div>Đích đến: <strong>Nhà máy Đồng Tháp</strong></div>
               </div>
             </div>
 
-            {/* Multi-stop Route Card (Figma Screen) */}
-            <div className="figma-card" style={{ padding: '16px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#111827', marginBottom: '12px' }}>
-                Lộ trình ghép điểm:
+            {/* Route Timeline */}
+            <div style={{
+              background: '#FFFFFF',
+              borderRadius: '14px',
+              border: '1px solid #E5E7EB',
+              padding: '14px 16px',
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
+            }}>
+              <h4 style={{ fontSize: '13.5px', fontWeight: '800', color: '#111827', margin: '0 0 12px' }}>
+                Tiến trình lộ trình:
               </h4>
 
-              {/* Map Illustration Line */}
-              <div style={{
-                background: '#F0FDF4',
-                border: '1px solid #DCFCE7',
-                borderRadius: '10px',
-                padding: '10px 14px',
-                marginBottom: '14px',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'space-between'
-              }}>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '10px', color: '#6B7280' }}>Điểm 1 (Bãi 1)</div>
-                  <strong style={{ fontSize: '12px', color: '#155724' }}>Thoại Sơn (30t)</strong>
-                </div>
-                <div style={{ flex: 1, height: '2px', background: '#16A34A', margin: '0 8px', position: 'relative' }}>
-                  <div style={{ position: 'absolute', top: '-5px', left: '50%', transform: 'translateX(-50%)', background: '#16A34A', color: 'white', borderRadius: '50%', width: '12px', height: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '8px' }}>✓</div>
-                </div>
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '10px', color: '#6B7280' }}>Điểm 2 (Bãi 2)</div>
-                  <strong style={{ fontSize: '12px', color: '#155724' }}>Hòn Đất (20t)</strong>
-                </div>
-                <div style={{ flex: 1, height: '2px', background: '#0284C7', margin: '0 8px' }} />
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontSize: '10px', color: '#6B7280' }}>Đích đến</div>
-                  <strong style={{ fontSize: '12px', color: '#0369A1' }}>Nhà máy Cần Thơ</strong>
-                </div>
-              </div>
-
-              {/* Stop Points Timeline */}
               <div style={{ position: 'relative', paddingLeft: '18px', borderLeft: '2px solid #155724', marginLeft: '6px' }}>
-                <div style={{ marginBottom: '12px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: '800', color: '#111827' }}>
-                    Điểm 1: HTX Tân Bình (Thoại Sơn)
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
-                    Đã bốc 30 tấn rơm cuộn đã quét QR IoT (07:30)
-                  </div>
+                <div style={{ position: 'relative', marginBottom: '14px' }}>
+                  <div style={{ position: 'absolute', left: '-23px', top: '2px', width: '12px', height: '12px', borderRadius: '50%', background: '#155724' }} />
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#111827' }}>Đã bốc hàng tại kho HTX Tân Bình</div>
+                  <div style={{ fontSize: '11px', color: '#6B7280' }}>24/10/2026 · 10:15 (Đã đối soát tem QR IoT)</div>
                 </div>
 
-                <div style={{ marginBottom: '12px' }}>
-                  <div style={{ fontSize: '13px', fontWeight: '800', color: '#111827' }}>
-                    Điểm 2: Cơ sở Út Triệu (Hòn Đất)
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
-                    Đã ghép thêm 20 tấn rơm cuộn (09:15)
-                  </div>
+                <div style={{ position: 'relative', marginBottom: '14px' }}>
+                  <div style={{ position: 'absolute', left: '-23px', top: '2px', width: '12px', height: '12px', borderRadius: '50%', background: '#2563EB', boxShadow: '0 0 0 3px rgba(37,99,235,0.2)' }} />
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#2563EB' }}>Đang di chuyển trên QL80</div>
+                  <div style={{ fontSize: '11px', color: '#6B7280' }}>Dự kiến còn 35 km nữa tới cổng nhà máy</div>
                 </div>
 
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '800', color: '#155724' }}>
-                    Đích: Nhà máy Điện Sinh khối Cần Thơ
-                  </div>
-                  <div style={{ fontSize: '11px', color: '#6B7280' }}>
-                    Dự kiến cập cảng tiếp nhận lúc 12:00
-                  </div>
+                <div style={{ position: 'relative' }}>
+                  <div style={{ position: 'absolute', left: '-23px', top: '2px', width: '12px', height: '12px', borderRadius: '50%', background: '#D1D5DB' }} />
+                  <div style={{ fontSize: '12px', fontWeight: '700', color: '#6B7280' }}>Cập cảng trạm cân Nhà máy Đồng Tháp</div>
+                  <div style={{ fontSize: '11px', color: '#6B7280' }}>Dự kiến: 24/10/2026 · 14:30</div>
                 </div>
               </div>
             </div>
@@ -481,112 +536,73 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
               onClick={() => onNavigate('weighbridge')}
               className="figma-btn-primary"
             >
-              Đến trạm cân & Giao hàng →
+              Tiến hành cân điện tử & Nghiệm thu →
             </button>
-
           </div>
         )}
 
         {/* ======================================================== */}
-        {/* SUB-TAB 4: THANH TOÁN & ĐỐI SOÁT (Figma Row 2 Screen 4) */}
+        {/* SUB-TAB 4: THANH TOÁN (Escrow COM-0001) */}
         {/* ======================================================== */}
         {activeTab === 'payment' && (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             
-            {/* Escrow Status Summary Card */}
+            {/* Total Escrow Card */}
             <div style={{
-              background: 'linear-gradient(135deg, #1A4329, #155724)',
+              background: '#FFFFFF',
               borderRadius: '14px',
+              border: '1px solid #E5E7EB',
               padding: '16px',
-              color: 'white'
+              boxShadow: '0 1px 3px rgba(0,0,0,0.02)'
             }}>
-              <div style={{ fontSize: '11.5px', color: '#A7F3D0', fontWeight: '600' }}>
-                TỔNG GIÁ TRỊ HỢP ĐỒNG ESCROW
+              <div style={{ fontSize: '12px', color: '#6B7280', fontWeight: '600' }}>
+                Tổng giá trị đơn cam kết COM-0001
               </div>
-              <div style={{ fontSize: '24px', fontWeight: '800', marginTop: '2px' }}>
-                75.000.000 đ
+              <div style={{ fontSize: '26px', fontWeight: '800', color: '#1A4329', margin: '4px 0 2px' }}>
+                24.000.000 đ
               </div>
-              <div style={{ fontSize: '11px', color: '#D1FAE5', marginTop: '4px' }}>
-                Thanh toán an toàn có bảo chứng ngân hàng qua AgriLog
+              <div style={{ fontSize: '11.5px', color: '#6B7280' }}>
+                20.0 tấn x 1.200.000 đ/tấn khô
               </div>
-            </div>
 
-            {/* Escrow Breakdown Card */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#111827', marginBottom: '10px' }}>
-                Tiến độ giải ngân tài khoản Escrow
-              </h4>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                {/* Step 1: 30% Deposit */}
-                <div style={{
-                  background: '#F0FDF4',
-                  border: '1px solid #BBF7D0',
-                  borderRadius: '10px',
-                  padding: '10px 12px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  <div>
-                    <div style={{ fontSize: '12px', fontWeight: '700', color: '#166534' }}>
-                      Mốc 1: Tiền cọc cam kết (30%)
-                    </div>
-                    <div style={{ fontSize: '10.5px', color: '#6B7280' }}>
-                      Đã phong tỏa bảo chứng khi chốt hợp đồng
-                    </div>
-                  </div>
-                  <strong style={{ fontSize: '14px', color: '#15803D' }}>22.500.000 đ</strong>
-                </div>
-
-                {/* Step 2: 70% Final Settlement */}
-                <div style={{
-                  background: '#EFF6FF',
-                  border: '1px solid #BFDBFE',
-                  borderRadius: '10px',
-                  padding: '10px 12px',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center'
-                }}>
-                  <div>
-                    <div style={{ fontSize: '12px', fontWeight: '700', color: '#1E40AF' }}>
-                      Mốc 2: Thanh toán quyết toán (70%)
-                    </div>
-                    <div style={{ fontSize: '10.5px', color: '#6B7280' }}>
-                      Giải ngân ngay sau khi cân điện tử xác nhận
-                    </div>
-                  </div>
-                  <strong style={{ fontSize: '14px', color: '#2563EB' }}>52.500.000 đ</strong>
-                </div>
-              </div>
-            </div>
-
-            {/* Beneficiaries Breakdown */}
-            <div className="figma-card" style={{ padding: '14px 16px' }}>
-              <h4 style={{ fontSize: '14px', fontWeight: '800', color: '#111827', marginBottom: '8px' }}>
-                Đơn vị thụ hưởng
-              </h4>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', borderBottom: '1px solid #F3F4F6', paddingBottom: '6px' }}>
-                  <span>1. HTX Nông nghiệp Tân Bình (30t)</span>
-                  <strong style={{ color: '#111827' }}>45.000.000 đ</strong>
+              <div style={{ borderTop: '1px solid #F3F4F6', marginTop: '12px', paddingTop: '12px', display: 'flex', flexDirection: 'column', gap: '8px', fontSize: '12px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Tạm ứng cọc 30% Escrow:</span>
+                  <strong style={{ color: '#15803D' }}>7.200.000 đ (Đã phong tỏa)</strong>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                  <span>2. Cơ sở Thu gom Út Triệu (20t)</span>
-                  <strong style={{ color: '#111827' }}>30.000.000 đ</strong>
+                  <span style={{ color: '#6B7280' }}>Quyết toán 70% còn lại:</span>
+                  <strong style={{ color: '#2563EB' }}>16.800.000 đ (Chờ trạm cân)</strong>
                 </div>
+                <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+                  <span style={{ color: '#6B7280' }}>Đơn vị thụ hưởng:</span>
+                  <strong>HTX Nông nghiệp Tân Bình</strong>
+                </div>
+              </div>
+            </div>
+
+            {/* Escrow Mechanism Notice */}
+            <div style={{
+              background: '#EFF6FF',
+              border: '1px solid #BFDBFE',
+              borderRadius: '12px',
+              padding: '12px 14px',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '8px'
+            }}>
+              <ShieldCheck size={18} color="#2563EB" style={{ flexShrink: 0, marginTop: '2px' }} />
+              <div style={{ fontSize: '11.5px', color: '#1E40AF', lineHeight: '1.4' }}>
+                Tài khoản ký quỹ Escrow bảo vệ an toàn vốn cho Doanh nghiệp. Khoản thanh toán 70% chỉ được Doanh nghiệp bấm giải ngân sau khi phiếu cân trạm điện tử đạt chuẩn.
               </div>
             </div>
 
             <button
-              onClick={() => onNavigate('weighbridge')}
+              onClick={() => onNavigate('escrow_settlement')}
               className="figma-btn-primary"
             >
-              Chuyển sang Trạm cân & Nghiệm thu →
+              Xem chi tiết giải ngân Escrow →
             </button>
-
           </div>
         )}
 
@@ -594,16 +610,16 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
 
       {/* Bottom Navigation Bar */}
       <div style={{
-        height: '64px',
+        height: '60px',
         background: '#FFFFFF',
         borderTop: '1px solid #E5E7EB',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-around',
-        padding: '0 8px',
+        padding: '0 10px 2px',
         flexShrink: 0
       }}>
-        {/* Tab 1: Tổng quan */}
+        {/* Tab 1: Trang chủ */}
         <button
           onClick={() => onNavigate('buyer_home')}
           style={{
@@ -612,15 +628,15 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <LayoutGrid size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <LayoutGrid size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
-            Tổng quan
+            Trang chủ
           </span>
         </button>
 
@@ -633,12 +649,12 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <ClipboardList size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <ClipboardList size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
             Yêu cầu
@@ -654,20 +670,20 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
           <div style={{
             background: '#E2EFE7',
             color: '#1A4329',
-            padding: '4px 16px',
+            padding: '3px 16px',
             borderRadius: '16px',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center'
           }}>
-            <PackageCheck size={18} strokeWidth={2.2} />
+            <Package size={18} strokeWidth={2.2} />
           </div>
           <span style={{ fontSize: '10px', color: '#1A4329', fontWeight: '800' }}>
             Đơn hàng
@@ -683,12 +699,12 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
-            gap: '4px',
+            gap: '3px',
             cursor: 'pointer'
           }}
         >
-          <div style={{ padding: '4px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-            <User size={20} color="#6B7280" strokeWidth={1.8} />
+          <div style={{ padding: '3px 16px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <User size={19} color="#6B7280" strokeWidth={1.8} />
           </div>
           <span style={{ fontSize: '10px', color: '#6B7280', fontWeight: '500' }}>
             Tài khoản
