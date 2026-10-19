@@ -323,7 +323,7 @@ export default function BuyerOrderDetailScreen({ onNavigate, onBack, orderId = '
 
             {/* CTA: Quét QR nhận hàng */}
             <button
-              onClick={() => onNavigate('weighbridge')}
+              onClick={() => onNavigate('qr_scanner')}
               style={{
                 width: '100%',
                 height: '48px',

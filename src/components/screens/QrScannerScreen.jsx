@@ -1,144 +1,617 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
-  ArrowLeft, Camera, Zap, RefreshCw, CheckCircle, 
-  Package, ShieldCheck, AlertCircle, ArrowRight, Scan
+  ArrowLeft, 
+  Zap, 
+  RefreshCw, 
+  CheckCircle2, 
+  Package, 
+  Scan, 
+  Camera, 
+  SwitchCamera,
+  AlertCircle,
+  ArrowRight,
+  ShieldCheck,
+  Scale
 } from 'lucide-react';
 
 export default function QrScannerScreen({ onNavigate, onBack }) {
   const [flashlight, setFlashlight] = useState(false);
+  const [facingMode, setFacingMode] = useState('environment'); // 'environment' (sau) hoặc 'user' (trước)
+  const [hasCamera, setHasCamera] = useState(false);
+  const [cameraError, setCameraError] = useState(null);
   const [scanned, setScanned] = useState(false);
+  const [scannedLot, setScannedLot] = useState({
+    id: 'AGR-261010-008',
+    coop: 'HTX Nông nghiệp Tân Bình',
+    location: 'Thoại Sơn, An Giang',
+    weight: '17.6 tấn',
+    moisture: '13.8%',
+    unit: 'Rơm rạ cuộn nén'
+  });
+
+  const videoRef = useRef(null);
+  const streamRef = useRef(null);
+
+  // Khởi động Camera điện thoại / webcam
+  useEffect(() => {
+    let isMounted = true;
+
+    async function startCamera() {
+      // Dừng track cũ nếu có
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+
+      setCameraError(null);
+
+      // Kiểm tra hỗ trợ MediaDevices
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        setCameraError('Trình duyệt không hỗ trợ truy cập camera trực tiếp.');
+        return;
+      }
+
+      try {
+        let stream;
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: {
+              facingMode: facingMode,
+              width: { ideal: 1280 },
+              height: { ideal: 720 }
+            },
+            audio: false
+          });
+        } catch (err1) {
+          // Thử lại với ràng buộc cơ bản nếu facingMode không được hỗ trợ
+          stream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+            audio: false
+          });
+        }
+
+        if (!isMounted) {
+          stream.getTracks().forEach(t => t.stop());
+          return;
+        }
+
+        streamRef.current = stream;
+        if (videoRef.current) {
+          videoRef.current.srcObject = stream;
+          videoRef.current.onloadedmetadata = () => {
+            videoRef.current.play().catch(e => console.log('Play err:', e));
+          };
+        }
+        setHasCamera(true);
+      } catch (err) {
+        console.warn('Camera access denied or unavailable:', err);
+        if (isMounted) {
+          setHasCamera(false);
+          setCameraError(
+            err.name === 'NotAllowedError'
+              ? 'Quyền camera bị từ chối. Bạn có thể bấm nút "Quét thử mã" bên dưới.'
+              : 'Không thể mở luồng camera. Bạn có thể bấm nút "Quét thử mã" để tiếp tục.'
+          );
+        }
+      }
+    }
+
+    startCamera();
+
+    return () => {
+      isMounted = false;
+      if (streamRef.current) {
+        streamRef.current.getTracks().forEach(track => track.stop());
+        streamRef.current = null;
+      }
+    };
+  }, [facingMode]);
+
+  // Bật/tắt đèn Flash nếu thiết bị hỗ trợ
+  const toggleFlashlight = async () => {
+    if (!streamRef.current) return;
+    const track = streamRef.current.getVideoTracks()[0];
+    if (track) {
+      try {
+        const capabilities = track.getCapabilities ? track.getCapabilities() : {};
+        if (capabilities.torch) {
+          const nextState = !flashlight;
+          await track.applyConstraints({
+            advanced: [{ torch: nextState }]
+          });
+          setFlashlight(nextState);
+        } else {
+          setFlashlight(!flashlight);
+        }
+      } catch (e) {
+        setFlashlight(!flashlight);
+      }
+    }
+  };
+
+  // Đổi camera trước / sau
+  const toggleFacingMode = () => {
+    setFacingMode(prev => (prev === 'environment' ? 'user' : 'environment'));
+  };
 
   const handleSimulateScan = () => {
     setScanned(true);
   };
 
+  const handleBack = () => {
+    if (onBack) {
+      onBack('buyer_order_detail');
+    } else {
+      onNavigate('buyer_order_detail');
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col justify-between">
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      background: '#090D14',
+      color: '#FFFFFF',
+      position: 'relative',
+      overflow: 'hidden'
+    }}>
+      
       {/* Top Header */}
-      <div className="p-4 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 z-10 flex items-center justify-between">
+      <div style={{
+        padding: '12px 16px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        background: 'rgba(11, 15, 23, 0.85)',
+        backdropFilter: 'blur(10px)',
+        borderBottom: '1px solid rgba(255, 255, 255, 0.08)',
+        zIndex: 20
+      }}>
         <button 
-          onClick={onBack || (() => onNavigate('buyer_order_detail'))}
-          className="p-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 transition"
+          onClick={handleBack}
+          style={{
+            background: 'rgba(255, 255, 255, 0.1)',
+            border: 'none',
+            borderRadius: '10px',
+            width: '36px',
+            height: '36px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            color: '#FFFFFF',
+            cursor: 'pointer'
+          }}
         >
           <ArrowLeft size={20} />
         </button>
-        <div className="text-center">
-          <h1 className="font-bold text-base text-white flex items-center justify-center gap-1.5">
-            <Scan size={18} className="text-emerald-400" />
+
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            fontSize: '15px',
+            fontWeight: '800',
+            color: '#FFFFFF',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '6px'
+          }}>
+            <Scan size={17} color="#10B981" />
             Quét mã QR IoT
-          </h1>
-          <p className="text-xs text-slate-400">Tem truy xuất nguồn gốc lô hàng</p>
+          </div>
+          <div style={{ fontSize: '11px', color: '#94A3B8' }}>
+            Tem truy xuất nguồn gốc lô hàng
+          </div>
         </div>
-        <button 
-          onClick={() => setFlashlight(!flashlight)}
-          className={`p-2 rounded-xl transition ${flashlight ? 'bg-amber-500 text-slate-950' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`}
-          title="Bật/Tắt đèn Flash"
-        >
-          <Zap size={20} />
-        </button>
+
+        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+          {/* Flip camera */}
+          <button 
+            onClick={toggleFacingMode}
+            title="Đổi camera trước / sau"
+            style={{
+              background: 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              borderRadius: '10px',
+              width: '36px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: '#FFFFFF',
+              cursor: 'pointer'
+            }}
+          >
+            <SwitchCamera size={18} />
+          </button>
+
+          {/* Flashlight */}
+          <button 
+            onClick={toggleFlashlight}
+            title="Bật/Tắt đèn Flash"
+            style={{
+              background: flashlight ? '#F59E0B' : 'rgba(255, 255, 255, 0.1)',
+              border: 'none',
+              borderRadius: '10px',
+              width: '36px',
+              height: '36px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              color: flashlight ? '#000000' : '#FFFFFF',
+              cursor: 'pointer',
+              transition: 'all 0.15s ease'
+            }}
+          >
+            <Zap size={18} />
+          </button>
+        </div>
       </div>
 
-      {/* Viewfinder area */}
-      <div className="relative flex-1 flex flex-col items-center justify-center p-6 overflow-hidden">
-        {/* Background simulated camera stream (dark mesh / animated pulse) */}
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 opacity-90 flex items-center justify-center">
-          <div className="w-full h-full bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:16px_16px] opacity-40"></div>
-        </div>
+      {/* Main Viewfinder Section */}
+      <div style={{
+        flex: 1,
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        overflow: 'hidden'
+      }}>
+        
+        {/* Real Camera Video Background */}
+        <video 
+          ref={videoRef}
+          autoPlay 
+          playsInline 
+          muted 
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1,
+            opacity: hasCamera ? 1 : 0,
+            transition: 'opacity 0.3s ease'
+          }}
+        />
 
-        {/* Viewfinder Frame */}
-        <div className="relative w-72 h-72 rounded-3xl border-2 border-emerald-500/40 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center shadow-2xl shadow-emerald-500/10">
+        {/* Fallback Mesh Background if camera not open */}
+        {!hasCamera && (
+          <div style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at center, #1E293B 0%, #090D14 100%)',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            zIndex: 1
+          }}>
+            <div style={{
+              width: '100%',
+              height: '100%',
+              backgroundImage: 'radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px)',
+              backgroundSize: '20px 20px',
+              opacity: 0.3
+            }} />
+          </div>
+        )}
+
+        {/* Viewfinder Target Window */}
+        <div style={{
+          position: 'relative',
+          width: '230px',
+          height: '230px',
+          borderRadius: '24px',
+          border: '2px solid rgba(16, 185, 129, 0.5)',
+          background: scanned ? 'rgba(6, 78, 59, 0.75)' : 'rgba(15, 23, 42, 0.25)',
+          backdropFilter: 'blur(2px)',
+          boxShadow: scanned ? '0 0 35px rgba(16, 185, 129, 0.4)' : '0 0 30px rgba(0, 0, 0, 0.7)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 10,
+          transition: 'all 0.3s ease'
+        }}>
           {/* Corner brackets */}
-          <div className="absolute top-2 left-2 w-8 h-8 border-t-4 border-l-4 border-emerald-400 rounded-tl-xl"></div>
-          <div className="absolute top-2 right-2 w-8 h-8 border-t-4 border-r-4 border-emerald-400 rounded-tr-xl"></div>
-          <div className="absolute bottom-2 left-2 w-8 h-8 border-b-4 border-l-4 border-emerald-400 rounded-bl-xl"></div>
-          <div className="absolute bottom-2 right-2 w-8 h-8 border-b-4 border-r-4 border-emerald-400 rounded-br-xl"></div>
+          <div style={{ position: 'absolute', top: '-2px', left: '-2px', width: '28px', height: '28px', borderTop: '4px solid #10B981', borderLeft: '4px solid #10B981', borderTopLeftRadius: '20px' }} />
+          <div style={{ position: 'absolute', top: '-2px', right: '-2px', width: '28px', height: '28px', borderTop: '4px solid #10B981', borderRight: '4px solid #10B981', borderTopRightRadius: '20px' }} />
+          <div style={{ position: 'absolute', bottom: '-2px', left: '-2px', width: '28px', height: '28px', borderBottom: '4px solid #10B981', borderLeft: '4px solid #10B981', borderBottomLeftRadius: '20px' }} />
+          <div style={{ position: 'absolute', bottom: '-2px', right: '-2px', width: '28px', height: '28px', borderBottom: '4px solid #10B981', borderRight: '4px solid #10B981', borderBottomRightRadius: '20px' }} />
 
-          {/* Laser animation */}
+          {/* Animated Laser Scanning Line */}
           {!scanned && (
-            <div className="absolute inset-x-4 h-0.5 bg-gradient-to-r from-transparent via-emerald-400 to-transparent shadow-[0_0_12px_#10b981] animate-bounce"></div>
+            <div style={{
+              position: 'absolute',
+              left: '12px',
+              right: '12px',
+              height: '3px',
+              background: 'linear-gradient(90deg, transparent, #10B981, #34D399, transparent)',
+              boxShadow: '0 0 14px #10B981',
+              borderRadius: '2px',
+              animation: 'qrLaser 2s ease-in-out infinite alternate'
+            }} />
           )}
 
-          {/* Center Target Icon */}
+          {/* Center Target Status */}
           {!scanned ? (
-            <div className="flex flex-col items-center text-center p-4">
-              <Camera size={36} className="text-emerald-400/60 mb-2 animate-pulse" />
-              <p className="text-xs text-slate-300 font-medium max-w-[200px]">
-                Đặt khung hình khớp với tem QR trên kiện rơm hoặc bao bì
+            <div style={{ textAlign: 'center', padding: '16px', color: '#FFFFFF' }}>
+              <div style={{
+                width: '46px',
+                height: '46px',
+                borderRadius: '50%',
+                background: 'rgba(16, 185, 129, 0.15)',
+                color: '#10B981',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 8px'
+              }}>
+                <Scan size={24} />
+              </div>
+              <p style={{ fontSize: '11.5px', color: '#CBD5E1', margin: 0, fontWeight: '500', maxWidth: '180px', lineHeight: '1.4' }}>
+                Hướng camera vào tem QR trên bao bì hoặc kiện rơm
               </p>
             </div>
           ) : (
-            <div className="flex flex-col items-center text-center p-4 bg-emerald-950/80 rounded-2xl border border-emerald-500/50 animate-in fade-in zoom-in duration-300">
-              <CheckCircle size={44} className="text-emerald-400 mb-2" />
-              <p className="text-xs font-semibold text-emerald-300 uppercase tracking-wider">Đã quét thành công!</p>
-              <p className="text-sm font-bold text-white mt-1">AGL-2026-KG0912</p>
+            <div style={{ textAlign: 'center', padding: '16px' }}>
+              <div style={{
+                width: '52px',
+                height: '52px',
+                borderRadius: '50%',
+                background: '#10B981',
+                color: '#FFFFFF',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                margin: '0 auto 8px',
+                boxShadow: '0 4px 14px rgba(16, 185, 129, 0.4)'
+              }}>
+                <CheckCircle2 size={32} />
+              </div>
+              <div style={{ fontSize: '11px', fontWeight: '800', color: '#34D399', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
+                ĐÃ NHẬN DIỆN THÀNH CÔNG!
+              </div>
+              <div style={{ fontSize: '15px', fontWeight: '800', color: '#FFFFFF', marginTop: '3px' }}>
+                {scannedLot.id}
+              </div>
             </div>
           )}
         </div>
 
-        {/* Status Hint */}
-        <div className="relative mt-6 text-center z-10">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-800/90 border border-slate-700/60 text-xs text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
-            <span>Hệ thống AI IoT đang nhận diện định danh số...</span>
-          </div>
+        {/* Status Hint Pill */}
+        <div style={{
+          marginTop: '16px',
+          background: 'rgba(15, 23, 42, 0.8)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '20px',
+          padding: '6px 14px',
+          fontSize: '11.5px',
+          color: '#E2E8F0',
+          display: 'flex',
+          alignItems: 'center',
+          gap: '8px',
+          zIndex: 10
+        }}>
+          <span style={{
+            width: '8px',
+            height: '8px',
+            borderRadius: '50%',
+            background: hasCamera ? '#10B981' : '#F59E0B',
+            boxShadow: hasCamera ? '0 0 8px #10B981' : '0 0 8px #F59E0B'
+          }} />
+          <span>{hasCamera ? 'Camera trực tiếp đang hoạt động' : 'Đang ở chế độ mô phỏng quét'}</span>
         </div>
+
+        {/* Camera Permission Error Notice (if any) */}
+        {cameraError && (
+          <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            left: '16px',
+            right: '16px',
+            background: 'rgba(239, 68, 68, 0.15)',
+            border: '1px solid rgba(239, 68, 68, 0.3)',
+            borderRadius: '10px',
+            padding: '8px 12px',
+            fontSize: '11px',
+            color: '#FCA5A5',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            zIndex: 10
+          }}>
+            <AlertCircle size={15} style={{ flexShrink: 0 }} />
+            <span>{cameraError}</span>
+          </div>
+        )}
+
       </div>
 
       {/* Bottom Sheet Controls & Result */}
-      <div className="p-4 bg-slate-900 border-t border-slate-800 rounded-t-3xl shadow-xl z-10 space-y-3">
+      <div style={{
+        background: '#0F172A',
+        borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+        padding: '16px',
+        borderTopLeftRadius: '24px',
+        borderTopRightRadius: '24px',
+        zIndex: 20
+      }}>
         {scanned ? (
-          <div className="space-y-3 animate-in slide-in-from-bottom duration-300">
-            <div className="p-3 bg-emerald-950/40 border border-emerald-500/30 rounded-2xl flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            
+            {/* Scanned Lot Result Card */}
+            <div style={{
+              background: '#1E293B',
+              border: '1px solid #10B981',
+              borderRadius: '14px',
+              padding: '12px 14px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between'
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <div style={{
+                  width: '38px',
+                  height: '38px',
+                  borderRadius: '10px',
+                  background: 'rgba(16, 185, 129, 0.2)',
+                  color: '#10B981',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontWeight: '800'
+                }}>
                   <Package size={20} />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm text-white">Lô: AGL-2026-KG0912</h4>
-                  <p className="text-xs text-slate-400">HTX Nông Nghiệp Tân Bình • 30 Tấn rơm</p>
+                  <div style={{ fontSize: '13.5px', fontWeight: '800', color: '#FFFFFF' }}>
+                    Lô: {scannedLot.id}
+                  </div>
+                  <div style={{ fontSize: '11px', color: '#94A3B8' }}>
+                    {scannedLot.coop} · {scannedLot.weight} · Độ ẩm {scannedLot.moisture}
+                  </div>
                 </div>
               </div>
-              <span className="text-xs px-2.5 py-1 bg-emerald-500/20 text-emerald-300 font-bold rounded-lg border border-emerald-500/30">
-                Đã kiểm định
+              <span style={{
+                background: 'rgba(16, 185, 129, 0.2)',
+                color: '#34D399',
+                fontSize: '11px',
+                fontWeight: '800',
+                padding: '3px 8px',
+                borderRadius: '6px',
+                border: '1px solid rgba(16, 185, 129, 0.3)'
+              }}>
+                IoT Chuẩn
               </span>
             </div>
 
-            <div className="grid grid-cols-2 gap-2">
+            {/* Next Action Buttons */}
+            <button
+              onClick={() => onNavigate('weighbridge')}
+              style={{
+                width: '100%',
+                height: '46px',
+                background: '#1A4329',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                fontSize: '14px',
+                fontWeight: '800',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 14px rgba(26, 67, 41, 0.35)'
+              }}
+            >
+              <Scale size={18} /> Chuyển sang Cân điện tử trạm cân →
+            </button>
+
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
               <button
                 onClick={() => setScanned(false)}
-                className="py-3 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold text-sm transition flex items-center justify-center gap-2"
+                style={{
+                  height: '40px',
+                  background: '#1E293B',
+                  color: '#CBD5E1',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  fontSize: '12.5px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
               >
-                <RefreshCw size={16} /> Quét lại
+                <RefreshCw size={14} /> Quét lại
               </button>
+
               <button
                 onClick={() => onNavigate('batch_qr')}
-                className="py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm transition shadow-lg shadow-emerald-900/30 flex items-center justify-center gap-2"
+                style={{
+                  height: '40px',
+                  background: '#1E293B',
+                  color: '#34D399',
+                  borderRadius: '10px',
+                  border: '1px solid rgba(16, 185, 129, 0.4)',
+                  fontSize: '12.5px',
+                  fontWeight: '700',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '6px'
+                }}
               >
-                Xem chi tiết tem <ArrowRight size={16} />
+                <QrCode size={14} /> Xem tem QR
               </button>
             </div>
+
           </div>
         ) : (
-          <div className="space-y-3">
-            <p className="text-center text-xs text-slate-400">
-              Mẹo: Giữ điện thoại song song cách tem QR khoảng 15-25cm
-            </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+            <div style={{ fontSize: '11.5px', color: '#94A3B8', textAlign: 'center', lineHeight: '1.4' }}>
+              Đưa camera lại gần tem QR in trên bao bì hoặc kiện rơm (khoảng cách 15 - 25 cm)
+            </div>
+
+            {/* Quick Demo Scan Button */}
             <button
               onClick={handleSimulateScan}
-              className="w-full py-3.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-sm rounded-xl transition shadow-lg shadow-emerald-900/40 flex items-center justify-center gap-2"
+              style={{
+                width: '100%',
+                height: '46px',
+                background: 'linear-gradient(135deg, #10B981, #059669)',
+                color: '#FFFFFF',
+                borderRadius: '12px',
+                border: 'none',
+                fontSize: '14px',
+                fontWeight: '800',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                boxShadow: '0 4px 14px rgba(16, 185, 129, 0.35)'
+              }}
             >
               <Scan size={18} />
-              Quét thử mã Lô AGL-2026-KG0912
+              Bấm nhận diện tem Lô AGR-261010-008
             </button>
+
             <button
-              onClick={onBack || (() => onNavigate('buyer_order_detail'))}
-              className="w-full py-2.5 text-slate-400 hover:text-white text-xs font-semibold text-center transition"
+              onClick={handleBack}
+              style={{
+                background: 'none',
+                border: 'none',
+                color: '#94A3B8',
+                fontSize: '12px',
+                fontWeight: '600',
+                padding: '6px',
+                cursor: 'pointer',
+                textAlign: 'center'
+              }}
             >
               Quay lại chi tiết đơn hàng
             </button>
           </div>
         )}
       </div>
+
+      {/* Global Laser Animation Style */}
+      <style>{`
+        @keyframes qrLaser {
+          0% { top: 12px; }
+          100% { top: 214px; }
+        }
+      `}</style>
+
     </div>
   );
 }
